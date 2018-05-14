@@ -1,0 +1,56 @@
+{
+  "_from": "cocosjs-cli",
+  "_id": "cocosjs-cli@1.0.1",
+  "_inBundle": false,
+  "_integrity": "sha512-+5Qzvim8hBFj+R5TtRywXjV26HpNKc94PoGt8UeTQH8pclnOyUhTMdt3Sb/j2478swGs6Ou/KsLkpr4KJkGXug==",
+  "_location": "/cocosjs-cli",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "cocosjs-cli",
+    "name": "cocosjs-cli",
+    "escapedName": "cocosjs-cli",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/cocosjs-cli/-/cocosjs-cli-1.0.1.tgz",
+  "_shasum": "4d6739b84a7eb171c98a416e1d99bd733e76b243",
+  "_spec": "cocosjs-cli",
+  "_where": "/Users/BJB041512-039/Desktop/cocosjstmp/cocosjs-cli",
+  "author": {
+    "name": "xiemingzhang",
+    "email": "xiemingzhang.ok@163.com"
+  },
+  "bin": {
+    "cocosjs-cli": "./index.js"
+  },
+  "bugs": {
+    "url": "https://github.com/xiemingzhang/cocosjs-cli/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "minimist": "^1.2.0"
+  },
+  "deprecated": false,
+  "description": "Auto generate cocosjs project template",
+  "homepage": "https://github.com/xiemingzhang/cocosjs-cli#readme",
+  "keywords": [
+    "cli"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "cocosjs-cli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiemingzhang/cocosjs-cli.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.4"
+}

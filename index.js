@@ -12,7 +12,7 @@ const optionsName = require('minimist')(process.argv.slice(2), {
 })
 
 if (options._.length === 0 && (options.v || options.version)) {
-    console.log('cocosjs-cli: ' + require('./package.json').version)
+    console.log('cocosjs: ' + require('./package.json').version)
     process.exit()
 }
 
@@ -24,7 +24,7 @@ if (options._.length === 0 && (options.h || options.help)) {
         '',
         '  Commands:',
         '',
-        '    init <ProjectName> generates a new project',
+        '    n || new <ProjectName> generates a new project',
         '',
         '  Options:',
         '',
@@ -40,7 +40,7 @@ if (options._.length === 0 && (options.n || options.new)) {
       init(options.new || options.n)
     }else{
       console.log('default project is cocosjsProj')
-      init('cocosjsProj')
+      init('cocosjs-project')
     }
     // process.exit(0)
 }
@@ -93,7 +93,7 @@ function createProject(name) {
 }
 
 function validateProjectName(name) {
-  if (!name.match(/^[$A-Z_][0-9A-Z_$]*$/i)) {
+  if (!name.match(/^[$A-Za-z0-9\u4e00-\u9fa5-_]*$/)) {
     console.error(
       '"%s" is not a valid name for a project. Please use a valid identifier ' +
         'name (alphanumeric).',

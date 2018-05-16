@@ -27,7 +27,7 @@
     "email": "xiemingzhang.ok@163.com"
   },
   "bin": {
-    "cocosjs-cli": "./index.js"
+    "cocosjs": "./index.js"
   },
   "bugs": {
     "url": "https://github.com/xiemingzhang/cocosjs-cli/issues"
@@ -52,5 +52,5 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.0.4"
+  "version": "1.0.6"
 }

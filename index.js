@@ -88,7 +88,9 @@ function createProject(name) {
 
     if (!fs.existsSync(root)) {
         fs.mkdirSync(root);
-        traverse(templatesPath, root)   
+        fs.mkdirSync(root+'/'+path.basename(root));
+        // traverse(templatesPath, root)   
+        traverse(templatesPath, root+'/'+path.basename(root))   
     }
 }
 

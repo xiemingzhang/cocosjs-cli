@@ -151,3 +151,11 @@ function randomArray(numbers, countNum){ // 返回指定长度的数组 值为�
     return countNum
   }
 }
+// 快速生成0到100的数组
+// var _arr = Array.apply(null, Array(len)).map(function(item, i) {
+//   return i
+// })
+// var arr = new Array(100)
+// var i = arr.length
+// while(i--){arr[i] = i}
+

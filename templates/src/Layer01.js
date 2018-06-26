@@ -62,7 +62,7 @@ var Layer01 = cc.Layer.extend({
     }.bind(this))
 
     this.horn = this.createSprite(res.sound, 1 / 3 * fix, {x: 0, y: 0}, {x: 15, y: 15})
-    this.addChild(this.horn, 1)
+    this.addChild(this.horn, 5)
 
     this.hornListener = cc.EventListener.create({
       event: cc.EventListener.TOUCH_ONE_BY_ONE,
@@ -84,7 +84,7 @@ var Layer01 = cc.Layer.extend({
     })
 
     var action1 = cc.callFunc(function(){
-      cc.log('提示玩法')
+      // cc.log('提示玩法')
       sound.gameInfo()
     })
     var action2 = cc.callFunc(function(){
@@ -107,20 +107,18 @@ var Layer01 = cc.Layer.extend({
         var pos = touch.getLocation()
 
         var targetRect = target.getBoundingBox()
-        if (cc.rectContainsPoint(targetRect, pos)) {
+        if (cc.rectContainsPoint(targetRect, pos) && !this.move && !target.crashed) {
           sound.buttonAudio()
-          if(!this.move){
-            updata.finish_steps++
-            this.move = true
-            // this.scheduleOnce(function(){
-            //   this.becomeFalse()
-            // }.bind(this), 0.8)
-            target._x = target.x
-            target._y = target.y
-            target._zIndex = target.getLocalZOrder()
-            target.setLocalZOrder(10)
-            return true
-          }
+          updata.finish_steps++
+          this.move = true
+          // this.scheduleOnce(function(){
+          //   this.becomeFalse()
+          // }.bind(this), 0.8)
+          target._x = target.x
+          target._y = target.y
+          target._zIndex = target.getLocalZOrder()
+          target.setLocalZOrder(10)
+          return true
         }
         return false
       }.bind(this),
@@ -164,11 +162,8 @@ var Layer01 = cc.Layer.extend({
     // })
   },
   // isFinish: function(){
-  //   var finished = true
-  //   this.dragArr.forEach(function(item){
-  //     if(item.texture.url !== item.data.sprurl){
-  //       finished = false
-  //     }
+  //   var finished = this.dragArr.every(function(item){
+  //     return item.texture.url === item.data.sprurl
   //   })
 
   //   if(finished){
@@ -184,11 +179,10 @@ var Layer01 = cc.Layer.extend({
     return false
   },
   right: function(){
-    this.finished = true
     sound.stopAllEffects()
     sound.starAudio()
-    this.getParent().starLayer.rightStar(1)
-    common_data[1].obtain = 1
+    common_data[1].obtain++
+    this.getParent().starLayer.rightStar(common_data[1].obtain)
     this.dataRefresh()
   },
   dataRefresh: function () {
@@ -201,7 +195,6 @@ var Layer01 = cc.Layer.extend({
     // cc.log(common_data)
   },
   next: function(){
-    sound.stopAllEffects()
     this.scheduleOnce(function(){
       var layer = new Layer02()
       this.getParent().addChild(layer)
@@ -210,16 +203,16 @@ var Layer01 = cc.Layer.extend({
       // c.director.runScene(transition);
     }.bind(this), 1.5)
   },
-  // finish: function () {
-  //   updata.is_finish = 1
-  //   this.scheduleOnce(function(){
-  //     sound.stopAudio()
-  //     sound.stopAllEffects()
-  //     sound.winAudio()
-  //     this.getParent().starLayer.gameEnd(4)
-  //     // common_data = deepCopy(common_data2);
-  //   }.bind(this), 1.8)
-  // },
+  finish: function () {
+    updata.is_finish = 1
+    this.scheduleOnce(function(){
+      sound.stopAudio()
+      sound.stopAllEffects()
+      sound.winAudio()
+      this.getParent().starLayer.gameEnd(common_data[0].obtain)
+      // common_data = deepCopy(common_data2);
+    }.bind(this), 1.8)
+  },
   becomeFalse: function() {
     this.move = false
   },

@@ -11,7 +11,7 @@
         "src/common/audio.js",
         "src/common/LayerExpand.js",
         "src/common/MyNode.js",
-        "src/PlayScene.js",
-        "src/Layer01.js"
+        "src/Layer01.js",
+        "src/PlayScene.js"
     ]
 }

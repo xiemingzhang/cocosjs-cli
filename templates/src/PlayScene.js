@@ -1,5 +1,4 @@
 
-var startTime = new Date().getTime()
 var PlayScene = cc.Scene.extend({
   onEnter: function () {
     this._super()

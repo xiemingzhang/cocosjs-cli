@@ -1,3 +1,65 @@
+
+var tu = [
+  // 'beaker_black.png',
+  // 'beaker_blue.png',
+  // 'beaker_green.png',
+  // 'beaker_orange.png',
+  // 'beaker_purple.png',
+  // 'beaker_red.png',
+  // 'beaker_yellow.png',
+  // 'beaker01.png',
+  // 'bg.png',
+  // 'bg01.png',
+  // 'black.png',
+  // 'blue.png',
+  // 'display.png',
+  // 'foam_black01.png',
+  // 'foam_black02.png',
+  // 'foam_blue01.png',
+  // 'foam_blue02.png',
+  // 'foam_green01.png',
+  // 'foam_green02.png',
+  // 'foam_orange01.png',
+  // 'foam_orange02.png',
+  // 'foam_purple01.png',
+  // 'foam_purple02.png',
+  // 'foam_red01.png',
+  // 'foam_red02.png',
+  // 'foam_yellow01.png',
+  // 'foam_yellow02.png',
+  // 'green.png',
+  // 'orange.png',
+  // 'pigment_blue01.png',
+  // 'pigment_blue02.png',
+  // 'pigment_blue03.png',
+  // 'pigment_red01.png',
+  // 'pigment_red02.png',
+  // 'pigment_red03.png',
+  // 'pigment_yellow01.png',
+  // 'pigment_yellow02.png',
+  // 'pigment_yellow03.png',
+  // 'purple.png',
+  // 'red.png',
+  // 'right.png',
+  // 'smile01.png',
+  // 'smile02.png',
+  // 'soda01.png',
+  // 'soda02.png',
+  // 'spoon.png',
+  // 'vinegar01.png',
+  // 'vinegar02.png',
+  // 'vinegar03.png',
+  // 'wave01.png',
+  // 'wave02.png',
+  // 'wave03.png',
+  // 'yellow.png'
+]
+
+var testObj = {}
+var xintu = tu.forEach(function(v) {
+  testObj[v.split('.')[0]] = 'source/' + v
+})
+// console.log(testObj)
 // 公共资源
 var res = {
   // 声音 //配音
@@ -26,6 +88,12 @@ var res = {
   hand: 'common/imgs/hand.png',
   handclick: 'common/imgs/handclick.png',
   sound: 'common/imgs/sound_button.png'
+}
+
+// var overObj = Object.assign(res, testObj)
+// cc.log(overObj)
+for (var obj in testObj) {
+  res[obj] = testObj[obj]
 }
 
 /* 预加载资源*/

@@ -140,19 +140,16 @@ var Layer01 = cc.Layer.extend({
         target.runAction(cc.sequence(
           cc.moveTo(0.8, target._x, target._y),
           cc.callFunc(function(){
+            target.setLocalZOrder(target._zIndex)
             this.becomeFalse()
           }.bind(this))
         ))
 
         // var choice
         // this.dragArr.forEach(function(item){
-        //   if(item.id !== target.id){
-        //     if(this.crash(item, target)){
-        //       choice = item
-        //       choice._x = choice.x
-        //       choice._y = choice.y
-        //     }
-        //   }
+      //     if(this.crash(item, target)){
+      //       choice = item
+      //     }
         // }.bind(this))
       }.bind(this)
     })
@@ -179,7 +176,7 @@ var Layer01 = cc.Layer.extend({
     return false
   },
   right: function(){
-    sound.stopAllEffects()
+    // sound.stopAllEffects()
     sound.starAudio()
     common_data[1].obtain++
     this.getParent().starLayer.rightStar(common_data[1].obtain)
@@ -195,15 +192,18 @@ var Layer01 = cc.Layer.extend({
     // cc.log(common_data)
   },
   next: function(){
+    cc.eventManager.removeListener(this.hornListener)
     this.scheduleOnce(function(){
+      sound.stopAllEffects()
       var layer = new Layer02()
       this.getParent().addChild(layer)
       this.removeFromParent()
-      // var transition = new cc.TransitionCrossFade(1, new playScene2(), false)
-      // c.director.runScene(transition);
+      // var transition = new cc.TransitionCrossFade(1, new PlayScene2(), false)
+      // cc.director.runScene(transition);
     }.bind(this), 1.5)
   },
   finish: function () {
+    cc.eventManager.removeListener(this.hornListener)
     updata.is_finish = 1
     this.scheduleOnce(function(){
       sound.stopAudio()

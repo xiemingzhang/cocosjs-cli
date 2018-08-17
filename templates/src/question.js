@@ -36,15 +36,9 @@ var updata2 = deepCopy(updata)
 // 加载精灵
 
 // 默认初始位置
-var spxy = [
-
+var spxy = [[],
   [
     // {id: 1001, chorPoint: [0, 0], sprurl: res.cat_one, sp_X: 116.3, sp_Y: 169, zindex: 1, Scale: 1, hidden: 0},
-    // {id: 1002, chorPoint: [0, 0], sprurl: res.cat_two, sp_X: 317, sp_Y: 169, zindex: 1, Scale: 1},
-    // {id: 1003, chorPoint: [0, 0], sprurl: res.cat_three, sp_X: 489.7, sp_Y: 169, zindex: 1, Scale: 1},
-    // {id: 1004, chorPoint: [0, 0], sprurl: res.fish_tank_one, sp_X: 147, sp_Y: 23.7, zindex: 1, Scale: 1},
-    // {id: 1005, chorPoint: [0, 0], sprurl: res.fish_tank_two, sp_X: 319.7, sp_Y: 23.7, zindex: 1, Scale: 1},
-    // {id: 1006, chorPoint: [0, 0], sprurl: res.fish_tank_three, sp_X: 483, sp_Y: 23.7, zindex: 1, Scale: 1}
   ]
 ]
 
@@ -65,97 +59,55 @@ var spxy = [
 //		{id: 2001, sprurl: "celebrate-girl.png", sp_X: 234, sp_Y: 110 , zindex: 2, hw: 1,Scale:1}
 //	]
 // ]
+// 
+var Hand = cc.Sprite.extend({
+  onEnter: function () {
+    this._super()
+    this.handClick()
+  },
+  onExit: function () {
+    this._super()
+  },
+  handClick: function () {
 
-// deep拷贝
-function deepCopy(o) {
-  if (o instanceof Array) {
-    var n = []
-    for (var i = 0; i < o.length; ++i) {
-      n[i] = deepCopy(o[i])
-    }
-    return n
+    var fadeIn = cc.fadeIn(0.8)
 
-  } else if (o instanceof Object) {
-    var n = {}
-    for (var i in o) {
-      n[i] = deepCopy(o[i])
-    }
-    return n
-  }
-  return o
-}
-// 随机排序
-function shuffle(arr){
-  var len = arr.length
-  if(len === 0){
-    return []
-  }
-  if(len === 1){
-    return arr
-  }
-  var arr1 = deepCopy(arr)
-  for(var i = 0; i < len - 1; i++){
-    var idx = Math.floor(Math.random() * (len - i))
-    var temp = arr1[idx]
-    arr1[idx] = arr1[len - i - 1]
-    arr1[len - i - 1] = temp
-  }
-  if(JSON.stringify(arr) === JSON.stringify(arr1)){
-    console.log('相等')
-    return shuffle(arr)
-  }
-  return arr1
-}
-// 完全打乱顺序，没有一项是相同的
-// shuffletwo:function(arr) {
-//  // cc.log("arr,arr1,flag")
-//  var len = arr.length;
-//  if(len === 0){
-//      return;
-//  }
-//  if(len === 1){
-//      return;
-//  }
-//  var arr1 = shuffle(arr);
-//  var flag = true;
-//  for(var i = 0;i < len ;i++){
-//      if(arr[i] === arr1[i]){
-//          flag = false;
-//      }
-//  }
-//  if(flag){
-//      return arr1;
-//  }
-//  return this.shuffletwo(arr);
+    this.runAction(fadeIn)
 
-// },
-function contains(a, obj) { // 检查数组中是否包含指定的值 并返回建值
-  var i = a.length
-  while (i--) {
-    if (a[i] === obj) {
-      return i
-    }
-  }
-  return false
-}
-function randomArray(numbers, countNum){ // 返回指定长度的数组 值为指定数字长度的随机数
-  for (var i = 0; i < numbers; i++) {
-    var num = Math.round(Math.random() * numbers)
-    if(contains(countNum, num) === false && countNum.length < numbers && num !== numbers){
-      countNum.push(num)
-    }
-  }
-  if(countNum.length < numbers){
-    return randomArray(numbers, countNum)
-  }else{
-    return countNum
-  }
-}
-// 快速生成0到100的数组
-// var _arr = Array.apply(null, Array(len)).map(function(item, i) {
-//   return i
-// })
-// var arr = new Array(100)
-// var i = arr.length
-// while(i--){arr[i] = i}
+    var cb1 = cc.callFunc(function(){
+      this.initWithFile(res.handclick)
+    }.bind(this))
 
+    var cb2 = cc.callFunc(function(){
+      this.initWithFile(res.hand)
+    }.bind(this))
+
+    var action = cc.sequence(cc.delayTime(0.5), cb1, cc.delayTime(0.5), cb2)
+    action.repeatForever()
+
+    this.runAction(action)
+
+    var action1 = cc.fadeOut(0.5)
+    var action2 = cc.fadeIn(0.5)
+    var a = cc.sequence(action1, action2)
+    this.runAction(a.repeatForever())
+  }
+})
+
+cc.Sprite.prototype._pixels = []
+
+cc.Sprite.prototype.readPixels = function(x, y){
+  var w = this.width
+  var h = this.height
+  if(!this._pixels || this._pixels.length == 0){
+    var canvas = cc.newElement('canvas') // 创建一个新的元素节点
+    canvas.width = w
+    canvas.height = h
+    var ctx = canvas.getContext('2d') // 获得一个2d的画布(通过它就可以这个画布上的像素信息,我们只在上面绘制一张图片)
+    ctx.drawImage(this.getTexture().getHtmlElementObj(), 0, 0) // 因此获得的像素信息也就等于是这个图片的像素信息
+
+    this._pixels = ctx.getImageData(0, 0, w, h).data // 获得像素信息
+  }
+  var idx = (h - y) * w * 4 + x * 4 // 根据触摸坐标得到像素上的索引
+  return [this._pixels[idx], this._pixels[idx + 1], this._pixels[idx + 2], this._pixels[idx + 3]] // 返回这个点上的的像素信息
+}

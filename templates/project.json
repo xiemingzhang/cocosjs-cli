@@ -3,14 +3,14 @@
     "showFPS" : false,
     "frameRate" : 30,
     "id" : "gameCanvas",
-    "renderMode" : 1,
+    "renderMode" : 0,
     "jsList" : [
+        "src/utils.js",
         "src/resource.js",
+        "src/audio.js",
         "src/question.js",
         "src/common/common.js",
-        "src/common/audio.js",
         "src/common/LayerExpand.js",
-        "src/common/MyNode.js",
         "src/Layer01.js",
         "src/PlayScene.js"
     ]

@@ -40,7 +40,7 @@
   "description": "Auto generate cocosjs project template",
   "homepage": "https://github.com/xiemingzhang/cocosjs-cli#readme",
   "keywords": [
-    "cli"
+    "cocosjs","cli"
   ],
   "license": "MIT",
   "main": "index.js",
@@ -52,5 +52,5 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.0.8"
+  "version": "1.1.1"
 }

@@ -1,40 +1,9 @@
-var Hand = cc.Sprite.extend({
-  onEnter: function () {
-    this._super()
-    this.handClick()
-  },
-  onExit: function () {
-    this._super()
-  },
-  handClick: function () {
-
-    var fadeIn = cc.fadeIn(0.8)
-
-    this.runAction(fadeIn)
-
-    var cb1 = cc.callFunc(function(){
-      this.initWithFile(res.handclick)
-    }.bind(this))
-
-    var cb2 = cc.callFunc(function(){
-      this.initWithFile(res.hand)
-    }.bind(this))
-
-    var action = cc.sequence(cc.delayTime(0.5), cb1, cc.delayTime(0.5), cb2)
-    action.repeatForever()
-
-    this.runAction(action)
-
-    var action1 = cc.fadeOut(0.5)
-    var action2 = cc.fadeIn(0.5)
-    var a = cc.sequence(action1, action2)
-    this.runAction(a.repeatForever())
-  }
-})
 var Layer01 = cc.Layer.extend({
   size: cc.winSize,
   ctor: function () {
     this._super()
+
+    this.fix_height = 180 / fix - 180
 
     this.bg = new cc.Sprite(res.bg)
     this.bg.setScale(this.size.height / this.bg.height)
@@ -57,7 +26,7 @@ var Layer01 = cc.Layer.extend({
 
     this.getChildren().forEach(function(item){
       if(item !== this.bg){
-        item.setPosition(item.getPosition().x, item.getPosition().y + 180 / fix - 180)
+        item.setPosition(item.getPosition().x, item.getPosition().y + this.fix_height)
       }
     }.bind(this))
 
@@ -108,6 +77,19 @@ var Layer01 = cc.Layer.extend({
 
         var targetRect = target.getBoundingBox()
         if (cc.rectContainsPoint(targetRect, pos) && !this.move && !target.crashed) {
+
+          // var touchPoint = touch.getLocation()
+          // var locationInNode = target.convertToNodeSpace(touchPoint)
+
+          // var x = locationInNode.x
+          // var y = locationInNode.y
+
+          // var pexels = target.readPixels(Math.round(x), Math.round(y))
+          // cc.log(pexels)
+          // if(pexels[3] === 0){
+          //   // 透明
+
+          // }
           sound.buttonAudio()
           updata.finish_steps++
           this.move = true
@@ -145,17 +127,11 @@ var Layer01 = cc.Layer.extend({
           }.bind(this))
         ))
 
-        // var choice
-        // this.dragArr.forEach(function(item){
-      //     if(this.crash(item, target)){
-      //       choice = item
-      //     }
-        // }.bind(this))
       }.bind(this)
     })
 
     // this.dragArr.forEach(function(item){
-    // 	cc.eventManager.addListener(listener.clone(),item);
+    //   cc.eventManager.addListener(listener.clone(), item)
     // })
   },
   // isFinish: function(){
@@ -167,54 +143,38 @@ var Layer01 = cc.Layer.extend({
   //     this.next()
   //   }
   // },
-  crash: function(item, target){
+  right: function(){
+    this.getParent().right()
+  },
+  wrong: function(){
+    this.getParent().wrong()
+  },
+  finish: function(){
+    this.getParent().finish()
+  },
+  nextLayer: function(){
+    if(this.hornListener){
+      cc.eventManager.removeListener(this.hornListener)
+    }
+    this.getParent().nextLayer()
+  },
+  crash: function(target, item){
     var itemBox = item.getBoundingBox()
     var targetBox = target.getBoundingBox()
-    if(cc.rectIntersectsRect(cc.rect(targetBox.x + targetBox.width / 4, targetBox.y, targetBox.width / 2, targetBox.height), cc.rect(itemBox.x + itemBox.width / 4, itemBox.y, itemBox.width / 2, itemBox.height))){
+    if(cc.rectIntersectsRect(cc.rect(targetBox.x, targetBox.y, targetBox.width, targetBox.height), cc.rect(itemBox.x, itemBox.y, itemBox.width, itemBox.height))){
       return true
     }
     return false
   },
-  right: function(){
-    // sound.stopAllEffects()
-    sound.starAudio()
-    common_data[1].obtain++
-    this.getParent().starLayer.rightStar(common_data[1].obtain)
-    this.dataRefresh()
-  },
-  dataRefresh: function () {
-    var sum = 0
-    common_data.slice(1).forEach(function (value, index, arr) {
-      sum += value.obtain
-    })
-
-    common_data[0].obtain = sum
-    // cc.log(common_data)
-  },
-  next: function(){
-    cc.eventManager.removeListener(this.hornListener)
-    this.scheduleOnce(function(){
-      sound.stopAllEffects()
-      var layer = new Layer02()
-      this.getParent().addChild(layer)
-      this.removeFromParent()
-      // var transition = new cc.TransitionCrossFade(1, new PlayScene2(), false)
-      // cc.director.runScene(transition);
-    }.bind(this), 1.5)
-  },
-  finish: function () {
-    cc.eventManager.removeListener(this.hornListener)
-    updata.is_finish = 1
-    this.scheduleOnce(function(){
-      sound.stopAudio()
-      sound.stopAllEffects()
-      sound.winAudio()
-      this.getParent().starLayer.gameEnd(common_data[0].obtain)
-      // common_data = deepCopy(common_data2);
-    }.bind(this), 1.8)
-  },
   becomeFalse: function() {
     this.move = false
+  },
+  colorBar: function(){
+    var particleSystem2 = new cc.ParticleSystem(res.bar_plist)
+    particleSystem2.texture = cc.textureCache.addImage(res.color_bar)
+    particleSystem2.x = this.size.width / 2
+    particleSystem2.y = this.size.height * 1.2
+    this.addChild(particleSystem2, 2)
   },
   createSprite: function (path, scale, anchor, pos, z) {
     var sprite = new cc.Sprite(path)

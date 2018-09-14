@@ -184,23 +184,23 @@ function createResource(name){
     Star_audio: 'common/audios/star.mp3',
     Button_audio: 'common/audios/button.mp3',
 
-    bar_plist: 'source/bar.plist',
-
     // 声音 //背景音乐及音效
     GameBg_audio: 'audio/effect/bgm_happy.mp3', // 背景音乐
 
     // 图片 //头部公共部分
+    // bar_plist: 'common/imgs/bar.plist',
+    // color_bar: 'common/imgs/color_bar.png',
     Back: 'common/imgs/back.png',
     BlackStar: 'common/imgs/shape.png',
     FlyStar: 'common/imgs/flay-star.png',
     LightStar: 'common/imgs/light-star.png',
     ResultBg: 'common/imgs/result-image-bg.png',
-    RepeatPress: 'common/imgs/result-btn-done-pressed.png',
-    DoneNormal: 'common/imgs/result-btn-done-normal.png',
-    celebrateGirl: 'common/imgs/celebrate-girl.png',
     hand: 'common/imgs/hand.png',
     handclick: 'common/imgs/handclick.png',
-    sound: 'common/imgs/sound_button.png'`
+    sound: 'common/imgs/sound_button.png',
+    button_green: 'common/imgs/button_green.png',
+    button_next: 'common/imgs/button_next.png',
+    star_finish: 'common/imgs/star_finish.png'`
 
   fs.writeFileSync(root + '/' + name + '/src/resource.js', _string1, "utf-8");
   //添加游戏图片
@@ -216,11 +216,11 @@ function createResource(name){
         }
     });
 
-  _myPathArr1 = _myPathArr1.filter(function(item){
-    if(item !== 'bg.png'){
-      return item
-    }
-  })
+  // _myPathArr1 = _myPathArr1.filter(function(item){
+  //   if(item !== 'bg.png'){
+  //     return item
+  //   }
+  // })
 
   if(_myPathArr1.length !== 0){
     _myPathArr1.forEach(function(item, index) {
@@ -298,9 +298,9 @@ function createResource(name){
         fs.appendFileSync(root + '/' + name + '/src/resource.js', ',\r\r//source音效\r', "utf-8")
       }
       if(index === _myPathArr3.length - 1){
-        var _str = `${item.replace('.mp3','_sound')}: 'audio/voice/${item}'\r}\r\r`
+        var _str = `${item.replace('.mp3','_sound')}: 'audio/effect/${item}'\r}\r\r`
       }else{
-        var _str = `${item.replace('.mp3','_sound')}: 'audio/voice/${item}',\r`
+        var _str = `${item.replace('.mp3','_sound')}: 'audio/effect/${item}',\r`
       }
       fs.appendFileSync(root + '/' + name + '/src/resource.js', _str, "utf-8")
     })

@@ -38,7 +38,7 @@ var updata2 = deepCopy(updata)
 // 默认初始位置
 var spxy = [[],
   [
-    // {id: 1001, chorPoint: [0, 0], sprurl: res.cat_one, sp_X: 116.3, sp_Y: 169, zindex: 1, Scale: 1, hidden: 0},
+    // {id: 1001, chorPoint: [0, 0], sprurl: res.cat_one, sp_X: 116.3, sp_Y: 169, rotation: 0, zindex: 1, Scale: 1, opacity: 255},
   ]
 ]
 

@@ -1,4 +1,5 @@
 var fix = 1
+var fix2
 var startTime = new Date().getTime()
 cc.game.onStart = function(){
   // cc.director.setDisplayStats(false);//去掉右下角显示
@@ -9,6 +10,9 @@ cc.game.onStart = function(){
 
   var designSize = cc.size(736, 414)
   var screenSize = cc.view.getFrameSize()
+
+  // 线的粗细的系数
+  fix2 = designSize.height / screenSize.height
 
   /* 手机端*/
   if(!cc.sys.isNative && screenSize.height < 500){

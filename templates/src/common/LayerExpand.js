@@ -22,9 +22,7 @@ var LayerExp = cc.Layer.extend({
 				// }
 				this.sprite[i] = cc.Sprite.create(this.Lres1[i].sprurl);
 				// this.sprite[i].setVisible(this.Lres1[i].hw)
-				if(this.Lres1[i].hidden){
-				  this.sprite[i].setOpacity(0)
-				}
+				this.sprite[i].setOpacity(this.Lres1[i].opacity)
 				this.sprite[i].setPosition(this.Lres1[i].sp_X* fix, this.Lres1[i].sp_Y* fix);
 				this.sprite[i].setAnchorPoint(this.Lres1[i].chorPoint[0],this.Lres1[i].chorPoint[1]);
 				this.sprite[i].id = this.Lres1[i].id;

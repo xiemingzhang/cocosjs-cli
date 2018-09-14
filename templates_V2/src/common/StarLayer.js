@@ -4,44 +4,14 @@ var StarLayer = cc.Layer.extend({
   ctor: function (num) {
     this._super()
     this.flag = true
-    if(num != ''){this.comCon(num)}
+    if(num != ''){this.starNum(num)}
     // if(num.id === 0){
     //   this.onTouchBegan()
     // }else{
     //   this.onReturn()
     // }
-
   },
-  onReturn: function () {// 重玩
-    var listener1 = cc.EventListener.create({
-      event: cc.EventListener.TOUCH_ONE_BY_ONE,
-      swallowTouches: true, // 设置是否吞没事件，在 onTouchBegan 方法返回 true 时吞掉事件，不再向下传递。
-      onTouchBegan: function (touch, event) {
-        var target = event.getCurrentTarget() // 获取事件所绑定的 target, 通常是cc.Node及其子类
-
-        // 获取当前触摸点相对于按钮所在的坐标
-        var locationInNode = target.convertToNodeSpace(touch.getLocation())
-        var s = target.getContentSize()
-        var rect = cc.rect(0, 0, s.width, s.height)
-
-        if (cc.rectContainsPoint(rect, locationInNode)) // 判断触摸点是否在按钮范围内
-        {
-          if (target.id == 'back') {
-            if(target.getParent().star){
-              target.getParent().star.stopAllActions()
-              target.getParent().star.removeFromParent()
-            }
-            cc.director.runScene(new StartScene())
-            return false
-          }
-          return true
-        }
-        return false
-      }
-    })
-    cc.eventManager.addListener(listener1.clone(), this.backSprite)
-  },
-  comCon: function (num) {// 初始星星
+  starNum: function (num) {// 初始星星
     var size = cc.director.getWinSize()
     var h1 = (size.height - 52 * fix)
     var h2 = (size.height - 47 * fix)
@@ -71,7 +41,6 @@ var StarLayer = cc.Layer.extend({
       this.shape[i].setScale(0.333 * fix)
       this.addChild(this.shape[i], 3)
     }
-
   },
   rightStar: function (count) {// 飞星效果
     updata.finish_star++
@@ -140,10 +109,7 @@ var StarLayer = cc.Layer.extend({
       this.wStar.runAction(action5)
     }
   },
-  random: function (max, min) { // 随机数生成
-    return Math.floor(Math.random() * (max - min + 1) + min)
-  },
-  onTouchBegan: function (touch, event) { // 返回退出调用
+  goBack: function () {// 返回游戏首页
     var listener1 = cc.EventListener.create({
       event: cc.EventListener.TOUCH_ONE_BY_ONE,
       swallowTouches: true, // 设置是否吞没事件，在 onTouchBegan 方法返回 true 时吞掉事件，不再向下传递。
@@ -158,7 +124,36 @@ var StarLayer = cc.Layer.extend({
         if (cc.rectContainsPoint(rect, locationInNode)) // 判断触摸点是否在按钮范围内
         {
           if (target.id == 'back') {
-            this.countTime()
+            if(target.getParent().star){
+              target.getParent().star.stopAllActions()
+              target.getParent().star.removeFromParent()
+            }
+            cc.director.runScene(new PlayScene())
+            return false
+          }
+          return true
+        }
+        return false
+      }
+    })
+    cc.eventManager.addListener(listener1.clone(), this.backSprite)
+  },
+  gameClose: function (touch, event) { // 返回游戏列表
+    var listener1 = cc.EventListener.create({
+      event: cc.EventListener.TOUCH_ONE_BY_ONE,
+      swallowTouches: true, // 设置是否吞没事件，在 onTouchBegan 方法返回 true 时吞掉事件，不再向下传递。
+      onTouchBegan: function (touch, event) {
+        var target = event.getCurrentTarget() // 获取事件所绑定的 target, 通常是cc.Node及其子类
+
+        // 获取当前触摸点相对于按钮所在的坐标
+        var locationInNode = target.convertToNodeSpace(touch.getLocation())
+        var s = target.getContentSize()
+        var rect = cc.rect(0, 0, s.width, s.height)
+
+        if (cc.rectContainsPoint(rect, locationInNode)) // 判断触摸点是否在按钮范围内
+        {
+          if (target.id == 'back') {
+            this.reportData()
             App.jsBack('close')
             cc.director.end()
             return false
@@ -172,9 +167,9 @@ var StarLayer = cc.Layer.extend({
   },
   gameEnd: function (num) {
     var size = cc.director.getWinSize()
-    sound.stopAllEffects()
-    sound.stopAudio()
-    sound.winAudio()
+    // sound.stopAllEffects()
+    // sound.stopAudio()
+    // sound.winAudio()
     updata.is_finish = 1
     var endTime = new Date().getTime()
     var gametime = endTime - startTime
@@ -208,13 +203,13 @@ var StarLayer = cc.Layer.extend({
     shadow.setPosition(cc.p(0, 0))
     shadow.setLocalZOrder(30)
     shadow.setOpacity(160)
-    this.addChild(shadow, 100)
+    this.getParent().addChild(shadow, 100)
 
     var board = new cc.Sprite(res.ResultBg)
     board.setAnchorPoint(0.5, 0)
     board.setScale(1 / 3 * fix)
     board.setPosition(368 * fix, 80 * fix + 180 / fix - 180)
-    this.addChild(board, 101)
+    this.getParent().addChild(board, 101)
 
     // var girl = new cc.Sprite(res.celebrateGirl);
     // girl.setAnchorPoint(0.5,0);
@@ -262,37 +257,37 @@ var StarLayer = cc.Layer.extend({
     this.text_great.setAnchorPoint(0.5, 0)
     this.text_great.setPosition(368 * fix, 231 * fix + 180 / fix - 180)
     this.text_great.setColor(cc.color(79, 53, 48))
-    this.addChild(this.text_great, 101)
+    this.getParent().addChild(this.text_great, 101)
 
     this.text_x = new cc.LabelTTF('x', 'STYuanti-TC-Regular', 32)
     this.text_x.setAnchorPoint(0, 0)
     this.text_x.setPosition(363 * fix, 162 * fix + 160 / fix - 160)
     this.text_x.setColor(cc.color(79, 53, 48))
-    this.addChild(this.text_x, 101)
+    this.getParent().addChild(this.text_x, 101)
 
     this.text_num = new cc.LabelTTF(num, 'STYuanti-TC-Regular', 44)
     this.text_num.setAnchorPoint(0, 0)
     this.text_num.setPosition(392 * fix, 152 * fix + 160 / fix - 160)
     this.text_num.setColor(cc.color(79, 53, 48))
-    this.addChild(this.text_num, 101)
+    this.getParent().addChild(this.text_num, 101)
 
     this.star_finish = new cc.Sprite(res.star_finish)
     this.star_finish.setAnchorPoint(1, 0)
     this.star_finish.setScale(1 / 3 * fix)
     this.star_finish.setPosition(351 * fix, 153 * fix + 180 / fix - 180)
-    this.addChild(this.star_finish, 101)
+    this.getParent().addChild(this.star_finish, 101)
 
     this.btn_rePlay = new cc.Sprite(res.button_green)
     this.btn_rePlay.setAnchorPoint(1, 0)
     this.btn_rePlay.setScale(1 / 3 * fix)
     this.btn_rePlay.setPosition(348 * fix, 55 * fix + 180 / fix - 180)
-    this.addChild(this.btn_rePlay, 101)
+    this.getParent().addChild(this.btn_rePlay, 101)
 
     this.btn_next = new cc.Sprite(res.button_next)
     this.btn_next.setAnchorPoint(0, 0)
     this.btn_next.setScale(1 / 3 * fix)
     this.btn_next.setPosition(388 * fix, 55 * fix + 180 / fix - 180)
-    this.addChild(this.btn_next, 101)
+    this.getParent().addChild(this.btn_next, 101)
 
     var listener2 = cc.EventListener.create({
       event: cc.EventListener.TOUCH_ONE_BY_ONE,
@@ -305,12 +300,10 @@ var StarLayer = cc.Layer.extend({
         var rect = cc.rect(0, 0, s.width, s.height) // 元素范围
         if(cc.rectContainsPoint(rect, locationInNode)) { // 判断触摸点是否在按钮范围内
           sound.buttonAudio()
-          this.countTime()
+          this.reportData()
           startTime = new Date().getTime()
-          common_data = deepCopy(common_data2)
-          updata = deepCopy(updata2)
           if(target === this.btn_rePlay){
-            cc.director.runScene(new PlayScene())
+            cc.director.runScene(new StartScene())
           }else if(target === this.btn_next){
             // cc.log(Boolean(App.getP('game_id')) == true)
             if(App.getP('game_id')){
@@ -339,7 +332,7 @@ var StarLayer = cc.Layer.extend({
                 param_arr.push(key + '=' + obj[key])
               })
               // cc.log(url_head + '?' + param_arr.join('&'))
-              window.open(url_head + '?' + param_arr.join('&'))
+              window.location.herf = url_head + '?' + param_arr.join('&')
             }else{
               cc.director.end()
               App.jsBack('close')
@@ -354,11 +347,14 @@ var StarLayer = cc.Layer.extend({
     cc.eventManager.addListener(listener2, this.btn_rePlay)
     cc.eventManager.addListener(listener2.clone(), this.btn_next)
   },
-  countTime: function () {
+  reportData: function () {
     var endTime = new Date().getTime()
     var gametime = endTime - startTime
     updata.finish_time = gametime
     cc.log(updata)
     App.report(updata)
+  },
+  random: function (max, min) { // 随机数生成
+    return Math.floor(Math.random() * (max - min + 1) + min)
   }
 })

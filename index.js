@@ -7,7 +7,7 @@ const readline = require('readline');
 const options = require('minimist')(process.argv.slice(2))
 
 const optionsName = require('minimist')(process.argv.slice(2), {
-    string: ['n', 'new', 'res']
+    string: ['new1', 'new2', 'res']
 })
 
 if (options._.length === 0 && (options.v || options.version)) {
@@ -23,7 +23,8 @@ if (options._.length === 0 && (options.h || options.help)) {
         '',
         '  Commands:',
         '',
-        '    n || new <ProjectName> generates a new project',
+        '    new1 <ProjectName> generates a new project that is single scene',
+        '    new2 <ProjectName> generates a new project that is multiple scenes',
         '    res <ProjectName> generates a new resource.js and audio.js over old',
         '',
         '  Options:',
@@ -35,9 +36,23 @@ if (options._.length === 0 && (options.h || options.help)) {
     process.exit(0)
 }
 
-if (options._.length === 0 && (options.n || options.new)) {
-    if(optionsName.n || optionsName.new){
-      init(options.new || options.n)
+var temp_path
+
+if (options._.length === 0 && options.new1) {
+    temp_path = "single_templates"
+    if(optionsName.new1){
+      init(options.new1)
+    }else{
+      console.log('default project is cocosjsProj')
+      init('cocosjs-project')
+    }
+    // process.exit(0)
+}
+
+if (options._.length === 0 && options.new2) {
+    temp_path = "multi_templates"
+    if(optionsName.new2){
+      init(options.new2)
     }else{
       console.log('default project is cocosjsProj')
       init('cocosjs-project')
@@ -78,7 +93,7 @@ function createAfterConfirmation(name) {
 function createProject(name) {
     let root = path.resolve(name);
     // var projectName = path.basename(root);
-    let templatesPath = path.join(__dirname, 'templates');
+    let templatesPath = path.join(__dirname, temp_path);
 
     console.log(
         'This will create a new cocosjs project in',
@@ -133,7 +148,7 @@ function copyFile(_targetPath, _templatePath) {
   //fs.createReadStream(_targetPath).pipe(fs.createWriteStream(_templatePath));
   if(_targetPath.split('/').reverse()[0] === 'index.html'){
     let _html = fs.readFileSync(_templatePath, 'utf8')
-    reHtml = _html.replace(/<title>([\s\S]){1,}<\/title>/gm, '<title>'+ (options.new || options.n) +'</title>')
+    reHtml = _html.replace(/<title>([\s\S]){1,}<\/title>/gm, '<title>'+ (options.new1 || options.new2) +'</title>')
     fs.writeFileSync(_targetPath, reHtml, 'utf8')
   }else{
     fs.writeFileSync(_targetPath, fs.readFileSync(_templatePath), "utf-8");
@@ -164,19 +179,9 @@ if (options._.length === 0 && (options.res || options.resource)) {
 function createResource(name){
   let root = path.resolve(name);
 
-  let _string1 = `var tu = [
-    // 'beaker_black.png',
-  ]
-
-  var testObj = {}
-  var xintu = tu.forEach(function(v) {
-    testObj[v.split('.')[0]] = 'source/' + v
-  })
-  // console.log(testObj)
-
-  var res = {
+  let _string1 = `var res = {
     // 声音 //配音
-    game_info: 'audio/voice/game_info.mp3', // 游戏介绍
+    //game_info: 'audio/voice/game_info.mp3', // 游戏介绍
     // 声音 //部分公共配音
     Right_audio: 'common/audios/right.mp3',
     Wrong_audio: 'common/audios/wrong.mp3',
@@ -306,13 +311,7 @@ function createResource(name){
     })
   }
 
-  let _string2 = `// var overObj = Object.assign(res, testObj)
-  // cc.log(overObj)
-  for (var obj in testObj) {
-    res[obj] = testObj[obj]
-  }
-
-  /* 预加载资源*/
+  let _string2 = `/* 预加载资源*/
   var g_resources = []
   for (var i in res) {
     g_resources.push(res[i])
@@ -433,4 +432,8 @@ function createAudio(name){
       fs.appendFileSync(root + '/' + name + '/src/audio.js', _str, "utf-8")
     })
   }
+}
+
+if (options._.length === 0 && options.build) {
+  
 }

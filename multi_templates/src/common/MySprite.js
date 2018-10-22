@@ -38,6 +38,17 @@ var MySprite = cc.Sprite.extend({
       this.runAction(action.repeat(re))
     }
   },
+  // 放大的动画
+  enlarge: function(num, time, re){
+    var action1 = cc.scaleBy(time, num)
+    var action3 = cc.scaleBy(time, 1 / num)
+    var action = cc.sequence(action1, action3)
+    if(re == 0){
+      this.runAction(action.repeatForever())
+    }else{
+      this.runAction(action.repeat(re))
+    }
+  },
   // 翻牌
   cardTurnOver: function(reverse){
     var action1 = cc.scaleTo(0.2, 0.001 * fix, 1 / 3 * fix)

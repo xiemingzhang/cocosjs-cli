@@ -16,8 +16,8 @@ var Layer01 = MyLayer.extend({
     this._super()
     // this.scheduleUpdate()
 
-    this.sprs = this.sprites(layer01_data[0])
-    this.sprs.forEach(function(item){
+    var sprs = this.sprites(layer01_data[0])
+    sprs.forEach(function(item){
       item.setPosition(item.getPosition().x, item.getPosition().y + this.fix_height)
     }.bind(this))
 
@@ -49,21 +49,17 @@ var Layer01 = MyLayer.extend({
     // // this.addChild(this.black, 2)
     // clipping_layer.addChild(black, 5)
     // this.getChildByTag(1005).addChild(clip)
+    // 
+    // var horn = this.createSprite(res.sound, 1 / 3 * fix, [0, 0], {x: 40 * fix, y: 240 * fix})
+    // horn.sound = sound.che_audio
+    // this.addSoundButton(horn)
 
-    // this.hander = new MySprite(res.hand)
-    // this.hander.setPosition({x: 360 * fix, y: 220 * fix + this.fix_height})
-    // this.hander.setAnchorPoint(0, 1)
-    // this.hander.setScale(1 / 3 * fix)
-    // this.addChild(this.hander, 6)
+    // this.hander = this.addHand(340 * fix, 235 * fix + this.fix_height)
     // this.hander.frameAnimate([res.hand, res.handclick], 0.5, 0)
 
     // this._point = this.pointArr[this.i].concat()
 
-    // this.hander = new MySprite(res.hand)
-    // this.hander.setPosition(this._point[0])
-    // this.hander.setAnchorPoint(0, 1)
-    // this.hander.setScale(1 / 3 * fix)
-    // this.addChild(this.hander, 6)
+    // this.hander = this.addHand(this._point[0].x, this._point[0].y)
     // this.hander.frameAnimate([res.hand, res.handclick], 0.5, 0)
 
     // this.hander.runAction(cc.sequence(
@@ -143,8 +139,10 @@ var Layer01 = MyLayer.extend({
           //   this.flag = 'clean'
           //   this.clickArr.forEach(function(item){
           //     item.initWithFile(item.data.sprurl)
+          //     item.setPosition(item.data.sp_X * fix, item.data.sp_Y * fix)
           //   })
           //   target.initWithFile(target.data.sprurl2)
+          //   target.setPosition(target.data.sp_X * fix, target.data.sp_Y * fix + this.fix_height)
           //   return false
           // }else if(target.id === 1014){
           //   // if(this.flag === 'move'){
@@ -160,11 +158,17 @@ var Layer01 = MyLayer.extend({
           //   this.colorObj = target.data.color
           //   this.clickArr.forEach(function(item){
           //     item.initWithFile(item.data.sprurl)
-          //   })
+          //     if(item.id === 1002){
+          //       item.setPosition(item.data.sp_X * fix, item.data.sp_Y * fix + this.fix_height)
+          //     }else{
+          //       item.setPosition(item.data.sp_X * fix, item.data.sp_Y * fix)
+          //     }
+          //   }.bind(this))
           //   target.initWithFile(target.data.sprurl2)
-          //   if(!this.listener3){
-          //     this.listener3 = this.listener2().clone()
-          //     cc.eventManager.addListener(this.listener3, this.getChildByTag(1013))
+          //   target.setPosition(target.data.sp_X * fix, target.data.sp_Y * fix - 20 * fix)
+          //   if(!this.listener1){
+          //     this.listener1 = this.listener().clone()
+          //     cc.eventManager.addListener(this.listener1, this.getChildByTag(1013))
           //   }
           //   return false
           // }

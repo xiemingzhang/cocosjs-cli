@@ -36,7 +36,7 @@ var PlayScene = MyScene.extend({
     // this.addChild(this.hander, 2)
 
     // this.move = false
-    // if(!playScene01.finished){
+    // if(!scene01Finish.finished){
     //   this.getChildByTag(1001).runAction(cc.sequence(
     //     cc.scaleBy(0.85, 1.05),
     //     cc.scaleBy(0.85, 1 / 1.05)
@@ -44,7 +44,7 @@ var PlayScene = MyScene.extend({
     //   cc.eventManager.addListener(this.listener().clone(), this.getChildByTag(1001))
     // }
 
-    // if(!playScene02.finished){
+    // if(!scene02Finish.finished){
     //   this.getChildByTag(1002).runAction(cc.sequence(
     //     cc.scaleBy(0.85, 1.05),
     //     cc.scaleBy(0.85, 1 / 1.05)
@@ -52,7 +52,7 @@ var PlayScene = MyScene.extend({
     //   cc.eventManager.addListener(this.listener().clone(), this.getChildByTag(1002))
     // }
 
-    // if(!playScene03.finished){
+    // if(!scene03Finish.finished){
     //   this.getChildByTag(1003).runAction(cc.sequence(
     //     cc.scaleBy(0.85, 1.05),
     //     cc.scaleBy(0.85, 1 / 1.05)
@@ -60,7 +60,7 @@ var PlayScene = MyScene.extend({
     //   cc.eventManager.addListener(this.listener().clone(), this.getChildByTag(1003))
     // }
 
-    // if(playScene01.finished && playScene02.finished && playScene03.finished){
+    // if(scene01Finish.finished && scene02Finish.finished && scene03Finish.finished){
     //   this.finish()
     // }else{
     //   this.begin()
@@ -93,19 +93,16 @@ var PlayScene = MyScene.extend({
           //   this.becomeFalse()
           // }.bind(this), 0.8)
           if(target.id === 1001){
-            target.initWithFile(target.data.sprurl2)
             common_data[1].obtain = 0
             this.dataRefresh()
             var transition = new cc.TransitionCrossFade(1.5, new PlayScene01(), false)
             cc.director.runScene(transition)
           }else if(target.id === 1002){
-            target.initWithFile(target.data.sprurl2)
             common_data[2].obtain = 0
             this.dataRefresh()
             var transition = new cc.TransitionCrossFade(1.5, new PlayScene02(), false)
             cc.director.runScene(transition)
           }else{
-            target.initWithFile(target.data.sprurl2)
             common_data[3].obtain = 0
             this.dataRefresh()
             var transition = new cc.TransitionCrossFade(1.5, new PlayScene03(), false)
@@ -136,18 +133,18 @@ var PlayScene = MyScene.extend({
     common_data[0].obtain = sum
     // cc.log(common_data)
   },
-  finish: function () {
-    this.move = true
-    if(this.hornListener){
-      cc.eventManager.removeListener(this.hornListener)
-    }
+  finish: function (t) {
     // updata.is_finish = 1
+    if(t >= 0){
+      var time = t
+    }else{
+      var time = 1.5
+    }
     this.scheduleOnce(function(){
       sound.stopAudio()
       sound.stopAllEffects()
       sound.winAudio()
-      this.getParent().starLayer.gameEnd(common_data[0].obtain)
-      // common_data = deepCopy(common_data2);
-    }.bind(this), 3.8)
+      this.starLayer.gameEnd(common_data[0].obtain)
+    }.bind(this), time)
   }
 })

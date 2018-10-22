@@ -59,7 +59,21 @@ var PlayScene = MyScene.extend({
         this.addedLayer = layer
       }.bind(this), time)
     }else{
-      this.finish()
+      this.finish(t)
     }
+  },
+  finish: function (t) {
+    // updata.is_finish = 1
+    if(t >= 0){
+      var time = t
+    }else{
+      var time = 1.5
+    }
+    this.scheduleOnce(function(){
+      sound.stopAudio()
+      sound.stopAllEffects()
+      sound.winAudio()
+      this.starLayer.gameEnd(common_data[0].obtain)
+    }.bind(this), time)
   }
 })

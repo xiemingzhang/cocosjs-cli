@@ -174,8 +174,8 @@ var StarLayer = cc.Layer.extend({
     var endTime = new Date().getTime()
     var gametime = endTime - startTime
     updata.finish_time = gametime
-    // cc.log(updata)
-
+    cc.log(updata)
+    this.reportData()
     var MsgBoxLayer = cc.LayerColor.extend({
       sprite: null,
       ctor: function(color, width, height){
@@ -300,7 +300,7 @@ var StarLayer = cc.Layer.extend({
         var rect = cc.rect(0, 0, s.width, s.height) // 元素范围
         if(cc.rectContainsPoint(rect, locationInNode)) { // 判断触摸点是否在按钮范围内
           sound.buttonAudio()
-          this.reportData()
+          // this.reportData()
           startTime = new Date().getTime()
           if(target === this.btn_rePlay){
             cc.director.runScene(new StartScene())

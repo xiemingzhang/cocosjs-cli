@@ -13,8 +13,8 @@
         "src/common/MySprite.js",
         "src/common/MyLayer.js",
         "src/common/MyScene.js",
-        "src/Scene01_Layer01.js",
-        "src/PlayScene01.js",
+        "src/scene01/Scene01_Layer01.js",
+        "src/scene01/PlayScene01.js",
         "src/PlayScene.js",
         "src/StartScene.js"
     ]

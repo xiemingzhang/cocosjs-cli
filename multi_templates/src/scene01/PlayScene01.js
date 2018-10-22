@@ -8,9 +8,9 @@ var PlayScene01 = MyScene.extend({
     // this.starLayer = new StarLayer(common_data[0])
     this.addChild(this.starLayer, 100, 2)
     // 返回游戏列表
-    this.starLayer.gameClose()
+    // this.starLayer.gameClose()
     // 返回游戏首场景
-    // this.starLayer.goBack()
+    this.starLayer.goBack()
   },
   onEnter: function () {
     this._super()
@@ -60,10 +60,10 @@ var PlayScene01 = MyScene.extend({
       }.bind(this), time)
     }else{
       // scene01Finish = true
-      this.backScene()
+      this.backScene(t)
     }
   },
-  backScene: function(){
+  backScene: function(t){
     if(common_data[0].obtain < common_data[0].total){
       this.scheduleOnce(function(){
         // sound.stopAllEffects()
@@ -71,7 +71,7 @@ var PlayScene01 = MyScene.extend({
         cc.director.runScene(transition)
       }, 1.5)
     }else{
-      this.finish()
+      this.finish(t)
     }
   }
 })

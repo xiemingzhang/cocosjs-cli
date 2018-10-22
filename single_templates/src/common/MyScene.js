@@ -33,15 +33,6 @@ var MyScene = cc.Scene.extend({
     sound.wrongAudio()
     this.starLayer.wrongStar()
   },
-  finish: function () {
-    // updata.is_finish = 1
-    this.scheduleOnce(function(){
-      sound.stopAudio()
-      sound.stopAllEffects()
-      sound.winAudio()
-      this.starLayer.gameEnd(common_data[0].obtain)
-    }.bind(this), 1.8)
-  },
   dataRefresh: function () {
     var sum = 0
     common_data.slice(1).forEach(function (value, index, arr) {

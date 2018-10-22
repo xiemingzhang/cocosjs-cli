@@ -12,9 +12,9 @@ var MyLayer = cc.Layer.extend({
     this._super()
     // cc.log("onExit");
   },
-  addSoundButton: function(effect){
-    var horn = this.createSprite(res.sound, 1 / 3 * fix, [0, 0], {x: 15, y: 15})
-    this.addChild(horn, 5)
+  addSoundButton: function(spr){
+    // var horn = this.createSprite(res.sound, 1 / 3 * fix, [0, 0], {x: 15, y: 15})
+    // this.addChild(horn, 5)
 
     this.hornListener = cc.EventListener.create({
       event: cc.EventListener.TOUCH_ONE_BY_ONE,
@@ -28,14 +28,15 @@ var MyLayer = cc.Layer.extend({
           if(!this.finished){
             sound.stopAllEffects()
             // sound.gameInfo()
-            cc.audioEngine.playEffect(effect)
+            // cc.audioEngine.playEffect(spr.effect)
+            spr.sound()
           }
           return true
         }
         return false
       }.bind(this)
     })
-    cc.eventManager.addListener(this.hornListener, horn)
+    cc.eventManager.addListener(this.hornListener, spr)
   },
   addHand: function(pointX, ponitY){
     var hander = new MySprite(res.hand)

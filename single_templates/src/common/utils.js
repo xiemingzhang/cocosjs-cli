@@ -7,7 +7,21 @@ function alterItem(arr, index1, index2) {
   arr[index1] = arr.splice(index2, 1, arr[index1])[0]
   return arr
 }
-
+//生成数组长度len的从0递加的数组
+function produceArr(len){
+  return new Array(len).fill('').map(function(v, i){return i})
+}
+function random(min, max){
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+// 快速生成0到100的数组
+// var _arr = Array.apply(null, Array(len)).map(function(item, i) {
+//   return i
+// })
+// var arr = new Array(100)
+// var i = arr.length
+// while(i--){arr[i] = i}
+//
 // deep拷贝
 function deepCopy(o) {
   if (o instanceof Array) {
@@ -26,28 +40,62 @@ function deepCopy(o) {
   }
   return o
 }
+// function randomSort(arr, newArr){
+//       // 如果原数组arr的length值等于1时，原数组只有一个值，其键值为0
+//       // 同时将这个值push到新数组newArr中
+//       if(arr.length == 1) {
+//         newArr.push(arr[0]);
+//         return newArr; // 相当于递归退出
+//       }
+//       // 在原数组length基础上取出一个随机数
+//       var random = Math.ceil(Math.random() * arr.length) - 1;
+//       // 将原数组中的随机一个值push到新数组newArr中
+//       newArr.push(arr[random]);
+//       // 对应删除原数组arr的对应数组项
+//       arr.splice(random,1);
+//       return this.randomSort(arr, newArr);
+//   }
 // 随机排序
-function shuffle(arr){
-  var len = arr.length
+Array.prototype.shuffle = function() {
+  var len = this.length
   if(len === 0){
     return []
   }
   if(len === 1){
-    return arr
+    return this
   }
-  var arr1 = deepCopy(arr)
-  for(var i = 0; i < len - 1; i++){
-    var idx = Math.floor(Math.random() * (len - i))
-    var temp = arr1[idx]
-    arr1[idx] = arr1[len - i - 1]
-    arr1[len - i - 1] = temp
+  var temp, i
+  var arr1 = deepCopy(this)
+  while (len) {
+    i = Math.floor(Math.random() * len--)
+    temp = arr1[len]
+    arr1[len] = arr1[i]
+    arr1[i] = temp
   }
-  // if(JSON.stringify(arr) === JSON.stringify(arr1)){
-  //   console.log('相等')
-  //   return shuffle(arr)
-  // }
   return arr1
 }
+// 随机排序
+// function shuffle(arr){
+//   var len = arr.length
+//   if(len === 0){
+//     return []
+//   }
+//   if(len === 1){
+//     return arr
+//   }
+//   var arr1 = deepCopy(arr)
+//   for(var i = 0; i < len - 1; i++){
+//     var idx = Math.floor(Math.random() * (len - i))
+//     var temp = arr1[idx]
+//     arr1[idx] = arr1[len - i - 1]
+//     arr1[len - i - 1] = temp
+//   }
+//   // if(JSON.stringify(arr) === JSON.stringify(arr1)){
+//   //   console.log('相等')
+//   //   return shuffle(arr)
+//   // }
+//   return arr1
+// }
 // 完全打乱顺序，没有一项是相同的
 // shuffletwo:function(arr) {
 //  // cc.log("arr,arr1,flag")
@@ -71,36 +119,29 @@ function shuffle(arr){
 //  return this.shuffletwo(arr);
 
 // },
-function contains(a, obj) { // 检查数组中是否包含指定的值 并返回建值
-  var i = a.length
-  while (i--) {
-    if (a[i] === obj) {
-      return i
-    }
-  }
-  return false
-}
-function randomArray(numbers, countNum){ // 返回指定长度的数组 值为指定数字长度的随机数
-  for (var i = 0; i < numbers; i++) {
-    var num = Math.round(Math.random() * numbers)
-    if(contains(countNum, num) === false && countNum.length < numbers && num !== numbers){
-      countNum.push(num)
-    }
-  }
-  if(countNum.length < numbers){
-    return randomArray(numbers, countNum)
-  }else{
-    return countNum
-  }
-}
-// 快速生成0到100的数组
-// var _arr = Array.apply(null, Array(len)).map(function(item, i) {
-//   return i
-// })
-// var arr = new Array(100)
-// var i = arr.length
-// while(i--){arr[i] = i}
-//
+// function contains(a, obj) { // 检查数组中是否包含指定的值 并返回建值
+//   var i = a.length
+//   while (i--) {
+//     if (a[i] === obj) {
+//       return i
+//     }
+//   }
+//   return false
+// }
+// function randomArray(numbers, countNum){ // 返回指定长度的数组 值为指定数字长度的随机数
+//   for (var i = 0; i < numbers; i++) {
+//     var num = Math.round(Math.random() * numbers)
+//     if(contains(countNum, num) === false && countNum.length < numbers && num !== numbers){
+//       countNum.push(num)
+//     }
+//   }
+//   if(countNum.length < numbers){
+//     return randomArray(numbers, countNum)
+//   }else{
+//     return countNum
+//   }
+// }
+
 //---------------------------一下参考https://github.com/adobe-webplatform/Snap.svg/blob/master/dist/snap.svg.js
 function parsePathString(pathString) {
   if (!pathString) {

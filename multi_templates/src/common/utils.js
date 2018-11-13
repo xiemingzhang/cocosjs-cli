@@ -7,7 +7,10 @@ function alterItem(arr, index1, index2) {
   arr[index1] = arr.splice(index2, 1, arr[index1])[0]
   return arr
 }
-
+//生成数组长度len的从0递加的数组
+function produceArr(len){
+  return new Array(len).fill('').map(function(v, i){return i})
+}
 // deep拷贝
 function deepCopy(o) {
   if (o instanceof Array) {
@@ -71,28 +74,28 @@ function shuffle(arr){
 //  return this.shuffletwo(arr);
 
 // },
-function contains(a, obj) { // 检查数组中是否包含指定的值 并返回建值
-  var i = a.length
-  while (i--) {
-    if (a[i] === obj) {
-      return i
-    }
-  }
-  return false
-}
-function randomArray(numbers, countNum){ // 返回指定长度的数组 值为指定数字长度的随机数
-  for (var i = 0; i < numbers; i++) {
-    var num = Math.round(Math.random() * numbers)
-    if(contains(countNum, num) === false && countNum.length < numbers && num !== numbers){
-      countNum.push(num)
-    }
-  }
-  if(countNum.length < numbers){
-    return randomArray(numbers, countNum)
-  }else{
-    return countNum
-  }
-}
+// function contains(a, obj) { // 检查数组中是否包含指定的值 并返回建值
+//   var i = a.length
+//   while (i--) {
+//     if (a[i] === obj) {
+//       return i
+//     }
+//   }
+//   return false
+// }
+// function randomArray(numbers, countNum){ // 返回指定长度的数组 值为指定数字长度的随机数
+//   for (var i = 0; i < numbers; i++) {
+//     var num = Math.round(Math.random() * numbers)
+//     if(contains(countNum, num) === false && countNum.length < numbers && num !== numbers){
+//       countNum.push(num)
+//     }
+//   }
+//   if(countNum.length < numbers){
+//     return randomArray(numbers, countNum)
+//   }else{
+//     return countNum
+//   }
+// }
 // 快速生成0到100的数组
 // var _arr = Array.apply(null, Array(len)).map(function(item, i) {
 //   return i

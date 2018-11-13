@@ -25,6 +25,18 @@ var MySprite = cc.Sprite.extend({
   //     }.bind(this))
   //   ).repeatForever())
   // },
+  // 闪动
+  flash: function(time, re){
+    this.setOpacity(0)
+    var action1 = cc.fadeIn(time)
+    var action3 = cc.fadeOut(time)
+    var action = cc.sequence(action1, action3)
+    if(re == 0){
+      this.runAction(action.repeatForever())
+    }else{
+      this.runAction(action.repeat(re))
+    }
+  },
   // 抖动
   shake: function(angle, re){
     var action1 = cc.rotateTo(0.1, angle)
@@ -50,7 +62,7 @@ var MySprite = cc.Sprite.extend({
     }
   },
   // 翻牌
-  cardTurnOver: function(reverse){
+  turn: function(reverse){
     var action1 = cc.scaleTo(0.2, 0.001 * fix, 1 / 3 * fix)
     var scale_ease1 = action1.easing(cc.easeOut(2))
 
@@ -66,7 +78,7 @@ var MySprite = cc.Sprite.extend({
 
     this.runAction(action)
   },
-  frameAnimate: function(arr, time, re){
+  frame: function(arr, time, re){
     var animation = new cc.Animation()
     for (var i = 0; i < arr.length; i++){
       animation.addSpriteFrameWithFile(arr[i])
@@ -81,7 +93,7 @@ var MySprite = cc.Sprite.extend({
       this.runAction(animate.repeat(re))
     }
   },
-  readPixels: function(x, y){
+  getPixels: function(x, y){
     this._pixels = []
     var w = this.width
     var h = this.height

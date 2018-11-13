@@ -39,12 +39,28 @@ var MyLayer = cc.Layer.extend({
     cc.eventManager.addListener(this.hornListener, spr)
   },
   addHand: function(pointX, ponitY){
-    hander = new MySprite(res.hand)
+    var hander = new MySprite(res.hand)
     hander.setPosition(pointX, ponitY)
     hander.setAnchorPoint(0.1, 0.9)
     hander.setScale(1 / 3 * fix)
     this.addChild(hander, 6)
     return hander
+  },
+  //截屏
+  capture: function(start_x, start_y, end_x, end_y){
+    var renderText = new cc.RenderTexture(size.width, size.height)
+    renderText.begin()
+    cc.director.getRunningScene().visit()
+    renderText.end()
+
+    // var _screen = cc.Sprite.create(renderText.getSprite().getTexture(), cc.rect(size.width / 2,size.height / 2,size.width,size.height))
+    var _screen = cc.Sprite.create(renderText.getSprite().getTexture(), cc.rect(start_x, start_y, end_x, end_y))
+    // _screen.setTextureRect(cc.rect(0, 0, w1, 820));
+    _screen.setPosition(0, 0)
+    _screen.setAnchorPoint(0, 0)
+    _screen.setScale(1 / 2)
+    this.addChild(_screen, 10)
+    return _screen
   },
   drawLine: function(ponitArr, lineWidth, colorArr){
     if(colorArr){
@@ -113,7 +129,8 @@ var MyLayer = cc.Layer.extend({
   },
   sprites: function (sp) {
     var sprite = []
-    for (var i in sp) {
+    var len = sp.length
+    for (var i = 0; i < len; i++) {
       sprite[i] = new MySprite(sp[i].sprurl)
       sprite[i].setPosition(sp[i].sp_X * fix, sp[i].sp_Y * fix)
       sprite[i].setAnchorPoint(sp[i].chorPoint[0], sp[i].chorPoint[1])
@@ -136,6 +153,12 @@ var MyLayer = cc.Layer.extend({
   finish: function(){
     this.getParent().finish()
   },
+  next: function(t){
+    if(this.hornListener){
+      cc.eventManager.removeListener(this.hornListener)
+    }
+    this.getParent().nextLayer(t)
+  },
   becomeFalse: function(t) {
     if(t){
       // setTimeout(function(){this.move = false}.bind(this), t)
@@ -148,13 +171,19 @@ var MyLayer = cc.Layer.extend({
   },
   colorBar: function(){
     var size = cc.director.getWinSize()
-    var particleSystem2 = new cc.ParticleSystem(res.bar_plist)
-    particleSystem2.texture = cc.textureCache.addImage(res.color_bar)
-    particleSystem2.x = size.width / 2
-    particleSystem2.y = size.height * 1.2
-    this.addChild(particleSystem2, 11)
+    var colorBar = new cc.ParticleSystem(res.bar_plist)
+    colorBar.texture = cc.textureCache.addImage(res.color_bar)
+    colorBar.x = size.width / 2
+    colorBar.y = size.height * 1.2
+    colorBar.setDuration(3)
+    this.addChild(colorBar, 11)
   },
   boomStar: function(x, y){
+    //星星
+    // var particleSystem = new cc.ParticleSystem(res.star_plist)
+    // particleSystem.x = 368 * fix
+    // particleSystem.y = 268 * fix
+    // this.addChild(particleSystem)
     var rainParticle = new cc.ParticleExplosion()
     rainParticle.texture = cc.textureCache.addImage(res.win_star)
     rainParticle.setTotalParticles(18)
@@ -174,5 +203,12 @@ var MyLayer = cc.Layer.extend({
     rainParticle.setZOrder(100)
 
     this.addChild(rainParticle)
+  },
+  // removeListeners
+  reListen: function(){
+    cc.eventManager.removeAllListeners()
+    // 返回游戏列表
+    this.getParent().starLayer.gameClose()
   }
 })
+

@@ -14,6 +14,15 @@ var Layer01 = MyLayer.extend({
   },
   onEnter: function(){
     this._super()
+    var size = cc.winSize
+    // this.scheduleUpdate()
+    // this._loading = new ccui.LoadingBar()
+    // this._loading.loadTexture(res.readBar)
+    // this._loading.setScale(1 / 3 * fix)
+    // this._loading.setPercent(100)
+    // this._loading.x = 369 * fix
+    // this._loading.y = 24 * fix + this.fix_height
+    // this.addChild(this._loading, 10)
     // this.scheduleUpdate()
 
     var sprs = this.sprites(layer01_data[0])
@@ -21,7 +30,6 @@ var Layer01 = MyLayer.extend({
       item.setPosition(item.getPosition().x, item.getPosition().y + this.fix_height)
     }.bind(this))
 
-    var size = cc.winSize
     // add bg
     var bg = new cc.LayerColor(cc.color(105, 185, 220), size.width, size.height)
     // 颜色只能用cc.color,不能直接写”red“
@@ -48,7 +56,7 @@ var Layer01 = MyLayer.extend({
     // black.setPosition({x: size.width / 2, y: size.height / 2})
     // // this.addChild(this.black, 2)
     // clipping_layer.addChild(black, 5)
-    // this.getChildByTag(1005).addChild(clip)
+    // this.getChildByTag(1005).addChild(clip)//移动该精灵
     // 
     // var horn = this.createSprite(res.sound, 1 / 3 * fix, [0, 0], {x: 40 * fix, y: 240 * fix})
     // horn.sound = sound.che_audio
@@ -235,30 +243,19 @@ var Layer01 = MyLayer.extend({
         // if(this.crashArr.some(function(item){
         //   if(this.crash(target, item) && target.data.flag === item.data.flag){
         //     target.crashed = true
-        //     var itemBox = item.getBoundingBox()
-        //     target.setAnchorPoint(0.5, 1)
-        //     target.setPosition(itemBox.x + itemBox.width / 2, itemBox.y + itemBox.height)
-        //     target.setLocalZOrder(target._zIndex)
-        //     item.runAction(cc.sequence(
-        //       cc.callFunc(function(){
-        //         item.initWithFile(item.data.sprurl2)
-        //       }),
-        //       cc.delayTime(0.5),
-        //       cc.callFunc(function(){
-        //         item.initWithFile(item.data.sprurl)
-        //       })
-        //     ))
+            // item.crashed = true
+            // var itemBox = item.getBoundingBox()
+            // target.runAction(cc.sequence(
+            //   cc.moveTo(0.8, itemBox.x, itemBox.y),
+            //   cc.callFunc(function(){
+            //     target.setLocalZOrder(target._zIndex)
+            //     this.becomeFalse()
+            //   }.bind(this))
+            // ))
         //     return true
         //   }
         // }.bind(this))){
         //   sound.rightAudio()
-        //   // this.right()
-        //   target.runAction(cc.sequence(
-        //     cc.moveBy(0.8, 0, -40 * fix),
-        //     cc.callFunc(function(){
-        //       this.becomeFalse()
-        //     }.bind(this))
-        //   ))
         // }else{
         //   if(this.crashArr.some(function(item){
         //     if(this.crash(target, item)){
@@ -292,21 +289,113 @@ var Layer01 = MyLayer.extend({
       }.bind(this)
     })
   },
-  // update: function(){
+  // update: function (dt) {
+  // this.addyu()
+  // this.removeyu()
+  //   this._count += 1
+  //   if (this._count > 100) {
+  //     this.unscheduleUpdate()
+  //     // this._count = 0
+  //   }
 
+  //   this._loading && this._loading.setPercent(this._count)
+  // },
+  // addyu : function(){
+//   var yu = new cc.Sprite(res.ff);
+//   yu.setScale(1/3*fix)
+//   var size = cc.winSize;
+//   var x = size.height*cc.random0To1();
+//   yu.attr({
+//             x: 0,
+//             y:x
+//         });
+//   this.yuSprites.push(yu);
+//         this.addChild(yu,5);
+//    var action = cc.MoveTo.create(2,cc.p(yu.x + 830*fix,yu.y - 100*fix));
+//         yu.runAction(action);
+// },
+// removeyu : function() {
+//         //移除到屏幕底部的sushi
+//         for (var i = 0; i < this.yuSprites.length; i++) {
+//             // cc.log("removeSushi.........");
+//             if(20 >= this.yuSprites[i].y) {
+//                 // cc.log("==============remove:"+i);
+//                 this.yuSprites[i].removeFromParent();
+//                 this.yuSprites[i] = undefined;
+//                 this.yuSprites.splice(i,1);
+//                 i= i-1;
+//             }
+//         }
+// }
+//createBubble: function(x,y){
+  //   var block = new SpriteExtend(res.bubble_g1);
+  //   block.setAnchorPoint(0.5, 0.5);
+  //   block.setPosition(x*fix,y*fix);
+  //   block.setScale(1/6*fix);
+  //   this.addChild(block,1);
+
+  //   var st = random(4,3);
+
+  //   var move = cc.moveBy(st,0,80*fix);
+  //   var scale = cc.scaleTo(st,1/3*fix);
+  //   var action1 = cc.spawn(move,scale);
+    
+  //   var fade = cc.fadeOut(0.2);
+
+  //   var cb2 = cc.callFunc(function(){
+  //     block.removeFromParent();
+  //   }.bind(this))
+  //   var cb1 = cc.callFunc(function(){
+  //     block.runAction(cc.sequence(fade,cb2))
+  //   }.bind(this))
+  //   block.runAction(cc.sequence(action1,cb1));
+  // },
+    // 调用createRain this.schedule(function() {
+    // var x1 = this.random(0,size.width);
+    //  this.createRain(x1,size.height); 
+
+    //     }, 0.1)
+  // createRain : function(x,y){
+  //   var sprite = cc.Sprite.create(res.big_xia_yu);
+  //   sprite.setAnchorPoint(0, 0);
+  //   sprite.setPosition(x,y);
+  //   sprite.setScale(1/3*fix);
+  //   this.addChild(sprite, 3);
+
+  //   this.rainArr.push(sprite);
+
+  //   var y = this.random(50,10)
+    
+  //   var move = cc.moveTo(2,x,y*fix);
+  //   var moveease = move.easing(cc.easeIn(2));
+  //   var fade = cc.fadeOut(0.3)
+  //     this.scheduleOnce(function() {
+  //    var sprite1 = cc.Sprite.create(res.shuikeng1);
+  //     sprite1.setAnchorPoint(0, 0);
+  //     sprite1.setPosition(x-40*fix,y);
+  //     sprite1.setScale(1/3*fix);
+  //     this.addChild(sprite1, 2);  
+  //     sprite1.runAction(cc.fadeOut(0.3))
+  // }, 2)
+     
+  //   var cb1 = cc.callFunc(function(){
+  //     sprite.removeFromParent();
+
+  //     for(var i = 0; i<this.rainArr.length; i++){
+  //       if(this.rainArr[i] == sprite){
+  //         this.rainArr.splice(i,1);
+  //         break;
+  //       }
+  //     }
+  //   }.bind(this))
+  //   sprite.runAction(cc.sequence(moveease,fade,cb1))
   // },
   // removeListeners
-  reListen: function(){
-    cc.eventManager.removeAllListeners()
-    // 返回游戏列表
-    this.getParent().starLayer.gameClose()
-  },
-  next: function(t){
-    if(this.hornListener){
-      cc.eventManager.removeListener(this.hornListener)
-    }
-    this.getParent().nextLayer(t)
-  },
+  // reListen: function(){
+  //   cc.eventManager.removeAllListeners()
+  //   // 返回游戏列表
+  //   this.getParent().starLayer.gameClose()
+  // },
   crash: function(target, item){
     var itemBox = item.getBoundingBox()
     var targetBox = target.getBoundingBox()

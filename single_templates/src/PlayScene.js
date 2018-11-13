@@ -2,7 +2,6 @@ var PlayScene = MyScene.extend({
   ctor: function(){
     this._super()
     this.l = 0
-    this.addedLayer = []
      /* 飞星层*/
     this.starLayer = new StarLayer(common_data[1])
     // this.starLayer = new StarLayer(common_data[0])

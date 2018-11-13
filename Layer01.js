@@ -1,88 +1,50 @@
-var Scene01_Layer01 = MyLayer.extend({
+var Layer01 = MyLayer.extend({
   ctor: function () {
     this._super()
     this.fix_height = 180 / fix - 180
-    // this.pointArr = []
-    // this.i = 0
-    // var svgPath = 'M315.833,153.5c0,0-3.083-71.25,61.667-68.333c67.295,3.032,60.667,63,53,77S408.5,201.833,368,207c-7.556,0.964-6.475,6.611-1.667,7.558c10.635,2.093,77.833-0.39,82.667,61.776s-59.799,67.455-73.667,67.499c-12.667,0.04-48.667,6.334-68.833-64.833'
-    // this.pointArr[0] = getPointArr(svgPath, 2, 0, this.fix_height)
-    // this.move = true
-    // this.delArr = []
-    // this.drawNodeArr = []
+    this.move = true
+    sound.step01_01_audio()
     return true
   },
   onEnter: function(){
     this._super()
     // this.scheduleUpdate()
-    // this.scheduleUpdate()
-    // this._loading = new ccui.LoadingBar()
-    // this._loading.loadTexture(res.readBar)
-    // this._loading.setScale(1 / 3 * fix)
-    // this._loading.setPercent(100)
-    // this._loading.x = 369 * fix
-    // this._loading.y = 24 * fix + this.fix_height
-    // this.addChild(this._loading, 10)
-    // this.scheduleUpdate()
+    // 一点点显示
+    // this.clip = new cc.LayerColor(cc.color(0, 0, 0), 830, 990) // 县市区
+    // this.clip.setPosition(229 * fix, 300 * fix)
+    // this.clip.setAnchorPoint(0, 0)
+    // this.clip.setScale(1 / 3 * fix,1/3);
+
+    // var clipTwo = new cc.ClippingNode(this.clip)
+    // clipTwo.setAnchorPoint(0, 0)
+    // this.addChild(clipTwo, 3);
+
+    // var gray = new cc.Sprite(res.lie_wen) // xianshineirong
+    // gray.setPosition(229 * fix, 0 * fix)
+    // gray.setAnchorPoint(0, 0)
+    // gray.setScale(1/3 * fix,1/3);
+    // clipTwo.addChild(gray, 10);
+    // this.clip.runAction(cc.moveTo(3, cc.p(229 * fix, 0 * fix)))
 
     var sprs = this.sprites(layer01_data[0])
     sprs.forEach(function(item){
       item.setPosition(item.getPosition().x, item.getPosition().y + this.fix_height)
+      cc.eventManager.addListener(this.listener().clone(), item)
     }.bind(this))
+    this.sprs = sprs
 
     var size = cc.winSize
-    // add bg
-    var bg = new cc.LayerColor(cc.color(105, 185, 220), size.width, size.height)
-    // 颜色只能用cc.color,不能直接写”red“
-    bg.setPosition(cc.p(0, 0))
+    var bg = new cc.Sprite(res.bg)
+    bg.setScale(size.height / bg.height)
+    bg.setAnchorPoint(0.5, 0.5)
+    bg.setPosition({x: size.width / 2, y: size.height / 2})
     this.addChild(bg)
 
-    // var bg = new cc.Sprite(res.beijing)
-    // bg.setScale(size.height / bg.height)
-    // bg.setAnchorPoint(0.5, 0.5)
-    // bg.setPosition({x: size.width / 2, y: size.height / 2})
-    // this.addChild(bg)
-
-    // var clip = new cc.Sprite(res.modal)
-    // clip.setAnchorPoint(0, 0)
-    // clip.setPosition(0, 0)
-    // // clip.setScale(1 / 3 * fix)
-    // var clipping_layer = new cc.ClippingNode(clip)
-    // clipping_layer.setInverted(true)
-    // this.addChild(clipping_layer, 2)
-
-    // var black = new cc.Sprite(res.black_glowworm)
-    // black.setScale(size.height / black.height)
-    // black.setAnchorPoint(0.5, 0.5)
-    // black.setPosition({x: size.width / 2, y: size.height / 2})
-    // // this.addChild(this.black, 2)
-    // clipping_layer.addChild(black, 5)
-    // this.getChildByTag(1005).addChild(clip)//移动该精灵
-    // 
-    // var horn = this.createSprite(res.sound, 1 / 3 * fix, [0, 0], {x: 40 * fix, y: 240 * fix})
-    // horn.sound = sound.che_audio
-    // this.addSoundButton(horn)
-
-    // this.hander = this.addHand(340 * fix, 235 * fix + this.fix_height)
-    // this.hander.frameAnimate([res.hand, res.handclick], 0.5, 0)
-
-    // this._point = this.pointArr[this.i].concat()
-
-    // this.hander = this.addHand(this._point[0].x, this._point[0].y)
-    // this.hander.frameAnimate([res.hand, res.handclick], 0.5, 0)
-
-    // this.hander.runAction(cc.sequence(
-    //   cc.moveTo(0.6, this._point[0].x, this._point[0].y),
-    //   cc.moveTo(0.6, this._point[10].x, this._point[10].y)
-    // ).repeatForever())
-
-    // this.pencilSpr = this.createSprite(res.pencil, 1 / 3 * fix, [0, 0], {x: this._point[0].x, y: this._point[0].y})
-    // this.pencilSpr.setLocalZOrder(13)
-
-    // // 创建draw对象
-    // this.drawLine(this._point, [0, 0, 0])
-    //
-    // cc.eventManager.addListener(this.listener(), this)
-
+    this.scheduleOnce(function(){
+      this.hander = this.addHand(150 * fix, 275 * fix + this.fix_height)
+      this.hander.frameAnimate([res.hand, res.handclick], 0.5, 0)
+      this.move = false
+    }, 3)
   },
   listener: function(){
     return cc.EventListener.create({
@@ -212,7 +174,7 @@ var Scene01_Layer01 = MyLayer.extend({
         //   }
         // }
         // if (!this.move && this.getDistance(this._point[0], touchPoint) <= 50) {
-        //   this.drawLine(this._point.splice(0, 2), this.colorObj)
+        //   this.drawLine(this._point.splice(0, 2), 5 * fix * fix2, this.colorObj)
         //   // this.delArr.push(drawNode)
         //   if(this._point.length <= 0){
         //     this.move = true
@@ -289,50 +251,21 @@ var Scene01_Layer01 = MyLayer.extend({
       }.bind(this)
     })
   },
-  // update: function (dt) {
-  // this.addyu()
-  // this.removeyu()
-  //   this._count += 1
-  //   if (this._count > 100) {
-  //     this.unscheduleUpdate()
-  //     // this._count = 0
-  //   }
+  // update: function(){
 
-  //   this._loading && this._loading.setPercent(this._count)
   // },
-  // // addyu : function(){
-//   var yu = new cc.Sprite(res.ff);
-//   yu.setScale(1/3*fix)
-//   var size = cc.winSize;
-//   var x = size.height*cc.random0To1();
-//   yu.attr({
-//             x: 0,
-//             y:x
-//         });
-//   this.yuSprites.push(yu);
-//         this.addChild(yu,5);
-//    var action = cc.MoveTo.create(2,cc.p(yu.x + 830*fix,yu.y - 100*fix));
-//         yu.runAction(action);
-// },
-// removeyu : function() {
-//         //移除到屏幕底部的sushi
-//         for (var i = 0; i < this.yuSprites.length; i++) {
-//             // cc.log("removeSushi.........");
-//             if(20 >= this.yuSprites[i].y) {
-//                 // cc.log("==============remove:"+i);
-//                 this.yuSprites[i].removeFromParent();
-//                 this.yuSprites[i] = undefined;
-//                 this.yuSprites.splice(i,1);
-//                 i= i-1;
-//             }
-//         }
-// }
   // removeListeners
-  // reListen: function(){
-  //   cc.eventManager.removeAllListeners()
-  //   // 返回游戏列表
-  //   this.getParent().starLayer.gameClose()
-  // },
+  reListen: function(){
+    cc.eventManager.removeAllListeners()
+    // 返回游戏列表
+    this.getParent().starLayer.gameClose()
+  },
+  next: function(t){
+    if(this.hornListener){
+      cc.eventManager.removeListener(this.hornListener)
+    }
+    this.getParent().nextLayer(t)
+  },
   crash: function(target, item){
     var itemBox = item.getBoundingBox()
     var targetBox = target.getBoundingBox()
@@ -343,97 +276,5 @@ var Scene01_Layer01 = MyLayer.extend({
     }
     return false
   }
-  // rubber: function(touch, event){
-  //   var target = event.getCurrentTarget()
-  //   var touchPoint = touch.getLocation()
-  //   var locationInNode = target.convertToNodeSpace(touchPoint)
-
-  //   var x = locationInNode.x
-  //   var y = locationInNode.y
-
-  //   this.drawNodeArr.forEach(function(item, index){
-  //     if(x > item.startx && x < item.endx && y > item.starty && y < item.endy){
-  //       this.drawNodeArr.splice(index, 1)
-  //       item.removeFromParent()
-  //     }
-  //   }.bind(this))
-  // },
-  //   drawColor: function(touch, event){
-  //   var target = event.getCurrentTarget()
-  //   var touchPoint = touch.getLocation()
-  //   var locationInNode = target.convertToNodeSpace(touchPoint)
-
-  //   var x = locationInNode.x
-  //   var y = locationInNode.y
-
-  //   var r = this.colorObj[0]
-  //   var g = this.colorObj[1]
-  //   var b = this.colorObj[2]
-  //   if(!this.sX){
-  //     this.sX = touchPoint.x - 0.001
-  //     this.sY = touchPoint.y - 0.001
-  //   }
-  //   if(!this._sX){
-  //     this._sX = x - 10
-  //     this._sY = y - 10
-  //   }
-
-  //   if(Math.abs(this.sX - touchPoint.x) < 35 && Math.abs(this.sY - touchPoint.y) < 35){
-
-  //     var drawNode = new cc.DrawNode()
-  //     drawNode.drawCardinalSpline(
-  //       [cc.p(this.sX, this.sY), // 起点
-  //         cc.p(touchPoint.x, touchPoint.y)], // 终点
-  //       0.1,
-  //       8,
-  //       3 * fix * fix2, // 线粗
-  //       // cc.color(this.colorObj.r, this.colorObj.b, this.colorObj.b, 255) // 颜色
-  //       cc.color(r, g, b, 255) // 颜色
-  //     )
-  //     this.addChild(drawNode, 8)
-
-  //     if(this._sX <= x){
-  //       if(x - this._sX >= 20){
-  //         drawNode.startx = this._sX
-  //         drawNode.endx = x
-  //       }else{
-  //         drawNode.startx = this._sX - 20
-  //         drawNode.endx = this._sX + 2 * 20
-  //       }
-  //     }else{
-  //       if(this._sX - x >= 20){
-  //         drawNode.startx = x
-  //         drawNode.endx = this._sX
-  //       }else{
-  //         drawNode.startx = x - 20
-  //         drawNode.endx = x + 2 * 20
-  //       }
-  //     }
-  //     if(this._sY <= y){
-  //       if(y - this._sY >= 20){
-  //         drawNode.starty = this._sY
-  //         drawNode.endy = y
-  //       }else{
-  //         drawNode.starty = this._sY - 20
-  //         drawNode.endy = this._sY + 2 * 20
-  //       }
-  //     }else{
-  //       if(this._sY - y >= 20){
-  //         drawNode.starty = y
-  //         drawNode.endy = this._sY
-  //       }else{
-  //         drawNode.starty = y - 20
-  //         drawNode.endy = y + 2 * 20
-  //       }
-  //     }
-  //     this.drawNodeArr.push(drawNode)
-
-  //     this.sX = touchPoint.x
-  //     this.sY = touchPoint.y
-
-  //     this._sX = x
-  //     this._sY = y
-  //   }
-  // }
 })
 

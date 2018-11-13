@@ -24,17 +24,8 @@
 var layer01_data = [
   [
     {id: 1001, chorPoint: [0, 0], sprurl: res.cat_one, sp_X: 116.3, sp_Y: 169, rotation: 0, zindex: 1, Scale: 1, opacity: 255},
-  ],
-  [
-    // {id: 1001, chorPoint: [0, 0], sprurl: res.cat_one, sp_X: 116.3, sp_Y: 169, rotation: 0, zindex: 1, Scale: 1, opacity: 255},
   ]
 ]
-
-// var scene02_spr_data = [[],
-//   [
-//     // {id: 1001, chorPoint: [0, 0], sprurl: res.cat_one, sp_X: 116.3, sp_Y: 169, rotation: 0, zindex: 1, Scale: 1, opacity: 255},
-//   ]
-// ]
 
 // 全屏拖拽定义tag
 // var TAG_CLIPPERNODE=8001;

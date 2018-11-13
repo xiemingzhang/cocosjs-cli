@@ -2,7 +2,6 @@ var PlayScene01 = MyScene.extend({
   ctor: function(){
     this._super()
     this.l = 0
-    this.addedLayer = []
      /* 飞星层*/
     this.starLayer = new StarLayer(common_data[1])
     // this.starLayer = new StarLayer(common_data[0])
@@ -29,7 +28,7 @@ var PlayScene01 = MyScene.extend({
 
     var layer = new this.layerArr[this.randomArr[0]]()
     this.addChild(layer)
-    this.addedLayer.push(layer)
+    this.addedLayer = layer
   },
   reListen: function(){
     cc.eventManager.removeAllListeners()
@@ -55,8 +54,8 @@ var PlayScene01 = MyScene.extend({
         // sound.stopAllEffects()
         var layer = new this.layerArr[this.randomArr[this.l]]()
         this.addChild(layer)
-        this.addedLayer[this.l - 1].removeFromParent()
-        this.addedLayer.push(layer)
+        this.addedLayer.removeFromParent()
+        this.addedLayer = layer
       }.bind(this), time)
     }else{
       // scene01Finish = true

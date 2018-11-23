@@ -28,7 +28,6 @@ var Layer01 = MyLayer.extend({
 
     var sprs = this.sprites(layer01_data[0])
     sprs.forEach(function(item){
-      item.setPosition(item.getPosition().x, item.getPosition().y + this.fix_height)
       cc.eventManager.addListener(this.listener().clone(), item)
     }.bind(this))
     this.sprs = sprs

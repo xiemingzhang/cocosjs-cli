@@ -47,14 +47,14 @@ var MyLayer = cc.Layer.extend({
     return hander
   },
   //截屏
-  capture: function(start_x, start_y, end_x, end_y){
+  capture: function(start_x, start_y, width, height){
+    var size = cc.winSize
     var renderText = new cc.RenderTexture(size.width, size.height)
     renderText.begin()
     cc.director.getRunningScene().visit()
     renderText.end()
 
-    // var _screen = cc.Sprite.create(renderText.getSprite().getTexture(), cc.rect(size.width / 2,size.height / 2,size.width,size.height))
-    var _screen = cc.Sprite.create(renderText.getSprite().getTexture(), cc.rect(start_x, start_y, end_x, end_y))
+    var _screen = cc.Sprite.create(renderText.getSprite().getTexture(), cc.rect(start_x, size.height - start_y - end_y, end_x, end_y))
     // _screen.setTextureRect(cc.rect(0, 0, w1, 820));
     _screen.setPosition(0, 0)
     _screen.setAnchorPoint(0, 0)
@@ -122,7 +122,7 @@ var MyLayer = cc.Layer.extend({
     var sprite = new cc.Sprite(path)
     sprite.setScale(scale)
     sprite.setAnchorPoint(anchor[0], anchor[1])
-    sprite.setPosition(pos)
+    sprite.setPosition(pos[0], pos[1])
     sprite.setLocalZOrder(z ? z : 1)
     this.addChild(sprite)
     return sprite
@@ -131,11 +131,11 @@ var MyLayer = cc.Layer.extend({
     var sprite = []
     var len = sp.length
     for (var i = 0; i < len; i++) {
-      sprite[i] = new MySprite(sp[i].sprurl)
-      sprite[i].setPosition(sp[i].sp_X * fix, sp[i].sp_Y * fix)
+      sprite[i] = new MySprite(sp[i].sprUrl)
+      sprite[i].setPosition(sp[i].pos[0] * fix, sp[i].pos[1] * fix + (sp[i].fix ? this.fix_height : 0))
       sprite[i].setAnchorPoint(sp[i].chorPoint[0], sp[i].chorPoint[1])
       sprite[i].setOpacity(sp[i].opacity)
-      sprite[i].setScale(sp[i].Scale / 3 * fix)
+      sprite[i].setScale(sp[i].scale[0] / 3 * fix, sp[i].scale[1] / 3 * fix)
       sprite[i].setRotation(sp[i].rotation)
       sprite[i].data = sp[i]
       sprite[i].id = sp[i].id

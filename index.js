@@ -2,6 +2,7 @@
 
 const fs = require('fs')
 const path = require('path')
+
 const readline = require('readline');
 
 const options = require('minimist')(process.argv.slice(2))
@@ -176,6 +177,27 @@ if (options._.length === 0 && (options.res || options.resource)) {
   createAudio(options.res)
 }
 
+// function exists(_path){
+
+//     return fs.stat(_path);
+
+// }
+
+// // 判断是不是文件：
+
+// function isFile(_path){
+
+//     return exists(_path) && fs.statSync(_path).isFile();
+
+// }
+
+//     // 判断是不是目录：
+
+// function isDir(_path){
+
+//     return exists(_path) && fs.statSync(_path).isDirectory();
+
+// }
 function createResource(name){
   let root = path.resolve(name);
 
@@ -212,12 +234,19 @@ function createResource(name){
   const paths1 = fs.readdirSync(root + '/' + name + '/res/Normal/source');
 
   let _myPathArr1 = []
+  
   paths1.forEach(_path => {
       var pic = /\.(png)/g;
         if(pic.test(_path)){
           _myPathArr1.push(_path)
         }else{
-          console.log(`${_path}:图片类型错误`);
+          fs.stat(root + '/' + name + '/res/Normal/source' + '/' + _path, function(err, stats){
+            if(stats.isDirectory()){
+              console.log(root + '/' + name + '/res/Normal/source' + '/' + _path);
+            }else{
+              console.log(`${_path}:图片类型错误`);
+            }
+          })
         }
     });
 

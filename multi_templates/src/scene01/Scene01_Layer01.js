@@ -25,9 +25,6 @@ var Scene01_Layer01 = MyLayer.extend({
     // this.scheduleUpdate()
 
     var sprs = this.sprites(layer01_data[0])
-    sprs.forEach(function(item){
-      item.setPosition(item.getPosition().x, item.getPosition().y + this.fix_height)
-    }.bind(this))
 
     var size = cc.winSize
     // add bg
@@ -63,12 +60,12 @@ var Scene01_Layer01 = MyLayer.extend({
     // this.addSoundButton(horn)
 
     // this.hander = this.addHand(340 * fix, 235 * fix + this.fix_height)
-    // this.hander.frameAnimate([res.hand, res.handclick], 0.5, 0)
+    // this.hander.frame([res.hand, res.handclick], 0.5, 0)
 
     // this._point = this.pointArr[this.i].concat()
 
     // this.hander = this.addHand(this._point[0].x, this._point[0].y)
-    // this.hander.frameAnimate([res.hand, res.handclick], 0.5, 0)
+    // this.hander.frame([res.hand, res.handclick], 0.5, 0)
 
     // this.hander.runAction(cc.sequence(
     //   cc.moveTo(0.6, this._point[0].x, this._point[0].y),
@@ -203,16 +200,23 @@ var Scene01_Layer01 = MyLayer.extend({
         // var y = locationInNode.y
         // var pexels = target.readPixels(Math.round(x), Math.round(y))
         // // cc.log(pexels[3])
-        // if (cc.rectContainsPoint(targetRect, touchPoint) && pexels[3] >= 5 && pexels[3] <= 100) {
+        // if (!this.move && cc.rectContainsPoint(targetRect, touchPoint) && pexels[3] > 0) {
         //   if(this.flag === 'draw'){
         //     this.drawColor(touch, event)
         //   }
         //   if(this.flag === 'clean'){
         //     this.rubber(touch, event)
         //   }
+        // }else{
+        //   this.move = true
+        //   this.sX = null
+        //   this.sY = null
+
+        //   this._sX = null
+        //   this._sY = null
         // }
         // if (!this.move && this.getDistance(this._point[0], touchPoint) <= 50) {
-        //   this.drawLine(this._point.splice(0, 2), this.colorObj)
+        //   this.drawLine(this._point.splice(0, 2), 5 * fix * fix2, this.colorObj)
         //   // this.delArr.push(drawNode)
         //   if(this._point.length <= 0){
         //     this.move = true
@@ -234,6 +238,7 @@ var Scene01_Layer01 = MyLayer.extend({
         //     this.becomeFalse()
         //   }.bind(this))
         // ))
+        // this.move = false
         // this.sX = null
         // this.sY = null
 
@@ -333,16 +338,16 @@ var Scene01_Layer01 = MyLayer.extend({
   //   // 返回游戏列表
   //   this.getParent().starLayer.gameClose()
   // },
-  crash: function(target, item){
-    var itemBox = item.getBoundingBox()
-    var targetBox = target.getBoundingBox()
-    var targetRect = cc.rect(targetBox.x, targetBox.y, targetBox.width, targetBox.height)
-    var itemRect = cc.rect(itemBox.x, itemBox.y, itemBox.width, itemBox.height)
-    if(cc.rectIntersectsRect(itemRect, targetRect)){
-      return true
-    }
-    return false
-  }
+  // crash: function(target, item){
+  //   var itemBox = item.getBoundingBox()
+  //   var targetBox = target.getBoundingBox()
+  //   var targetRect = cc.rect(targetBox.x, targetBox.y, targetBox.width, targetBox.height)
+  //   var itemRect = cc.rect(itemBox.x, itemBox.y, itemBox.width, itemBox.height)
+  //   if(cc.rectIntersectsRect(itemRect, targetRect)){
+  //     return true
+  //   }
+  //   return false
+  // },
   // rubber: function(touch, event){
   //   var target = event.getCurrentTarget()
   //   var touchPoint = touch.getLocation()

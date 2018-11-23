@@ -32,17 +32,7 @@ cc.game.onStart = function(){
   // 在移动设备上进入全屏模式
   cc.view.enableAutoFullScreen(true)
   cc.LoaderScene.preload(g_resources, function () {
-    // 背景音乐
     cc.director.runScene(new StartScene())
   }, this)
-  // while (true){
-  //   console.log(autoFun.num)
-  //   if(autoFun.num == len){
-  //     cc.LoaderScene.preload(g_resources, function () {
-  //       cc.director.runScene(new StartScene())
-  //     }, this)
-  //     break
-  //   }
-  // }
 }
 cc.game.run()

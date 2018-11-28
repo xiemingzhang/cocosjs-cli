@@ -1,31 +1,74 @@
-
-// 控制飞星层 数据
-var common_data
-
-// 数据上报
-var updata
-
-var StartScene = cc.Scene.extend({
-  ctor: function (){
+var StartScene = MyScene.extend({
+  ctor: function(){
     this._super()
 
-    common_data = [
-      {id: 0, obtain: 0, total: 10},
-      {id: 1, obtain: 0, total: 4}
-    ]
-
-    updata = {
-      task_id: 'sss',
-      is_finish: 0, // 是否完成游戏
-      finish_star: 0, // 获得几颗星
-      finish_steps: 0, // 操作多少部
-      finish_time: 0// 时长
-    }
     sound.gameBgAudio()
+    this.l = 0
+     /* 飞星层*/
+    this.starLayer = new StarLayer(common_data[1])
+    // this.starLayer = new StarLayer(common_data[0])
+    this.addChild(this.starLayer, 100, 2)
+    // 返回游戏列表
+    this.starLayer.gameClose()
+    // 返回游戏首场景
+    // this.starLayer.goBack()
   },
   onEnter: function () {
     this._super()
+    var size = cc.winSize
 
-    cc.director.runScene(new PlayScene())
+    // sound.gameBgAudio()
+    this.layerArr = [Layer01]
+    // this.randomArr = shuffle([0])
+    this.randomArr = [0]
+
+    var layer = new this.layerArr[this.randomArr[0]]()
+    this.addChild(layer)
+    this.addedLayer = layer
+  },
+  reListen: function(){
+    cc.eventManager.removeAllListeners()
+    // 返回游戏列表
+    this.starLayer.gameClose()
+  },
+  right: function(){
+    // sound.stopAllEffects()
+    sound.starAudio()
+    common_data[1].obtain++
+    this.starLayer.rightStar(common_data[1].obtain)
+    this.dataRefresh()
+  },
+  nextLayer: function(t, n){
+    this.l++
+    if(t >= 0){
+      var time = t
+    }else{
+      var time = 1.5
+    }
+    if(this.l < this.randomArr.length){
+      this.scheduleOnce(function(){
+        // sound.stopAllEffects()
+        var layer = new this.layerArr[this.randomArr[this.l]](n)
+        this.addChild(layer)
+        this.addedLayer.removeFromParent()
+        this.addedLayer = layer
+      }.bind(this), time)
+    }else{
+      this.finish(t)
+    }
+  },
+  finish: function (t) {
+    // updata.is_finish = 1
+    if(t >= 0){
+      var time = t
+    }else{
+      var time = 1.5
+    }
+    this.scheduleOnce(function(){
+      sound.stopAudio()
+      sound.stopAllEffects()
+      sound.winAudio()
+      this.starLayer.gameEnd(common_data[0].obtain)
+    }.bind(this), time)
   }
 })

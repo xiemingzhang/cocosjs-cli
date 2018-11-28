@@ -1,0 +1,20 @@
+{
+    "debugMode" : 1,
+    "showFPS" : false,
+    "frameRate" : 30,
+    "id" : "gameCanvas",
+    "renderMode" : 1,
+    "jsList" : [
+        "src/common/utils.js",
+        "src/resource.js",
+        "src/audio.js",
+        "src/data.js",
+        "src/common/StarLayer.js",
+        "src/common/MySprite.js",
+        "src/common/MyLayer.js",
+        "src/common/MyScene.js",
+        "src/Layer01.js",
+        "src/PlayScene.js",
+        "src/StartScene.js"
+    ]
+}

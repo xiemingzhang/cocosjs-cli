@@ -1,0 +1,27 @@
+{
+    "debugMode" : 1,
+    "showFPS" : false,
+    "frameRate" : 30,
+    "id" : "gameCanvas",
+    "renderMode" : 1,
+    "jsList" : [
+        "src/common/utils.js",
+        "src/resource.js",
+        "src/audio.js",
+        "src/data.js",
+        "src/common/StarLayer.js",
+        "src/common/MySprite.js",
+        "src/common/MyLayer.js",
+        "src/common/MyScene.js",
+        "src/Scene01_Layer01.js",
+        "src/Scene01_Layer02.js",
+        "src/Scene01_Layer03.js",
+        "src/Scene02_Layer01.js",
+        "src/Scene02_Layer02.js",
+        "src/Scene02_Layer03.js",
+        "src/PlayScene01.js",
+        "src/PlayScene02.js",
+        "src/PlayScene.js",
+        "src/StartScene.js"
+    ]
+}

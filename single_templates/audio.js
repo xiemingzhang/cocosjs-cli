@@ -1,10 +1,10 @@
 
-var step04 = load('./res/Normal/audio/voice/step04.mp3')
-var step06 = load('./res/Normal/audio/voice/step06.mp3')
-var step07 = load('./res/Normal/audio/voice/step07.mp3')
-var step08 = load('./res/Normal/audio/voice/step08.mp3')
-var step09 = load('./res/Normal/audio/voice/step09.mp3')
-var step11 = load('./res/Normal/audio/voice/step11.mp3')
+// var step04 = load('./res/Normal/audio/voice/step04.mp3')
+// var step06 = load('./res/Normal/audio/voice/step06.mp3')
+// var step07 = load('./res/Normal/audio/voice/step07.mp3')
+// var step08 = load('./res/Normal/audio/voice/step08.mp3')
+// var step09 = load('./res/Normal/audio/voice/step09.mp3')
+// var step11 = load('./res/Normal/audio/voice/step11.mp3')
 
 var audio_list_play = []
 function load(src){
@@ -63,33 +63,33 @@ document.addEventListener('visibilitychange', function() {
   }
 })
 
-sound.step04_audio = function() {
-  step04.play()
-}
-sound.step06_audio = function() {
-  step06.play()
-}
-sound.step07_audio = function() {
-  step07.play()
-}
-sound.step08_audio = function() {
-  step08.play()
-}
-sound.step09_audio = function() {
-  step09.play()
-}
-sound.step11_audio = function() {
-  step11.play()
-}
-sound.stopAllEffects = function () {
-  audio_list_play.forEach(function(item){
-    setTimeout(function(){
-      item.currentTime = 0
-      item.flag = true
-    }, 150)
-    item.flag = false
-    item.pause()
-  })
-  audio_list_play = []
-  cc.audioEngine.stopAllEffects()
-}
+// sound.step04_audio = function() {
+//   step04.play()
+// }
+// sound.step06_audio = function() {
+//   step06.play()
+// }
+// sound.step07_audio = function() {
+//   step07.play()
+// }
+// sound.step08_audio = function() {
+//   step08.play()
+// }
+// sound.step09_audio = function() {
+//   step09.play()
+// }
+// sound.step11_audio = function() {
+//   step11.play()
+// }
+// sound.stopAllEffects = function () {
+//   audio_list_play.forEach(function(item){
+//     setTimeout(function(){
+//       item.currentTime = 0
+//       item.flag = true
+//     }, 150)
+//     item.flag = false
+//     item.pause()
+//   })
+//   audio_list_play = []
+//   cc.audioEngine.stopAllEffects()
+// }

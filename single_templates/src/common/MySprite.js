@@ -13,18 +13,6 @@ var MySprite = cc.Sprite.extend({
     this._super()
     // cc.log("onExit");
   },
-  // clickAnimation: function(){
-  //   this.runAction(cc.sequence(
-  //     cc.delayTime(0.5),
-  //     cc.callFunc(function(){
-  //       this.initWithFile(res.handclick)
-  //     }.bind(this)),
-  //     cc.delayTime(0.5),
-  //     cc.callFunc(function(){
-  //       this.initWithFile(res.hand)
-  //     }.bind(this))
-  //   ).repeatForever())
-  // },
   // 闪动
   flash: function(time, re){
     this.setOpacity(0)
@@ -109,5 +97,25 @@ var MySprite = cc.Sprite.extend({
 
     var idx = (h - y) * w * 4 + x * 4 // 根据触摸坐标得到像素上的索引
     return [this._pixels[idx], this._pixels[idx + 1], this._pixels[idx + 2], this._pixels[idx + 3]] // 返回这个点上的的像素信息
+  },
+  addOneByOneListener: function (fun0, fun1, fun2) {
+    this.listener = cc.EventListener.create({
+      event: cc.EventListener.TOUCH_ONE_BY_ONE,
+      swallowTouches: true, // 设置是否吞没事件，在 onTouchBegan 方法返回 true 时吞掉事件，不再向下传递。
+      onTouchBegan: function (touch, event) { //实现 onTouchBegan 事件处理回调函数
+        fun0(touch, event)
+      },
+      onTouchMoved: function (touch, event) { //实现onTouchMoved事件处理回调函数, 触摸移动时触发
+        fun1(touch, event)
+      },
+      onTouchEnded: function (touch, event) { // 实现onTouchEnded事件处理回调函数
+        fun3(touch, event)
+      }
+    })
+    // 添加监听器到管理器
+    cc.eventManager.addListener(this.listener, this)
+  },
+  removeListener: function(){
+    cc.eventManager.removeListener(this.listener)
   }
 })

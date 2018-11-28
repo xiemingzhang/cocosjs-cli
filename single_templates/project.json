@@ -9,12 +9,11 @@
         "src/resource.js",
         "src/audio.js",
         "src/data.js",
-        "src/common/StarLayer.js",
+        "src/StarLayer.js",
         "src/common/MySprite.js",
         "src/common/MyLayer.js",
         "src/common/MyScene.js",
         "src/Layer01.js",
-        "src/PlayScene.js",
         "src/StartScene.js"
     ]
 }

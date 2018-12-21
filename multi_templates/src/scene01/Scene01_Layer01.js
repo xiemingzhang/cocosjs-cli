@@ -24,7 +24,7 @@ var Scene01_Layer01 = MyLayer.extend({
     // this.addChild(this._loading, 10)
     // this.scheduleUpdate()
 
-    var sprs = this.sprites(layer01_data[0])
+    var sprs = this.sprs = this.sprites(layer01_data[0])
 
     var size = cc.winSize
     // add bg

@@ -8,8 +8,14 @@ const readline = require('readline');
 const options = require('minimist')(process.argv.slice(2))
 
 const optionsName = require('minimist')(process.argv.slice(2), {
-    string: ['new1', 'new2', 'res']
+    string: ['new', 'res']
 })
+
+//判断文件名
+function extname(pathStr) {
+    var temp = /(\.[^\.\/\?\\]*)$/.exec(pathStr);
+    return temp ? temp[1] : null;
+}
 
 if (options._.length === 0 && (options.v || options.version)) {
     console.log('cocosjs: ' + require('./package.json').version)
@@ -24,8 +30,7 @@ if (options._.length === 0 && (options.h || options.help)) {
         '',
         '  Commands:',
         '',
-        '    new1 <ProjectName> generates a new project that is single scene',
-        '    new2 <ProjectName> generates a new project that is multiple scenes',
+        '    new <ProjectName> generates a new project that is single scene',
         '    res <ProjectName> generates a new resource.js and audio.js over old',
         '',
         '  Options:',
@@ -39,21 +44,10 @@ if (options._.length === 0 && (options.h || options.help)) {
 
 var temp_path
 
-if (options._.length === 0 && options.new1) {
-    temp_path = "single_templates"
-    if(optionsName.new1){
-      init(options.new1)
-    }else{
-      console.log('default project is cocosjsProj')
-      init('cocosjs-project')
-    }
-    // process.exit(0)
-}
-
-if (options._.length === 0 && options.new2) {
-    temp_path = "multi_templates"
-    if(optionsName.new2){
-      init(options.new2)
+if (options._.length === 0 && options.new) {
+    temp_path = "template"
+    if(optionsName.new){
+      init(options.new)
     }else{
       console.log('default project is cocosjsProj')
       init('cocosjs-project')
@@ -149,7 +143,7 @@ function copyFile(_targetPath, _templatePath) {
   //fs.createReadStream(_targetPath).pipe(fs.createWriteStream(_templatePath));
   if(_targetPath.split('/').reverse()[0] === 'index.html'){
     let _html = fs.readFileSync(_templatePath, 'utf8')
-    reHtml = _html.replace(/<title>([\s\S]){1,}<\/title>/gm, '<title>'+ (options.new1 || options.new2) +'</title>')
+    reHtml = _html.replace(/<title>([\s\S]){1,}<\/title>/gm, '<title>'+ options.new +'</title>')
     fs.writeFileSync(_targetPath, reHtml, 'utf8')
   }else{
     fs.writeFileSync(_targetPath, fs.readFileSync(_templatePath), "utf-8");
@@ -200,21 +194,57 @@ if (options._.length === 0 && (options.res || options.resource)) {
 // }
 function createResource(name){
   let root = path.resolve(name);
-
-  let _string1 = `var res = {
-    // 声音 //配音
-    //game_info: 'audio/voice/game_info.mp3', // 游戏介绍
-    // 声音 //部分公共配音
+  let _string0 = `var res = {
+    // 公共声音
     Right_audio: 'common/audios/right.mp3',
     Wrong_audio: 'common/audios/wrong.mp3',
     Win_audio: 'common/audios/celebration.mp3',
     Star_audio: 'common/audios/star.mp3',
-    Button_audio: 'common/audios/button.mp3',
+    Button_audio: 'common/audios/button.mp3'`
 
-    // 声音 //背景音乐及音效
-    GameBg_audio: 'audio/effect/bgm_happy.mp3', // 背景音乐
+    fs.writeFileSync(root + '/' + name + '/src/resource.js', _string0, "utf-8");
 
-    // 图片 //头部公共部分
+    // 添加音
+  // const paths3 = fs.readdirSync(root + '/' + name + '/res/Normal/audio');
+
+  // let _myPathArr3 = []
+  // paths3.forEach(_path => {
+  //     var pic = /\.(mp3|wav)/i;
+  //       if(pic.test(_path)){
+  //         _myPathArr3.push(_path)
+  //       }else{
+  //         console.log(`${_path}:声音类型错误`);
+  //       }
+  //   });
+
+  // if(_myPathArr3.length === 0){
+  //   fs.appendFileSync(root + '/' + name + '/src/resource.js', '\r}\r\r', "utf-8")
+  // }else{
+  //   _myPathArr3.forEach(function(item, index) {
+  //     var pic1 = /\.mp3/i;
+  //     // var pic2 = /\.wav/i;
+  //     if(index === 0){
+  //       fs.appendFileSync(root + '/' + name + '/src/resource.js', ',\r\r//source声音\r', "utf-8")
+  //     }
+  //     if(index === _myPathArr3.length - 1){
+  //       if(pic1.test(item)){
+  //         var _str = `${item.replace(extname(item),'_sound')}: 'audio/${item}'\r}\r\r`
+  //       }else{
+  //         var _str = `${item.replace(extname(item),'_sound')}: 'audio/${item}'\r}\r\r`
+  //       }
+  //     }else{
+  //       if(pic1.test(item)){
+  //         var _str = `${item.replace(extname(item),'_sound')}: 'audio/${item}',\r`
+  //       }else{
+  //         var _str = `${item.replace(extname(item),'_sound')}: 'audio/${item}',\r`
+  //       }
+  //     }
+  //     fs.appendFileSync(root + '/' + name + '/src/resource.js', _str, "utf-8")
+  //   })
+  // }
+
+  let _string1 = `var res = {
+    // 公共图片
     // bar_plist: 'common/imgs/bar.plist',
     // color_bar: 'common/imgs/color_bar.png',
     Back: 'common/imgs/back.png',
@@ -236,7 +266,7 @@ function createResource(name){
   let _myPathArr1 = []
   
   paths1.forEach(_path => {
-      var pic = /\.(png)/g;
+      var pic = /\.(png|img)/i;
         if(pic.test(_path)){
           _myPathArr1.push(_path)
         }else{
@@ -258,83 +288,23 @@ function createResource(name){
 
   if(_myPathArr1.length !== 0){
     _myPathArr1.forEach(function(item, index) {
+      var pic1 = /\.(png)/i;
       if(index === 0){
         fs.appendFileSync(root + '/' + name + '/src/resource.js', ',\r\r//source图片\r', "utf-8")
       }
       if(index === _myPathArr1.length - 1){
         // var _str = `${item.replace('\.png','')}: 'source/${item}'\r}\r\r`
-        var _str = `${item.replace('\.png','')}: 'source/${item}'`
-      }else{
-        var _str = `${item.replace('.png','')}: 'source/${item}',\r`
-      }
-      fs.appendFileSync(root + '/' + name + '/src/resource.js', _str, "utf-8")
-    })
-  }
-
-  // 添加配音
-  const paths2 = fs.readdirSync(root + '/' + name + '/res/Normal/audio/voice');
-
-  let _myPathArr2 = []
-  paths2.forEach(_path => {
-      var pic = /\.(mp3)/g;
-        if(pic.test(_path)){
-          _myPathArr2.push(_path)
+        if(pic1.test(item)){
+          var _str = `${item.replace(extname(item),'')}: 'source/${item}'`
         }else{
-          console.log(`${_path}:配音类型错误`);
+          var _str = `${item.replace(extname(item),'')}: 'source/${item}'`
         }
-    });
-
-  _myPathArr2 = _myPathArr2.filter(function(item){
-    if(item !== 'game_info.mp3'){
-      return item
-    }
-  })
-
-  if(_myPathArr2.length !== 0){
-    _myPathArr2.forEach(function(item, index) {
-      if(index === 0){
-        fs.appendFileSync(root + '/' + name + '/src/resource.js', ',\r\r//source配音\r', "utf-8")
-      }
-      if(index === _myPathArr2.length - 1){
-        // var _str = `${item.replace('.mp3','_audio')}: 'audio/voice/${item}'\r}\r\r`
-        var _str = `${item.replace('.mp3','_audio')}: 'audio/voice/${item}'`
       }else{
-        var _str = `${item.replace('.mp3','_audio')}: 'audio/voice/${item}',\r`
-      }
-      fs.appendFileSync(root + '/' + name + '/src/resource.js', _str, "utf-8")
-    })
-  }
-
-  // 添加音效
-  const paths3 = fs.readdirSync(root + '/' + name + '/res/Normal/audio/effect');
-
-  let _myPathArr3 = []
-  paths3.forEach(_path => {
-      var pic = /\.(mp3)/g;
-        if(pic.test(_path)){
-          _myPathArr3.push(_path)
+        if(pic1.test(item)){
+          var _str = `${item.replace(extname(item),'')}: 'source/${item}',\r`
         }else{
-          console.log(`${_path}:音效类型错误`);
+          var _str = `${item.replace(extname(item),'')}: 'source/${item}',\r`
         }
-    });
-
-  _myPathArr3 = _myPathArr3.filter(function(item){
-    if(item !== 'bgm_happy.mp3'){
-      return item
-    }
-  })
-
-  if(_myPathArr3.length === 0){
-    fs.appendFileSync(root + '/' + name + '/src/resource.js', '\r}\r\r', "utf-8")
-  }else{
-    _myPathArr3.forEach(function(item, index) {
-      if(index === 0){
-        fs.appendFileSync(root + '/' + name + '/src/resource.js', ',\r\r//source音效\r', "utf-8")
-      }
-      if(index === _myPathArr3.length - 1){
-        var _str = `${item.replace('.mp3','_sound')}: 'audio/effect/${item}'\r}\r\r`
-      }else{
-        var _str = `${item.replace('.mp3','_sound')}: 'audio/effect/${item}',\r`
       }
       fs.appendFileSync(root + '/' + name + '/src/resource.js', _str, "utf-8")
     })
@@ -357,19 +327,19 @@ function createAudio(name){
   let _string1 = `// 共性
   var sound = {
     rightAudio: function () {// 正确
-      cc.audioEngine.playEffect(res.Right_audio)
+      cc.audioEngine.playEffect(aud.Right_audio)
     },
     wrongAudio: function () {// 错误
-      cc.audioEngine.playEffect(res.Wrong_audio)
+      cc.audioEngine.playEffect(aud.Wrong_audio)
     },
     winAudio: function () {// 完成 欢呼
-      cc.audioEngine.playEffect(res.Win_audio)
+      cc.audioEngine.playEffect(aud.Win_audio)
     },
     starAudio: function () {// 飞星
-      cc.audioEngine.playEffect(res.Star_audio)
+      cc.audioEngine.playEffect(aud.Star_audio)
     },
     buttonAudio: function () {// 点击
-      cc.audioEngine.playEffect(res.Button_audio)
+      cc.audioEngine.playEffect(aud.Button_audio)
     },
     stopAudio: function () {// 停止
       cc.audioEngine.stopMusic()
@@ -378,85 +348,64 @@ function createAudio(name){
       cc.audioEngine.stopAllEffects()
     },
     // 个性
-    gameBgAudio: function () {// 背景
-      cc.audioEngine.playMusic(res.GameBg_audio, true)
-      cc.audioEngine.setMusicVolume(0.2)
-    },
-    gameInfo: function() {
-      cc.audioEngine.playEffect(res.game_info)
-    }`
+    //gameBgAudio: function () {// 背景
+      // cc.audioEngine.playMusic(res.GameBg_audio, true)
+      //cc.audioEngine.setMusicVolume(0.2)
+    //}`
 
   fs.writeFileSync(root + '/' + name + '/src/audio.js', _string1, "utf-8");
 
-  // 添加配音方法
-  const paths2 = fs.readdirSync(root + '/' + name + '/res/Normal/audio/voice');
 
-  let _myPathArr2 = []
-  paths2.forEach(_path => {
-      var pic = /\.(mp3)/g;
-        if(pic.test(_path)){
-          _myPathArr2.push(_path)
-        }
-    });
-
-  _myPathArr2 = _myPathArr2.filter(function(item){
-    if(item !== 'game_info.mp3'){
-      return item
-    }
-  })
-
-  if(_myPathArr2.length !== 0){
-    _myPathArr2.forEach(function(item, index) {
-      if(index === 0){
-        fs.appendFileSync(root + '/' + name + '/src/audio.js', ',\r//配音\r', "utf-8")
-      }    
-      if(index === _myPathArr2.length - 1){
-        var _str = `${item.replace('.mp3','_audio')}: function() {
-    cc.audioEngine.playEffect(res.${item.replace('.mp3','_audio')})
-  }`
-      }else{
-        var _str = `${item.replace('.mp3','_audio')}: function() {
-    cc.audioEngine.playEffect(res.${item.replace('.mp3','_audio')})
-  },\r`
-      }
-
-      fs.appendFileSync(root + '/' + name + '/src/audio.js', _str, "utf-8")
-    })
-  }
-
-  // 添加音效方法
-  const paths3 = fs.readdirSync(root + '/' + name + '/res/Normal/audio/effect');
+  // 添加声音方法
+  const paths3 = fs.readdirSync(root + '/' + name + '/res/Normal/audio');
 
   let _myPathArr3 = []
   paths3.forEach(_path => {
-      var pic = /\.(mp3)/g;
+      var pic = /\.(mp3|wav)/ig;
         if(pic.test(_path)){
           _myPathArr3.push(_path)
         }
     });
 
-  _myPathArr3 = _myPathArr3.filter(function(item){
-    if(item !== 'bgm_happy.mp3'){
-      return item
-    }
-  })
+  // _myPathArr3 = _myPathArr3.filter(function(item){
+  //   if(item !== 'bgm_happy.mp3'){
+  //     return item
+  //   }
+  // })
 
   if(_myPathArr3.length === 0){
     fs.appendFileSync(root + '/' + name + '/src/audio.js', '\r}', "utf-8")
   }else{
+    var pic1 = /\.mp3/i;
     _myPathArr3.forEach(function(item, index) {
       if(index === 0){
-        fs.appendFileSync(root + '/' + name + '/src/audio.js', ',\r//音效\r', "utf-8")
+        fs.appendFileSync(root + '/' + name + '/src/audio.js', ',\r//声音\r', "utf-8")
       }
       if(index === _myPathArr3.length - 1){
-        var _str = `${item.replace('.mp3','_sound')}: function() {
+
+        if(pic1.test(item)){
+          var _str = `${item.replace(extname(item),'_sound')}: function() {
     cc.audioEngine.playEffect(res.${item.replace('.mp3','_sound')})
   }
   }`
+        }else{
+          var _str = `${item.replace(extname(item),'_sound')}: function() {
+    cc.audioEngine.playEffect(res.${item.replace('.wav','_sound')})
+  }
+  }`
+        }
+        
       }else{
-        var _str = `${item.replace('.mp3','_sound')}: function() {
+        if(pic1.test(item)){
+          var _str = `${item.replace(extname(item),'_sound')}: function() {
     cc.audioEngine.playEffect(res.${item.replace('.mp3','_sound')})
   },\r`
+        }else{
+          var _str = `${item.replace(extname(item),'_sound')}: function() {
+    cc.audioEngine.playEffect(res.${item.replace('.wav','_sound')})
+  },\r`
+        }
+        
       }
       fs.appendFileSync(root + '/' + name + '/src/audio.js', _str, "utf-8")
     })

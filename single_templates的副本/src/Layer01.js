@@ -15,7 +15,6 @@ var Layer01 = MyLayer.extend({
   onEnter: function(){
     this._super()
     var size = cc.winSize
-    // this.scheduleUpdate()
     // this._loading = new ccui.LoadingBar()
     // this._loading.loadTexture(res.readBar)
     // this._loading.setScale(1 / 3 * fix)
@@ -508,6 +507,244 @@ var Layer01 = MyLayer.extend({
   //     this._sX = x
   //     this._sY = y
   //   }
-  // }
+  // },
+  rubber: function(touch, event){
+    var target = event.getCurrentTarget()
+    var touchPoint = touch.getLocation()
+    var locationInNode = target.convertToNodeSpace(touchPoint)
+
+    var x = locationInNode.x
+    var y = locationInNode.y
+
+    this.drawNodeArr.forEach(function(item, index){
+      var sx = item.startx
+      var ex = item.endx
+      var sy = item.starty
+      var ey = item.endy
+      var x1, x2, y1, y2
+      if(sx <= ex){
+        if(ex - sx >= 20){
+          x1 = sx
+          x2 = ex
+        }else{
+          x1 = sx - 20
+          x2 = sx + 2 * 20
+        }
+      }else{
+        if(sx - ex >= 20){
+          x1 = ex
+          x2 = sx
+        }else{
+          x1 = sx - 20
+          x2 = sx + 2 * 20
+        }
+      }
+      if(sy <= ey){
+        if(ey - sy >= 20){
+          y1 = sy
+          y2 = ey
+        }else{
+          y1 = sy - 20
+          y2 = sy + 2 * 20
+        }
+      }else{
+        if(sy - ey >= 20){
+          y1 = ey
+          y2 = sy
+        }else{
+          y1 = ey - 20
+          y2 = ey + 2 * 20
+        }
+      }
+
+      if(x > x1 && x < x2 && y > y1 && y < y2){
+        this.drawNodeArr.splice(index, 1)
+        item.removeFromParent()
+      }
+    }.bind(this))
+  },
+  drawColor: function(touch, event){
+    var target = event.getCurrentTarget()
+    var touchPoint = touch.getLocation()
+    var locationInNode = target.convertToNodeSpace(touchPoint)
+
+    var x = locationInNode.x
+    var y = locationInNode.y
+
+    if(this.flag === 'draw2'){
+      var r = this.clor1[0]
+      var g = this.clor1[1]
+      var b = this.clor1[2]
+    }else{
+      var r = this.clor2[0]
+      var g = this.clor2[1]
+      var b = this.clor2[2]
+    }
+    if(!this.sX){
+      this.sX = touchPoint.x - 0.001
+      this.sY = touchPoint.y - 0.001
+    }
+    if(!this._sX){
+      this._sX = x - 10
+      this._sY = y - 10
+    }
+    if(this.flag === 'draw2'){
+      var thick = this.thick * 2
+    }else{
+      var thick = this.thick * 5.7
+    }
+
+    var dx = Math.abs(this.sX - touchPoint.x)
+    var dy = Math.abs(this.sY - touchPoint.y)
+    if(dx <= 60 && dy <= 60){
+      var drawNode = new cc.DrawNode()
+      drawNode.drawCardinalSpline(
+        [cc.p(this.sX, this.sY), // 起点
+          cc.p(touchPoint.x, touchPoint.y)], // 终点
+        0.1,
+        8,
+        thick * fix * fix2, // 线粗
+        // cc.color(this.colorObj.r, this.colorObj.b, this.colorObj.b, 255) // 颜色
+        cc.color(r, g, b, 255) // 颜色
+      )
+      this.addChild(drawNode, 8)
+
+      drawNode.startx = this._sX
+      drawNode.endx = x
+
+      drawNode.starty = this._sY
+      drawNode.endy = y
+
+      this.drawNodeArr.push(drawNode)
+
+      this.sX = touchPoint.x
+      this.sY = touchPoint.y
+
+      this._sX = x
+      this._sY = y
+    }else if((dx > 60 && dx <= 120 && dy <= 120) || (dy > 60 && dy <= 120 && dx <= 120)){
+      var sX = this.sX
+      var sY = this.sY
+      var eX = touchPoint.x
+      var eY = touchPoint.y
+
+      var drawNode = new cc.DrawNode()
+      drawNode.drawCardinalSpline(
+        [cc.p(sX, sY), // 起点
+          cc.p(sX + (eX - sX)/2, sY + (eY - sY)/2)], // 终点
+        0.1,
+        8,
+        thick * fix * fix2, // 线粗
+        // cc.color(this.colorObj.r, this.colorObj.b, this.colorObj.b, 255) // 颜色
+        cc.color(r, g, b, 255) // 颜色
+      )
+      this.addChild(drawNode, 8)
+
+      drawNode.startx = this._sX
+      drawNode.endx = this._sX + (x - this._sX)/2
+
+      drawNode.starty = this._sY
+      drawNode.endy = this._sY + (y - this._sY)/2
+
+      this.drawNodeArr.push(drawNode)
+
+      var drawNode = new cc.DrawNode()
+      drawNode.drawCardinalSpline(
+        [cc.p(sX + (eX - sX)/2, sY + (eY - sY)/2), // 起点
+          cc.p(eX, eY)], // 终点
+        0.1,
+        8,
+        thick * fix * fix2, // 线粗
+        // cc.color(this.colorObj.r, this.colorObj.b, this.colorObj.b, 255) // 颜色
+        cc.color(r, g, b, 255) // 颜色
+      )
+      this.addChild(drawNode, 8)
+
+      drawNode.startx = this._sX + (x - this._sX)/2
+      drawNode.endx = x
+
+      drawNode.starty = this._sY + (y - this._sY)/2
+      drawNode.endy = y
+
+      this.drawNodeArr.push(drawNode)
+
+      this.sX = touchPoint.x
+      this.sY = touchPoint.y
+
+      this._sX = x
+      this._sY = y
+    }else{
+      var sX = this.sX
+      var sY = this.sY
+      var eX = touchPoint.x
+      var eY = touchPoint.y
+
+      var drawNode = new cc.DrawNode()
+      drawNode.drawCardinalSpline(
+        [cc.p(sX, sY), // 起点
+          cc.p(sX + (eX - sX)/3, sY + (eY - sY)/3)], // 终点
+        0.1,
+        8,
+        thick * fix * fix2, // 线粗
+        // cc.color(this.colorObj.r, this.colorObj.b, this.colorObj.b, 255) // 颜色
+        cc.color(r, g, b, 255) // 颜色
+      )
+      this.addChild(drawNode, 8)
+
+      drawNode.startx = this._sX
+      drawNode.endx = this._sX + (x - this._sX)/3
+
+      drawNode.starty = this._sY
+      drawNode.endy = this._sY + (y - this._sY)/3
+
+      this.drawNodeArr.push(drawNode)
+
+      var drawNode = new cc.DrawNode()
+      drawNode.drawCardinalSpline(
+        [cc.p(sX + (eX - sX)/3, sY + (eY - sY)/3), // 起点
+          cc.p(sX + (eX - sX)/3*2, sY + (eY - sY)/3*2)], // 终点
+        0.1,
+        8,
+        thick * fix * fix2, // 线粗
+        // cc.color(this.colorObj.r, this.colorObj.b, this.colorObj.b, 255) // 颜色
+        cc.color(r, g, b, 255) // 颜色
+      )
+      this.addChild(drawNode, 8)
+
+      drawNode.startx = this._sX + (x - this._sX)/3
+      drawNode.endx = this._sX + (x - this._sX)/3*2
+
+      drawNode.starty = this._sY + (y - this._sY)/3
+      drawNode.endy = this._sY + (y - this._sY)/3*2
+
+      this.drawNodeArr.push(drawNode)
+
+      var drawNode = new cc.DrawNode()
+      drawNode.drawCardinalSpline(
+        [cc.p(sX + (eX - sX)/3*2, sY + (eY - sY)/3*2), // 起点
+          cc.p(eX, eY)], // 终点
+        0.1,
+        8,
+        thick * fix * fix2, // 线粗
+        // cc.color(this.colorObj.r, this.colorObj.b, this.colorObj.b, 255) // 颜色
+        cc.color(r, g, b, 255) // 颜色
+      )
+      this.addChild(drawNode, 8)
+
+      drawNode.startx = this._sX + (x - this._sX)/3*2
+      drawNode.endx = x
+
+      drawNode.starty = this._sY + (y - this._sY)/3*2
+      drawNode.endy = y
+
+      this.drawNodeArr.push(drawNode)
+
+      this.sX = touchPoint.x
+      this.sY = touchPoint.y
+
+      this._sX = x
+      this._sY = y
+    }
+  }
 })
 

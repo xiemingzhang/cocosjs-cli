@@ -2,45 +2,55 @@ var Layer01 = MyLayer.extend({
   ctor: function () {
     this._super()
     this.fix_height = 180 / fix - 180
-    this.move = true
-    sound.step01_01_audio()
     return true
   },
   onEnter: function(){
     this._super()
-
-    var sprs = this.sprites(layer01_data[0])
-    sprs.forEach(function(item){
-      cc.eventManager.addListener(this.listener().clone(), item)
-    }.bind(this))
-    this.sprs = sprs
-
     var size = cc.winSize
+    var self = this
+    this.sprites(layer01_data[0])
+    this.sprs2 = this.sprites(layer01_data[2])
+
+    var sprs1 = this.sprs1 = this.sprites(layer01_data[1])
+    var random = [0, 1, 2, 3, 4, 5, 6, 7, 8].shuffle()
+    sprs1.forEach(function(item, index){
+      item.setPosition(sprs1[random[index]].data.pos[0] * fix, sprs1[random[index]].data.pos[1] * fix + self.fix_height)
+      item.setRotation((Math.random() - 0.5) * 30)
+      cc.eventManager.addListener(self.listener(), item)
+    })
+
     var bg = new cc.Sprite(res.bg)
     bg.setScale(size.height / bg.height)
     bg.setAnchorPoint(0.5, 0.5)
     bg.setPosition({x: size.width / 2, y: size.height / 2})
     this.addChild(bg)
-
-    this.scheduleOnce(function(){
-      this.hander = this.addHand(150 * fix, 275 * fix + this.fix_height)
-      this.hander.frameAnimate([res.hand, res.handclick], 0.5, 0)
-      this.move = false
-    }, 3)
   },
   listener: function(){
+    var sprs1 = this.sprs1
+    var sprs2 = this.sprs2
+    var self = this
     return cc.EventListener.create({
       event: cc.EventListener.TOUCH_ONE_BY_ONE,
       swallowTouches: true,
       onTouchBegan: function (touch, event) {
-        var target = event.getCurrentTarget()
+        //触摸点
         var touchPoint = touch.getLocation()
-        var targetRect = target.getBoundingBox()
-        if (!this.move && !target.crashed && cc.rectContainsPoint(targetRect, touchPoint)) {
+        //触摸的精灵
+        var target = event.getCurrentTarget()
+        //触摸精灵范围
+        var s = target.getContentSize()
+        var rect = cc.rect(0, 0, s.width, s.height)
+        //触摸点所在精灵处的颜色及透明度
+        var locationInNode = target.convertToNodeSpace(touchPoint)
+        var x = locationInNode.x
+        var y = locationInNode.y
+        var pexels = target.getPixels(Math.round(x), Math.round(y))
+        //判断点击到精灵并且点击的不是空白
+        if (cc.rectContainsPoint(rect, locationInNode) && pexels[3] > 0) {
 
           sound.buttonAudio()
           updata.finish_steps++
-          this.move = true
+          self.move = true
           //   this.becomeFalse(0.8)
           target._x = target.x
           target._y = target.y
@@ -49,7 +59,7 @@ var Layer01 = MyLayer.extend({
           return true
         }
         return false
-      }.bind(this),
+      },
       onTouchMoved: function(touch, event){
         var target = event.getCurrentTarget()
         var targetRect = target.getBoundingBox()
@@ -57,26 +67,64 @@ var Layer01 = MyLayer.extend({
         var touchPoint = touch.getLocation()
 
         var size = cc.winSize
-        if(!this.move){
-          if(target.x + delta.x < size.width - targetRect.width && target.x + delta.x > 0){
+        // if(!self.move){
+          if(target.x + delta.x < size.width - targetRect.width / 3 && target.x + delta.x >  -targetRect.width / 3 * 2){
             target.x += delta.x
           }
-          if(target.y + delta.y < size.height - targetRect.height && target.y + delta.y > 0){
+          if(target.y + delta.y < size.height - targetRect.height / 3 && target.y + delta.y >  -targetRect.width / 3 * 2){
             target.y += delta.y
           }
-        }
-      }.bind(this),
+        // }
+      },
       onTouchEnded: function(touch, event){
         var target = event.getCurrentTarget()
-        this.move = false
+        // self.move = false
+        if(sprs2.some(function(item){
+          if(self.crash(target, item) && target.data.flag === item.data.flag){
+            target.crashed = true
+            item.crashed = true
+            var itemBox = item.getBoundingBox()
+            target.runAction(cc.sequence(
+              cc.moveTo(0.8, itemBox.x, itemBox.y),
+              cc.callFunc(function(){
+                target.setLocalZOrder(target._zIndex)
+                self.becomeFalse()
+              })
+            ))
+            return true
+          }
+        })){
+          sound.rightAudio()
+        }else{
+          if(sprs2.some(function(item){
+            if(self.crash(target, item)){
+              return true
+            }
+          })){
+            self.wrong()
+          }
+          target.runAction(cc.sequence(
+            cc.moveTo(0.8, target._x, target._y),
+            cc.callFunc(function(){
+              target.setLocalZOrder(target._zIndex)
+              self.becomeFalse()
+            })
+          ))
+        }
 
-      }.bind(this)
+        if(sprs2.every(function(item){
+          return item.crashed
+        })){
+          self.reListen()
+          self.right()
+          self.next()
+        }
+      }
     })
-  }
-  // update: function(){
+  },
+  // update: function (dt) {
 
-  // },
-  // removeListeners
+  // }
   crash: function(target, item){
     var itemBox = item.getBoundingBox()
     var targetBox = target.getBoundingBox()

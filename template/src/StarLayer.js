@@ -153,7 +153,7 @@ var StarLayer = cc.Layer.extend({
         if (cc.rectContainsPoint(rect, locationInNode)) // 判断触摸点是否在按钮范围内
         {
           if (target.id == 'back') {
-            this.reportData()
+            !this.reportFlag && this.reportData()
             App.jsBack('close')
             cc.director.end()
             return false
@@ -176,6 +176,8 @@ var StarLayer = cc.Layer.extend({
     updata.finish_time = gametime
     cc.log(updata)
     this.reportData()
+    this.reportFlag = true
+    
     common_data.forEach(function(item){
       item.obtain = 0
     })

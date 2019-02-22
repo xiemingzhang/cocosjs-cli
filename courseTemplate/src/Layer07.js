@@ -10,25 +10,25 @@ var Layer07 = MyLayer.extend({
     var size = cc.winSize
     var self = this
 
-    var bg = new cc.Sprite(res.背景)
-    bg.setScale(size.height / bg.height * 1.25)
+    var bg = new cc.Sprite(res.g_02背景)
     bg.setAnchorPoint(0, 0.5)
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)
 
-    this.createBtn('下一页：情景学习 5/14')
+    this.createBtn('下一页：认识鸟的嘴巴 5/13', 34)
 
     var sprs = this.sprs = this.sprites(layer07_data[0], true)
   },
   onStart: function(){
-    sound.a_7_sound()
+    sound.s7_sound()
     var self = this
     var sprs = this.sprs
 
-    sprs[1].frame([res.米丫3, res.米丫4], 0.5, 0)
+    sprs[2].frame([res.g_03米丫01, res.g_03米丫02], 0.5, 0)
     this.scheduleOnce(function(){
+      sprs[2].stopAllActions()
       this.next()
-    }, 6)
+    }, 4)
   }
   // update: function (dt) {
 

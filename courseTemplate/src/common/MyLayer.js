@@ -135,7 +135,7 @@ var MyLayer = cc.LayerColor.extend({
       // sprite[i].setPosition(sp[i].pos[0] * fix, sp[i].pos[1] * fix + (sp[i].fix ? this.fix_height : 0))
       // sprite[i].setPosition(sp[i].pos[0] * fix, (sp[i].fix ? sp[i].pos[1] * fix : sp[i].pos[1]))
       // if(sp[i].fix === 0){
-      sprite[i].setPosition(sp[i].pos[0], sp[i].pos[1])
+        sprite[i].setPosition(sp[i].pos[0], sp[i].pos[1])
       // }else if(sp[i].fix === 1){
       //   sprite[i].setPosition(sp[i].pos[0] * fix, sp[i].pos[1] * fix + this.fix_height)
       // }else if(sp[i].fix === 2){
@@ -220,18 +220,41 @@ var MyLayer = cc.LayerColor.extend({
     // 返回游戏列表
     this.getParent().starLayer.gameClose()
   },
-  createBtn: function(name){
-    var text_great = new cc.LabelTTF(name, '', 40)
-    text_great.setAnchorPoint(0.5, 0)
-    text_great.setPosition(1590, 45)
-    text_great.setColor(cc.color(255, 255, 255))
-    this.addChild(text_great, 101)
+  createBtn: function(name, fontSize){
+    var size = cc.winSize
+    if(fontSize){
+      var _fontSize = fontSize 
+    }else{
+      var _fontSize = 40
+    }
 
     var box = new cc.Sprite(res.box)
-    box.setAnchorPoint(0.5, 0)
-    box.setPosition(1590, 30)
-    box.setScale(1.23)
-    this.addChild(box, 100)
+    box.setAnchorPoint(1, 0)
+    box.setPosition(size.width - 30, 30)
+    this.addChild(box, 10)
+
+    var word = new cc.LabelTTF(name, '', _fontSize)
+    word.setAnchorPoint(0.5, 0.5)
+    word.setPosition(box.width / 2, box.height / 2 - 5)
+    word.setColor(cc.color(255, 255, 255))
+    box.addChild(word, 1)
+    // var box = cc.Sprite.create(res.box2);
+    // box.setAnchorPoint(1,0)
+    // box.setPosition(this.size.width-30, 30);
+    // if(sX){
+    //   box.setScale(sX);
+    // }else{
+    //   box.setScale(1);
+    // }
+    // this.addChild(box, 10);
+
+    // word = new cc.LabelTTF(DATA.text[index],"", 40);
+    // word.color = cc.color(255,255,255); 
+    // word.setAnchorPoint(0.5, 0.5);
+    // word.x = box.width/2;
+    // word.y = box.height/2-5;
+    // word.setScale(1);
+    // box.addChild(word,1);
   }
 })
 

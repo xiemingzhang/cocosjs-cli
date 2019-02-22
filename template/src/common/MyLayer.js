@@ -1,4 +1,4 @@
-var MyLayer = cc.Layer.extend({
+var MyLayer = cc.LayerColor.extend({
   // 实例化 new时调用
   // ctor: function(){
   //   this._super()

@@ -9,7 +9,7 @@ var StartScene = cc.Scene.extend({
     // this.starLayer = new StarLayer(common_data[0])
     // this.addChild(this.starLayer, 100, 2)
     // 返回游戏列表
-    // this.starLayer.gameClose()
+    // this.starLayer.gaeClose()
     // 返回游戏首场景
     // this.starLayer.goBack()
   },
@@ -18,9 +18,9 @@ var StartScene = cc.Scene.extend({
     var size = cc.winSize
 
     // sound.gameBgAudio()
-    this.layerArr = [Layer01, Layer02, Layer03, Layer04, Layer05, Layer07, Layer08, Layer081, Layer09, Layer10, Layer11, Layer12, Layer13, Layer14, Layer15, Layer16, Layer17, Layer18, Layer19, Layer20, Layer21]
+    this.layerArr = [Layer01, Layer02, Layer03, Layer04, Layer05, Layer06, Layer07, Layer08, Layer09, Layer10, Layer11, Layer12, Layer13, Layer14, Layer15, Layer16, Layer17]
     // this.randomArr = shuffle([0])
-    this.randomArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,21]
+    this.randomArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 
     var layer = new this.layerArr[this.randomArr[0]]()
     this.addChild(layer)

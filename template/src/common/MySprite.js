@@ -14,11 +14,27 @@ var MySprite = cc.Sprite.extend({
     // cc.log("onExit");
   },
   // 闪动
+  // flash: function(time, re){
+  //   this.setOpacity(0)
+  //   var action1 = cc.fadeIn(time)
+  //   var action3 = cc.fadeOut(time)
+  //   var action = cc.sequence(action1, action3)
+  //   if(re == 0){
+  //     this.runAction(action.repeatForever())
+  //   }else{
+  //     this.runAction(action.repeat(re))
+  //   }
+  // },
   flash: function(time, re){
-    this.setOpacity(0)
+    var opacity = this.getOpacity()
     var action1 = cc.fadeIn(time)
     var action3 = cc.fadeOut(time)
-    var action = cc.sequence(action1, action3)
+    var action
+    if(opacity > 0){
+      action = cc.sequence(action3, action1)
+    }else{
+      action = cc.sequence(action1, action3)
+    }
     if(re == 0){
       this.runAction(action.repeatForever())
     }else{

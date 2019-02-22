@@ -1,7 +1,7 @@
 {
     "debugMode" : 1,
     "showFPS" : false,
-    "frameRate" : 60,
+    "frameRate" : 30,
     "id" : "gameCanvas",
     "renderMode" : 1,
     "jsList" : [
@@ -21,7 +21,6 @@
         "src/Layer06.js",
         "src/Layer07.js",
         "src/Layer08.js",
-        "src/Layer081.js",
         "src/Layer09.js",
         "src/Layer10.js",
         "src/Layer11.js",
@@ -31,10 +30,6 @@
         "src/Layer15.js",
         "src/Layer16.js",
         "src/Layer17.js",
-        "src/Layer18.js",
-        "src/Layer19.js",
-        "src/Layer20.js",
-        "src/Layer21.js",
         "src/StartScene.js"
     ]
 }

@@ -8,7 +8,7 @@ const readline = require('readline');
 const options = require('minimist')(process.argv.slice(2))
 
 const optionsName = require('minimist')(process.argv.slice(2), {
-    string: ['new', 'res']
+    string: ['new', 'res', 'newCourse']
 })
 
 //判断文件名
@@ -43,6 +43,7 @@ if (options._.length === 0 && (options.h || options.help)) {
 }
 
 var temp_path
+var _name //游戏名字或者课件名字
 
 if (options._.length === 0 && options.new) {
     temp_path = "template"
@@ -97,6 +98,7 @@ function createAfterConfirmation(name) {
 }
 
 function createProject(name) {
+    _name = name
     let root = path.resolve(name);
     // var projectName = path.basename(root);
     let templatesPath = path.join(__dirname, temp_path);
@@ -154,7 +156,7 @@ function copyFile(_targetPath, _templatePath) {
   //fs.createReadStream(_targetPath).pipe(fs.createWriteStream(_templatePath));
   if(_targetPath.split('/').reverse()[0] === 'index.html'){
     let _html = fs.readFileSync(_templatePath, 'utf8')
-    reHtml = _html.replace(/<title>([\s\S]){1,}<\/title>/gm, '<title>'+ options.new +'</title>')
+    reHtml = _html.replace(/<title>([\s\S]){1,}<\/title>/gm, '<title>'+ _name +'</title>')
     fs.writeFileSync(_targetPath, reHtml, 'utf8')
   }else{
     fs.writeFileSync(_targetPath, fs.readFileSync(_templatePath), "utf-8");

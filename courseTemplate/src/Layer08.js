@@ -10,18 +10,17 @@ var Layer08 = MyLayer.extend({
     var size = cc.winSize
     var self = this
 
-    var bg = new cc.Sprite(res.背景3)
-    bg.setScale(size.height / bg.height)
+    var bg = new cc.Sprite(res.g_02背景)
     bg.setAnchorPoint(0, 0.5)
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)
 
-    this.createBtn('下一页：情景学习 6/14')
+    this.createBtn('下一页：认识鸟的嘴巴 6/13', 34)
 
     var sprs = this.sprs = this.sprites(layer08_data[0], true)
   },
   onStart: function(){
-    sound.a_8_sound()
+    // sound.s8_sound()
     var self = this
     var sprs = this.sprs
 
@@ -29,7 +28,7 @@ var Layer08 = MyLayer.extend({
 
     this.scheduleOnce(function(){
       this.next()
-    }, 4)
+    }, 3)
   }
   // update: function (dt) {
 

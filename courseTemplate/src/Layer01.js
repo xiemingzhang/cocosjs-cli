@@ -10,8 +10,8 @@ var Layer01 = MyLayer.extend({
     var size = cc.winSize
     var self = this
 
-    var bg = new cc.Sprite(res.学习测量长度1)
-    bg.setScale(size.height / bg.height)
+    var bg = new cc.Sprite(res.g_01背景)
+    // bg.setScale(size.height / bg.height)
     bg.setAnchorPoint(0, 0.5)
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)

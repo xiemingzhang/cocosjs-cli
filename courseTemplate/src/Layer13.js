@@ -9,14 +9,13 @@ var Layer13 = MyLayer.extend({
   onEnter: function () {
     this._super()
     var size = cc.winSize
-    var self = this
 
-    var bg = new cc.Sprite(res.g_02背景)
+    var bg = new cc.Sprite(res.s13背景)
     bg.setAnchorPoint(0, 0.5)
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)
 
-    this.createBtn('下一页：认识鸟的嘴巴 11/13', 34)
+    this.createBtn('下一页：创作步骤 3/4')
     var sprs = this.sprs = this.sprites(layer13_data[0], true)
   },
   onStart: function(){
@@ -26,7 +25,7 @@ var Layer13 = MyLayer.extend({
 
     this.scheduleOnce(function(){
       this.next()
-    }, 8)
+    }, 7)  
   }
   // update: function (dt) {
 

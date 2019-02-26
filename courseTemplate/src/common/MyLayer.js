@@ -5,12 +5,51 @@ var MyLayer = cc.LayerColor.extend({
   // },
   onEnter: function () {
     this._super()
+    var self = this
     // cc.log("onEnter");
     // this.listenerArr = []
+    this._listener = cc.EventListener.create({
+      event: cc.EventListener.KEYBOARD,
+      onKeyPressed: function (keyCode, event) {
+        cc.log(keyCode)
+        if(keyCode === 32){
+          cc.log("kongge")
+          if(!self._go){
+            cc.director.pause()
+          }else{
+            cc.director.resume()
+          }
+          self._go = !self._go
+        }
+        if(keyCode === 39){
+          cc.log("xiayiye")
+          if(!self._nextPage){
+            sound.stopAllEffects()
+            self.next()
+          }
+          self._nextPage = true
+        }
+        if(keyCode === 37){ 
+          cc.log("shangyiye")
+          if(!self._prePage){
+            sound.stopAllEffects()
+            self.pre()
+          }
+          self._prePage = true
+        }
+        // return true
+      },
+      onKeyReleased: function (keyCode, event) {
+        cc.log("up")
+      }
+    })
+    // 添加监听器到管理器
+    cc.eventManager.addListener(this._listener, this)
   },
   onExit: function () {
     this._super()
     // cc.log("onExit");
+    // cc.eventManager.removeListeners(cc.EventListener.KEYBOARD)
   },
   addSoundButton: function(spr){
     // var horn = this.createSprite(res.sound, 1 / 3 * fix, [0, 0], {x: 15, y: 15})
@@ -132,15 +171,7 @@ var MyLayer = cc.LayerColor.extend({
     var len = sp.length
     for (var i = 0; i < len; i++) {
       sprite[i] = new MySprite(sp[i].sprUrl)
-      // sprite[i].setPosition(sp[i].pos[0] * fix, sp[i].pos[1] * fix + (sp[i].fix ? this.fix_height : 0))
-      // sprite[i].setPosition(sp[i].pos[0] * fix, (sp[i].fix ? sp[i].pos[1] * fix : sp[i].pos[1]))
-      // if(sp[i].fix === 0){
-        sprite[i].setPosition(sp[i].pos[0], sp[i].pos[1])
-      // }else if(sp[i].fix === 1){
-      //   sprite[i].setPosition(sp[i].pos[0] * fix, sp[i].pos[1] * fix + this.fix_height)
-      // }else if(sp[i].fix === 2){
-      //   sprite[i].setPosition(sp[i].pos[0] * fix, sp[i].pos[1] * fix)
-      // }
+      sprite[i].setPosition(sp[i].pos[0], sp[i].pos[1])
       sprite[i].setAnchorPoint(sp[i].chorPoint[0], sp[i].chorPoint[1])
       sprite[i].setOpacity(sp[i].opacity)
       sprite[i].setScale(sp[i].scale[0], sp[i].scale[1])
@@ -163,11 +194,17 @@ var MyLayer = cc.LayerColor.extend({
   finish: function(){
     this.getParent().finish()
   },
-  next: function(t){
+  next: function(t, n){
     if(this.hornListener){
       cc.eventManager.removeListener(this.hornListener)
     }
-    this.getParent().nextLayer(t)
+    this.getParent().nextLayer(this, t, n)
+  },
+  pre: function(t, n){
+    if(this.hornListener){
+      cc.eventManager.removeListener(this.hornListener)
+    }
+    this.getParent().preLayer(this, t, n)
   },
   becomeFalse: function(t) {
     if(t){

@@ -1,83 +1,125 @@
 var StartScene = cc.Scene.extend({
-  ctor: function(){
+  ctor: function() {
     this._super()
 
-    // sound.gameBgAudio()
-    this.l = 0
-     /* 飞星层*/
+    // sound.bgm_happyday_sound()
+    this.l = this.l ? this.l : 0
+    /* 飞星层*/
     // this.starLayer = new StarLayer(common_data[1])
     // this.starLayer = new StarLayer(common_data[0])
     // this.addChild(this.starLayer, 100, 2)
     // 返回游戏列表
-    // this.starLayer.gaeClose()
+    // this.starLayer.gameClose()
     // 返回游戏首场景
     // this.starLayer.goBack()
   },
-  onEnter: function () {
+  onEnter: function() {
     this._super()
     var size = cc.winSize
 
     // sound.gameBgAudio()
-    this.layerArr = [Layer01, Layer02, Layer03, Layer04, Layer05, Layer06, Layer07, Layer08, Layer09, Layer10, Layer11, Layer12, Layer13, Layer14, Layer15, Layer16, Layer17]
+    // this.layerArr = [Layer01, Layer02, Layer03, Layer04, Layer05, Layer06]
+    this._layerArr = [
+      [Layer01, Layer02, Layer03],
+      [Layer04, Layer05],
+      [Layer06, Layer07],
+      [Layer08, Layer09],
+      [Layer10, Layer11],
+      [Layer12, Layer13, Layer14, Layer15],
+      [Layer16]]
+    this.layerArr = this.doArr(this._layerArr)
     // this.randomArr = shuffle([0])
-    this.randomArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+    this.randomArr = getArr(this.layerArr.length)
+    // this.randomArr = [15]
 
-    var layer = new this.layerArr[this.randomArr[0]]()
+    var layer = new this.layerArr[this.randomArr[this.l]]()
+    layer.v = this.layerArr[this.randomArr[this.l]].v
     this.addChild(layer)
     this.addedLayer = layer
   },
-  reListen: function(){
+  // 转换为一维数组，并标记对应位置
+  doArr: function(arr) {
+    var res = []
+    for(var i = 0;i < arr.length;i++) {
+      arr[i].v = i
+      if(isArray(arr[i])) {
+        res = res.concat(this.doArr(arr[i]))
+      }else{
+        arr[i].v = [arr.v, i]
+        res.push(arr[i])
+      }
+    }
+    return res
+  },
+  reListen: function() {
     cc.eventManager.removeAllListeners()
     // 返回游戏列表
-    this.starLayer.gameClose()
+    // this.starLayer.gameClose()
   },
-  right: function(){
+  right: function() {
     // sound.stopAllEffects()
     sound.starAudio()
     common_data[1].obtain++
-    this.starLayer.rightStar(common_data[1].obtain)
+    // this.starLayer.rightStar(common_data[1].obtain)
     this.dataRefresh()
   },
-  wrong: function(){
-    sound.wrongAudio()
-    this.starLayer.wrongStar()
-  },
-  nextLayer: function(t, n){
+  nextLayer: function(self, t, n) {
     this.l++
-    if(t >= 0){
-      var time = t
-    }else{
-      var time = 2.5
-    }
-    if(this.l < this.randomArr.length){
-      this.scheduleOnce(function(){
-        // sound.stopAllEffects()
-        var layer = new this.layerArr[this.randomArr[this.l]](n)
-        this.addChild(layer)
-        this.addedLayer.removeFromParent()
-        this.addedLayer = layer
-      }.bind(this), time)
-    }else{
-      // this.finish(t)
-    }
-  },
-  finish: function (t) {
-    // updata.is_finish = 1
-    if(t >= 0){
+    if(t >= 0) {
       var time = t
     }else{
       var time = 1.5
     }
-    this.scheduleOnce(function(){
+    if(this.l < this.randomArr.length) {
+      if(this._layerArr[self.v[0]].length === self.v[1] + 1) {
+        var myScene = new StartScene()
+        myScene.l = this.l 
+        var transition = new cc.TransitionCrossFade(1, myScene, false)
+        cc.director.runScene(transition)
+      }else{
+        this.scheduleOnce(function() {
+          // sound.stopAllEffects()
+          var layer = new this.layerArr[this.randomArr[this.l]](n)
+          layer.v = this.layerArr[this.randomArr[this.l]].v
+          this.addChild(layer)
+          this.addedLayer.removeFromParent()
+          this.addedLayer = layer
+        }.bind(this), time)
+      }
+    }else{
+      // this.finish(t)
+    }
+  },
+  preLayer: function(self, t, n) {
+    this.l > 0 && this.l--
+    if(t >= 0) {
+      var time = t
+    }else{
+      var time = 1.5
+    }
+
+    var myScene = new StartScene()
+    myScene.l = this.l 
+    var transition = new cc.TransitionCrossFade(1, myScene, false)
+    cc.director.runScene(transition)
+  },
+  finish: function(t) {
+    // updata.is_finish = 1
+    if(t >= 0) {
+      var time = t
+    }else{
+      var time = 1.5
+    }
+    this.scheduleOnce(function() {
       sound.stopAudio()
       sound.stopAllEffects()
       sound.winAudio()
-      this.starLayer.gameEnd(common_data[0].obtain)
+      // this.starLayer.gameEnd(common_data[0].obtain)
     }.bind(this), time)
   },
-  dataRefresh: function () {
+  dataRefresh: function() {
     var sum = 0
-    common_data.slice(1).forEach(function (value, index, arr) {
+    common_data.slice(1).forEach(function(value, index, arr) {
       sum += value.obtain
     })
 
@@ -85,3 +127,4 @@ var StartScene = cc.Scene.extend({
     // cc.log(common_data)
   }
 })
+

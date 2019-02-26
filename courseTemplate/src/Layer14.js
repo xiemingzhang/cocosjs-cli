@@ -1,4 +1,3 @@
-
 var Layer14 = MyLayer.extend({
   ctor: function () {
     this._super()
@@ -9,26 +8,26 @@ var Layer14 = MyLayer.extend({
   onEnter: function () {
     this._super()
     var size = cc.winSize
-    var self = this
 
-    var bg = new cc.Sprite(res.g_02背景)
+    var bg = new cc.Sprite(res.s13背景)
     bg.setAnchorPoint(0, 0.5)
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)
 
-    this.createBtn('下一页：认识鸟的嘴巴 12/13', 34)
-    var sprs = this.sprs = this.sprites(layer14_data[0], true)
+    this.createBtn('下一页：创作步骤 4/4')
+    this.sprs = this.sprites(layer14_data[0], true)
   },
   onStart: function(){
     sound.s14_sound()
     var self = this
     var sprs = this.sprs
 
-    // sprs[1].frame([res.米丫3, res.米丫4], 0.5, 0)
+    // sprs[0].frame([res.s米亚胜利01, res.s米亚胜利02], 0.5, 0)
 
     this.scheduleOnce(function(){
+      // sprs[0].stopAllActions()
       this.next()
-    }, 11)
+    }, 5)
   }
   // update: function (dt) {
 

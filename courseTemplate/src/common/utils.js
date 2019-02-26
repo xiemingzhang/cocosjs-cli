@@ -3,7 +3,7 @@
  * @param {*} obj
  * @returns {boolean}
  */
-var isFunction = function (obj) {
+var isFunction = function(obj) {
   return typeof obj === 'function'
 }
 
@@ -12,7 +12,7 @@ var isFunction = function (obj) {
  * @param {*} obj
  * @returns {boolean}
  */
-var isNumber = function (obj) {
+var isNumber = function(obj) {
   return typeof obj === 'number' || Object.prototype.toString.call(obj) === '[object Number]'
 }
 
@@ -21,7 +21,7 @@ var isNumber = function (obj) {
  * @param {*} obj
  * @returns {boolean}
  */
-var isString = function (obj) {
+var isString = function(obj) {
   return typeof obj === 'string' || Object.prototype.toString.call(obj) === '[object String]'
 }
 
@@ -30,7 +30,7 @@ var isString = function (obj) {
  * @param {*} obj
  * @returns {boolean}
  */
-var isArray = function (obj) {
+var isArray = function(obj) {
   return Array.isArray(obj) ||
         (typeof obj === 'object' && Object.prototype.toString.call(obj) === '[object Array]')
 }
@@ -40,7 +40,7 @@ var isArray = function (obj) {
  * @param {*} obj
  * @returns {boolean}
  */
-var isUndefined = function (obj) {
+var isUndefined = function(obj) {
   return typeof obj === 'undefined'
 }
 
@@ -49,7 +49,7 @@ var isUndefined = function (obj) {
  * @param {*} obj
  * @returns {boolean}
  */
-var isObject = function (obj) {
+var isObject = function(obj) {
   return typeof obj === 'object' && Object.prototype.toString.call(obj) === '[object Object]'
 }
 
@@ -62,11 +62,11 @@ function alterItem(arr, index1, index2) {
   arr[index1] = arr.splice(index2, 1, arr[index1])[0]
   return arr
 }
-//生成数组长度len的从0递加的数组
-function produceArr(len){
-  return new Array(len).fill('').map(function(v, i){return i})
+// 生成数组长度len的从0递加的数组
+function produceArr(len) {
+  return new Array(len).fill('').map(function(v, i) {return i})
 }
-function random(min, max){
+function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 // 快速生成0到100的数组
@@ -113,10 +113,10 @@ function deepCopy(o) {
 // 随机排序
 Array.prototype.shuffle = function() {
   var len = this.length
-  if(len === 0){
+  if(len === 0) {
     return []
   }
-  if(len === 1){
+  if(len === 1) {
     return this
   }
   var temp, i
@@ -197,7 +197,7 @@ Array.prototype.shuffle = function() {
 //   }
 // }
 
-//---------------------------一下参考https://github.com/adobe-webplatform/Snap.svg/blob/master/dist/snap.svg.js
+// ---------------------------一下参考https://github.com/adobe-webplatform/Snap.svg/blob/master/dist/snap.svg.js
 function parsePathString(pathString) {
   if (!pathString) {
     return null
@@ -208,10 +208,10 @@ function parsePathString(pathString) {
     data = []
 
   if (!data.length) {
-    String(pathString).replace(pathCommand, function (a, b, c) {
+    String(pathString).replace(pathCommand, function(a, b, c) {
       var params = [],
         name = b.toLowerCase()
-      c.replace(pathValues, function (a, b) {
+      c.replace(pathValues, function(a, b) {
         b && params.push(+b)
       })
       if (name == 'm' && params.length > 2) {
@@ -424,7 +424,7 @@ function path2curve(path, path2) {
   var p = pathToAbsolute(path),
     attrs = {x: 0, y: 0, bx: 0, by: 0, X: 0, Y: 0, qx: null, qy: null},
     // attrs2 = {x: 0, y: 0, bx: 0, by: 0, X: 0, Y: 0, qx: null, qy: null},
-    processPath = function (path, d, pcom) {
+    processPath = function(path, d, pcom) {
       var nx, ny
       if (!path) {
         return ['C', d.x, d.y, d.x, d.y, d.x, d.y]
@@ -483,7 +483,7 @@ function path2curve(path, path2) {
           rad = Math.PI / 180 * (+angle || 0),
           res = [],
           xy,
-          rotate = function (x, y, rad) {
+          rotate = function(x, y, rad) {
             var X = x * Math.cos(rad) - y * Math.sin(rad),
               Y = x * Math.sin(rad) + y * Math.cos(rad)
             return {x: X, y: Y}
@@ -570,7 +570,7 @@ function path2curve(path, path2) {
       }
       return path
     },
-    fixArc = function (pp, i) {
+    fixArc = function(pp, i) {
       if (pp[i].length > 7) {
         pp[i].shift()
         var pi = pp[i]
@@ -583,7 +583,7 @@ function path2curve(path, path2) {
         ii = Math.max(p.length || 0)
       }
     },
-    fixM = function (path1, path2, a1, a2, i) {
+    fixM = function(path1, path2, a1, a2, i) {
       if (path1 && path2 && path1[i][0] == 'M' && path2[i][0] != 'M') {
         path2.splice(i, 0, ['M', a2.x, a2.y])
         a1.bx = 0
@@ -662,7 +662,7 @@ function path2curve(path, path2) {
 }
 
 function getLengthFactory(istotal, subpath) {
-  return function (path, length, onlystart) {
+  return function(path, length, onlystart) {
     // if (path instanceof Element) {
     //   path = path.attr('d')
     // }
@@ -777,18 +777,60 @@ function getLengthFactory(istotal, subpath) {
 }
 var getTotalLength = getLengthFactory(1)
 var getPointAtLength = getLengthFactory()
-//--------------------------------------------------------
+// --------------------------------------------------------
 // svgpath转为游戏坐标
 // i 间距
 // varianceX 横向调整
 // varianceY 纵向向调整
-function getPointArr(svgPath, i, varianceX, varianceY){
+function getPointArr(svgPath, i, varianceX, varianceY) {
   var pointArr = []
   var totalLen = getTotalLength(svgPath)
-  for(var pathLen = 0;pathLen < totalLen;pathLen += i){
+  for(var pathLen = 0;pathLen < totalLen;pathLen += i) {
     var preMove = getPointAtLength(svgPath, pathLen)
     pointArr.push({x: preMove.x * fix + varianceX, y: (414 * fix - preMove.y * fix) + varianceY})
   }
   return pointArr
 }
 
+function flatten(arr) {
+  var res = []
+  for(var i = 0;i < arr.length;i++) {
+    if(isArray(arr[i])) {
+      res = res.concat(flatten(arr[i]))
+    }else{
+      res.push(arr[i])
+    }
+  }
+  return res
+}
+
+function getArr(len) {
+  return Array.apply(null, Array(len)).map(function(item, i) {
+    return i
+  })
+}
+
+//////////////////
+
+Function.prototype.bind = Function.prototype.bind || function (oThis) {
+    if (!cc.isFunction(this)) {
+        // closest thing possible to the ECMAScript 5
+        // internal IsCallable function
+        throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+    }
+
+    var aArgs = Array.prototype.slice.call(arguments, 1),
+        fToBind = this,
+        fNOP = function () {},
+        fBound = function () {
+            return fToBind.apply(this instanceof fNOP && oThis
+                ? this
+                : oThis,
+                aArgs.concat(Array.prototype.slice.call(arguments)));
+        };
+
+    fNOP.prototype = this.prototype;
+    fBound.prototype = new fNOP();
+
+    return fBound;
+};

@@ -9,7 +9,6 @@
         "src/resource.js",
         "src/audio.js",
         "src/data.js",
-        "src/StarLayer.js",
         "src/common/MySprite.js",
         "src/common/MyLayer.js",
         "src/common/MyScene.js",
@@ -29,7 +28,6 @@
         "src/Layer14.js",
         "src/Layer15.js",
         "src/Layer16.js",
-        "src/Layer17.js",
         "src/StartScene.js"
     ]
 }

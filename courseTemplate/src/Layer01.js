@@ -8,9 +8,8 @@ var Layer01 = MyLayer.extend({
   onEnter: function(){
     this._super()
     var size = cc.winSize
-    var self = this
 
-    var bg = new cc.Sprite(res.g_01背景)
+    var bg = new cc.Sprite(res.创意旗帜01)
     // bg.setScale(size.height / bg.height)
     bg.setAnchorPoint(0, 0.5)
     bg.setPosition({x: 0, y: size.height / 2})

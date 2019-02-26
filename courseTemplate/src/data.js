@@ -26,120 +26,129 @@ var getID = function(){
 // 默认初始位置
 var layer02_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_02字, pos: [623, 925], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s鸟飞01, pos: [179 - 400, 561], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s文字01, pos: [418, 911], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer03_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_03字01, pos: [156, 876], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_03图, pos: [531, 162], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_03字02, pos: [254, 677], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_03箭头, pos: [491, 674], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_03米丫01, pos: [1240, -300], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s04黑板, pos: [136, 208], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s03字, pos: [207, 486], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s03米丫01, pos: [1240, 0], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer04_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_04黑板, pos: [136, 208], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_04字, pos: [211, 538], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_03米丫01, pos: [1240, -300], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-  ]
-]
-
-var layer05_data = [
-  [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_05字, pos: [447, 936], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_05图, pos: [467, 163], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s04, pos: [352, 914], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s04图, pos: [468, 0], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer06_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_06字, pos: [100, 934], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_06图, pos: [109, 163], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.此处动图, pos: [1266, 436], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s06字, pos: [365, 914], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer07_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_11电视, pos: [258, 30], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_07字, pos: [386, 415], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_03米丫01, pos: [1306, -300], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s07字, pos: [0, 0], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer08_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.此处视频, pos: [687, 351], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s06, pos: [483, 932], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer09_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_09字, pos: [188, 919], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_09图, pos: [471, 167], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s09字, pos: [0, 0], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer10_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_10字, pos: [124, 876], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_10图, pos: [148, 152], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.此处动图, pos: [1265, 423], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s10字, pos: [471, 967], rotation: 0, zindex: 6, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer11_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_11电视, pos: [258, 30], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_11字, pos: [375, 376], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_03米丫01, pos: [1306, -300], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s10, pos: [0, 0], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer12_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.此处视频, pos: [687, 351], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s12字, pos: [177, 192], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s03米丫01, pos: [1240, 0], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer13_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_13字, pos: [427, 919], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_13图, pos: [575, 119], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13纸, pos: [197, 29], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字, pos: [454, 944], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13图01, pos: [419, 628], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13图02, pos: [1064, 607], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13图03, pos: [475, 131], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13图04, pos: [1013, 140], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字01, pos: [576, 564], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字02, pos: [1238, 564], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字03, pos: [579, 79], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字04, pos: [1225, 79], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer14_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_14字, pos: [276, 920], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_14图01, pos: [76, 227], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_14图02, pos: [972, 227], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13纸, pos: [197, 29], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s14字, pos: [552, 944], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13图01, pos: [419, 628], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13图02, pos: [1064, 607], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13图03, pos: [475, 131], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13图04, pos: [1013, 140], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字01, pos: [576, 564], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字02, pos: [1238, 564], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字03, pos: [579, 79], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字04, pos: [1225, 79], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s1735, pos: [504, 642], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s1734, pos: [1190, 695], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.image15, pos: [558, 258], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer15_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_11电视, pos: [258, 30], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_15字, pos: [409, 412], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_03米丫01, pos: [1306, -300], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13纸, pos: [197, 29], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s15字, pos: [620, 944], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s15图01, pos: [419, 628], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s15图02, pos: [1064, 607], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s15图03, pos: [475, 131], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s15图04, pos: [1013, 140], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字01, pos: [576, 564], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字02, pos: [1238, 564], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字03, pos: [579, 79], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字04, pos: [1225, 79], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer16_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.此处视频, pos: [687, 351], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s16字, pos: [177, 192], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.s03米丫01, pos: [1240, 0], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
   ]
 ]
 
-var layer17_data = [
-  [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_04黑板, pos: [136, 208], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_17字, pos: [213, 502], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.g_03米丫01, pos: [1306, -300], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255, fix: 1},
-  ]
-]
+// var layer17_data = [
+//   [
+//     {id: getID(), chorPoint: [0, 0], sprUrl: res.g_04黑板, pos: [136, 208], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+//     {id: getID(), chorPoint: [0, 0], sprUrl: res.g_17字, pos: [213, 502], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+//     {id: getID(), chorPoint: [0, 0], sprUrl: res.g_03米丫01, pos: [1306, -300], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+//   ]
+// ]
 

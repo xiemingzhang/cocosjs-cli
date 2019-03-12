@@ -399,10 +399,10 @@ function createAudio(name){
       cc.audioEngine.stopAllEffects()
     },
     // 个性
-    //gameBgAudio: function () {// 背景
-      // cc.audioEngine.playMusic(res.GameBg_audio, true)
-      //cc.audioEngine.setMusicVolume(0.2)
-    //}`
+    gameBgAudio: function () {// 背景
+      cc.audioEngine.playMusic(res.bgm_happyday_sound, true)
+      cc.audioEngine.setMusicVolume(0.2)
+    }`
 
   fs.writeFileSync(root + '/' + name + '/src/audio.js', _string1, "utf-8");
 

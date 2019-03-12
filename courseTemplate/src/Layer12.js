@@ -9,12 +9,12 @@ var Layer12 = MyLayer.extend({
     this._super()
     var size = cc.winSize
 
-    var bg = new cc.Sprite(res.s02背景)
+    var bg = new cc.Sprite(res.背景003)
     bg.setAnchorPoint(0, 0.5)
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)
 
-    this.createBtn('下一页：创作步骤 2/4')
+    this.btn = this.createBtn('下一页：分句欣赏 7/10')
 
     this.sprs = this.sprites(layer12_data[0], true)
   },
@@ -22,13 +22,29 @@ var Layer12 = MyLayer.extend({
     sound.s12_sound()
     var self = this
     var sprs = this.sprs
-
-    sprs[1].frame([res.s03米丫01, res.s03米丫02], 0.5, 0)
+    //[res.星星01, res.星星02], 0.7, 0
+    sprs[0].runAction(cc.sequence(
+      cc.fadeTo(0.7, 55),
+      cc.callFunc(function(){
+        sprs[0].setTexture(res.星星02)
+      }),
+      cc.fadeTo(0.7, 255),
+      cc.fadeTo(0.7, 55),
+      cc.callFunc(function(){
+        sprs[0].setTexture(res.星星01)
+      }),
+      cc.fadeTo(0.7, 255)
+    ).repeatForever())
+    sprs[1].frame([res.鸟18, res.鸟19], 0.5, 0)
+    sprs[2].frame([res.鸟03, res.鸟04], 0.5, 0)
+    sprs[2].runAction(cc.moveBy(5.5, -600, -100))
 
     this.scheduleOnce(function(){
+      sprs[0].stopAllActions()
       sprs[1].stopAllActions()
+      sprs[2].stopAllActions()
       this.next()
-    }, 9)
+    }, 7)
   }
   // update: function (dt) {
 

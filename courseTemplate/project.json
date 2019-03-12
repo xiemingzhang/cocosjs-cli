@@ -3,7 +3,7 @@
     "showFPS" : false,
     "frameRate" : 30,
     "id" : "gameCanvas",
-    "renderMode" : 1,
+    "renderMode" : 2,
     "jsList" : [
         "src/common/utils.js",
         "src/resource.js",
@@ -17,17 +17,18 @@
         "src/Layer03.js",
         "src/Layer04.js",
         "src/Layer05.js",
-        "src/Layer06.js",
         "src/Layer07.js",
         "src/Layer08.js",
         "src/Layer09.js",
         "src/Layer10.js",
         "src/Layer11.js",
         "src/Layer12.js",
+        "src/Layer06.js",
         "src/Layer13.js",
         "src/Layer14.js",
         "src/Layer15.js",
         "src/Layer16.js",
+        "src/Layer17.js",
         "src/StartScene.js"
     ]
 }

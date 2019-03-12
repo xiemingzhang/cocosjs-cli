@@ -13,6 +13,7 @@ var MyLayer = cc.LayerColor.extend({
       onKeyPressed: function (keyCode, event) {
         cc.log(keyCode)
         if(keyCode === 32){
+          sound.stopAllEffects()
           cc.log("kongge")
           if(!self._go){
             cc.director.pause()
@@ -272,26 +273,12 @@ var MyLayer = cc.LayerColor.extend({
 
     var word = new cc.LabelTTF(name, '', _fontSize)
     word.setAnchorPoint(0.5, 0.5)
+    word.setVerticalAlignment(1)
     word.setPosition(box.width / 2, box.height / 2 - 5)
     word.setColor(cc.color(255, 255, 255))
     box.addChild(word, 1)
-    // var box = cc.Sprite.create(res.box2);
-    // box.setAnchorPoint(1,0)
-    // box.setPosition(this.size.width-30, 30);
-    // if(sX){
-    //   box.setScale(sX);
-    // }else{
-    //   box.setScale(1);
-    // }
-    // this.addChild(box, 10);
 
-    // word = new cc.LabelTTF(DATA.text[index],"", 40);
-    // word.color = cc.color(255,255,255); 
-    // word.setAnchorPoint(0.5, 0.5);
-    // word.x = box.width/2;
-    // word.y = box.height/2-5;
-    // word.setScale(1);
-    // box.addChild(word,1);
+    return box
   }
 })
 

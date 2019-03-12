@@ -44,9 +44,9 @@ var MySprite = cc.Sprite.extend({
     }
   },
   // 放大的动画
-  enlarge: function(num, time, re){
-    var action1 = cc.scaleBy(time, num)
-    var action3 = cc.scaleBy(time, 1 / num)
+  enlarge: function(time, multiple, re){
+    var action1 = cc.scaleBy(time, multiple)
+    var action3 = cc.scaleBy(time, 1 / multiple)
     var action = cc.sequence(action1, action3)
     if(re == 0){
       this.runAction(action.repeatForever())

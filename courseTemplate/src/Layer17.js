@@ -11,25 +11,25 @@ var Layer17 = MyLayer.extend({
     var size = cc.winSize
     var self = this
 
-    var bg = new cc.Sprite(res.g_02背景)
+    var bg = new cc.Sprite(res.bg02)
     bg.setAnchorPoint(0, 0.5)
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)
 
-    // this.createBtn('下一页：思考练习2/4')
-    var sprs = this.sprs = this.sprites(layer17_data[0], true)
+    // this.createBtn('下一页：总结结束 1/1')
+    this.sprs = this.sprites(layer17_data[0], true)
   },
   onStart: function(){
     sound.s17_sound()
     var self = this
     var sprs = this.sprs
 
-     sprs[2].frame([res.g_03米丫01, res.g_03米丫02], 0.5, 0)
+    sprs[2].frame([res.人04, res.人004], 0.5, 0)
 
     this.scheduleOnce(function(){
       sprs[2].stopAllActions()
       this.next()
-    }, 13)
+    }, 9)
   }
   // update: function (dt) {
 

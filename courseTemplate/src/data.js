@@ -24,131 +24,130 @@ var getID = function(){
 }
 
 // 默认初始位置
+var layer01_data = [
+  [
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.月主题, pos: [0, 892 + 200], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.封面, pos: [960 + 360, 316 + 270], rotation: 0, zindex: 1, scale: [0, 0], opacity: 255},
+  ]
+]
+
 var layer02_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s鸟飞01, pos: [179 - 400, 561], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s文字01, pos: [418, 911], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.文字01, pos: [273, 935], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.图片01, pos: [169, 135], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.图片02, pos: [1019, 135], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer03_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s04黑板, pos: [136, 208], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s03字, pos: [207, 486], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s03米丫01, pos: [1240, 0], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.对话框01, pos: [143, 307], rotation: 0, zindex: 2, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.人04, pos: [1247, 111], rotation: 0, zindex: 2, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer04_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s04, pos: [352, 914], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s04图, pos: [468, 0], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.music, pos: [687, 0], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+  ]
+]
+
+var layer05_data = [
+  [
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.对话框02, pos: [143, 307], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.人04, pos: [1247, 111], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer06_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s06字, pos: [365, 914], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    // {id: getID(), chorPoint: [0, 1], sprUrl: res.小图01, pos: [-10, 1090], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    // {id: getID(), chorPoint: [1, 1], sprUrl: res.小图02, pos: [1922, 1090], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    // {id: getID(), chorPoint: [0, 0], sprUrl: res.小图03, pos: [-10, 0], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    // {id: getID(), chorPoint: [1, 0], sprUrl: res.小图04, pos: [1918, 0], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.数字01, pos: [836 + 15, 543 + 5], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.数字02, pos: [976 + 15, 543 + 5], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.数字03, pos: [836 + 15, 440 + 5], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.数字04, pos: [976 + 15, 440 + 5], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer07_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s07字, pos: [0, 0], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.对话框03, pos: [143, 307], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.人04, pos: [1247, 111], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer08_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s06, pos: [483, 932], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.鸟01, pos: [284 - 300, 663 + 200], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.鸟03, pos: [860 - 300, 340 + 250], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.草说话02, pos: [1107, 0], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.叶子01, pos: [172, 529], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.叶子02, pos: [617, 908], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.叶子03, pos: [1040, 709], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.柳树00, pos: [551, 713], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer09_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s09字, pos: [0, 0], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.树说话02, pos: [0, -1], rotation: 0, zindex: 10, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.花02, pos: [0, 469], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.鸟06, pos: [537 + 1000, 739 + 100], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.鸟09, pos: [719 - 100, 282], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.鸟09, pos: [0, 0], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer10_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s10字, pos: [471, 967], rotation: 0, zindex: 6, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.大山, pos: [0, 0], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.太阳, pos: [664, 715 + 100], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.云01, pos: [275, 740], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.鸟11, pos: [254 - 150, 318+ 50], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.河流01, pos: [850, -50], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer11_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s10, pos: [0, 0], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.大山, pos: [0, 0], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.太阳, pos: [1164, 256], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.云01, pos: [-75, 640], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.鸟03, pos: [1094 - 300, 706], rotation: 0, zindex: 1, scale: [0.65, 0.65], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.河流01, pos: [850, -50], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.鸟14, pos: [1433, 124], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer12_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s12字, pos: [177, 192], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s03米丫01, pos: [1240, 0], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.星星01, pos: [28, 623], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.鸟18, pos: [458, 504], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.鸟03, pos: [871 + 800, 728 + 200], rotation: 0, zindex: 1, scale: [-0.65, 0.65], opacity: 255},
   ]
 ]
 
 var layer13_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13纸, pos: [197, 29], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字, pos: [454, 944], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13图01, pos: [419, 628], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13图02, pos: [1064, 607], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13图03, pos: [475, 131], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13图04, pos: [1013, 140], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字01, pos: [576, 564], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字02, pos: [1238, 564], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字03, pos: [579, 79], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字04, pos: [1225, 79], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-  ]
-]
-
-var layer14_data = [
-  [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13纸, pos: [197, 29], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s14字, pos: [552, 944], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13图01, pos: [419, 628], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13图02, pos: [1064, 607], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13图03, pos: [475, 131], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13图04, pos: [1013, 140], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字01, pos: [576, 564], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字02, pos: [1238, 564], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字03, pos: [579, 79], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字04, pos: [1225, 79], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s1735, pos: [504, 642], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s1734, pos: [1190, 695], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.image15, pos: [558, 258], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.对话框04, pos: [143, 307], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.人04, pos: [1247, 111], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
   ]
 ]
 
 var layer15_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13纸, pos: [197, 29], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s15字, pos: [620, 944], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s15图01, pos: [419, 628], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s15图02, pos: [1064, 607], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s15图03, pos: [475, 131], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s15图04, pos: [1013, 140], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字01, pos: [576, 564], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字02, pos: [1238, 564], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字03, pos: [579, 79], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s13字04, pos: [1225, 79], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.对话框05, pos: [143, 307], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.人04, pos: [1247, 111], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
   ]
 ]
 
-var layer16_data = [
+var layer17_data = [
   [
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s16字, pos: [177, 192], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-    {id: getID(), chorPoint: [0, 0], sprUrl: res.s03米丫01, pos: [1240, 0], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.黑板, pos: [97, 214], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.结束语, pos: [249, 538], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
+    {id: getID(), chorPoint: [0, 0], sprUrl: res.人04, pos: [1418, 132], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
   ]
 ]
-
-// var layer17_data = [
-//   [
-//     {id: getID(), chorPoint: [0, 0], sprUrl: res.g_04黑板, pos: [136, 208], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-//     {id: getID(), chorPoint: [0, 0], sprUrl: res.g_17字, pos: [213, 502], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-//     {id: getID(), chorPoint: [0, 0], sprUrl: res.g_03米丫01, pos: [1306, -300], rotation: 0, zindex: 1, scale: [1, 1], opacity: 255},
-//   ]
-// ]
-

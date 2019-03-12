@@ -9,12 +9,12 @@ var Layer07 = MyLayer.extend({
     this._super()
     var size = cc.winSize
 
-    var bg = new cc.Sprite(res.s07图)
+    var bg = new cc.Sprite(res.bg02)
     bg.setAnchorPoint(0, 0.5)
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)
 
-    this.createBtn('下一页：认识旗帜 5/8')
+    this.createBtn('下一页：分句欣赏 2/10')
 
     this.sprs = this.sprites(layer07_data[0], true)
   },
@@ -23,9 +23,12 @@ var Layer07 = MyLayer.extend({
     var self = this
     var sprs = this.sprs
 
+    sprs[1].frame([res.人04, res.人004], 0.5, 0)
+
     this.scheduleOnce(function(){
+      sprs[1].stopAllActions()
       this.next()
-    }, 22)  
+    }, 6)  
   }
   // update: function (dt) {
 

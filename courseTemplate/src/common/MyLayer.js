@@ -172,10 +172,14 @@ var MyLayer = cc.LayerColor.extend({
     var len = sp.length
     for (var i = 0; i < len; i++) {
       sprite[i] = new MySprite(sp[i].sprUrl)
-      sprite[i].setPosition(sp[i].pos[0], sp[i].pos[1])
+      if(sp[i].dY){
+        sprite[i].setPosition(sp[i].pos[0] * fix, sp[i].pos[1] * fix + sp[i].dY)
+      }else{
+        sprite[i].setPosition(sp[i].pos[0] * fix, sp[i].pos[1] * fix)
+      }
       sprite[i].setAnchorPoint(sp[i].chorPoint[0], sp[i].chorPoint[1])
       sprite[i].setOpacity(sp[i].opacity)
-      sprite[i].setScale(sp[i].scale[0], sp[i].scale[1])
+      sprite[i].setScale(sp[i].scale[0] * fix, sp[i].scale[1] * fix)
       sprite[i].setRotation(sp[i].rotation)
       sprite[i].data = sp[i]
       sprite[i].id = sp[i].id
@@ -269,7 +273,7 @@ var MyLayer = cc.LayerColor.extend({
     var box = new cc.Sprite(res.box)
     box.setAnchorPoint(1, 0)
     box.setPosition(size.width - 30, 30)
-    this.addChild(box, 10)
+    this.addChild(box, 100)
 
     var word = new cc.LabelTTF(name, '', _fontSize)
     word.setAnchorPoint(0.5, 0.5)

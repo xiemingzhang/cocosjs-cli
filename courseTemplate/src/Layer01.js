@@ -1,22 +1,16 @@
 var Layer01 = MyLayer.extend({
-  ctor: function () {
-    this._super()
-
-    this.scheduleOnce(this.onStart, 1)
-    return true
-  },
   onEnter: function(){
     this._super()
     var size = cc.winSize
+    this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.第一张图)
+    var bg = new cc.Sprite(res.bg)
     // bg.setScale(size.height / bg.height)
     bg.setAnchorPoint(0, 0.5)
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)
 
-    this.sprs = this.sprites(layer01_data[0], true)
-
+    this.sprs = this.sprites(gameData.layer01_data, true)
   },
   onStart: function(){
     var self = this

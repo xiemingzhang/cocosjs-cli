@@ -1,83 +1,85 @@
 var Layer16 = MyLayer.extend({
-  ctor: function () {
-    this._super()
-
-    this.scheduleOnce(this.onStart, 1)
-    return true
-  },
-  onEnter: function () {
+  onEnter: function() {
     this._super()
     var size = cc.winSize
+    this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.bg02)
+    var bg = new cc.Sprite(res.bg2)
     bg.setAnchorPoint(0, 0.5)
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)
 
     this.createBtn('下一页：总结结束 1/1')
 
-    this.sprs = this.sprites(layer04_data[0], true)
+    this.sprs = this.sprites(gameData.layer16_data, true)
   },
-  onStart: function(){
+  onStart: function() {
 
-    sound.s4_sound()
+    // sound.s16_sound()
     var self = this
     var sprs = this.sprs
 
-    this.t = 0
-    this.f = Math.random() //多长时间生成一个音符
-    this.sArr = []//音符精灵数组
-    this.sRes = [res.note1819, res.note1820, res.note1821, res.note1822, res.note1823]//音符图片数组
-    this.scheduleUpdate()
+    var x1 = new cc.ProgressTimer(new cc.Sprite(res.lianxian1))
+    x1.setAnchorPoint(0, 0)
+    x1.type = cc.ProgressTimer.TYPE_BAR
+    x1.midPoint = cc.p(0, 1)
+    x1.barChangeRate = cc.p(1, 0)
+    x1.x = 330 * fix
+    x1.y = 393
+    this.addChild(x1, 5)
+    x1.runAction(cc.progressTo(1.5, 100))
 
-    // var action1 = cc.scaleTo(0.5, 0.8/3)
-    // var action2 = cc.scaleTo(0.5, 1/3)
-    // var action3 = cc.rotateBy(2, 360)
-    // var action4 = cc.rotateBy(2, -360)
+    this.scheduleOnce(function() {
+      x1 = new cc.ProgressTimer(new cc.Sprite(res.lianxian2))
+      x1.setAnchorPoint(0, 0)
+      x1.type = cc.ProgressTimer.TYPE_BAR
+      x1.midPoint = cc.p(0, 1)
+      x1.barChangeRate = cc.p(1, 0)
+      x1.x = 961 * fix
+      x1.y = 396
+      this.addChild(x1, 5)
+      x1.runAction(cc.progressTo(1.5, 100))
+    }, 1.5)
 
-    // sprs[1].runAction(cc.sequence(action1.clone(), action2.clone()).repeatForever())
+    this.scheduleOnce(function() {
+      x1 = new cc.ProgressTimer(new cc.Sprite(res.lianxian5))
+      x1.setAnchorPoint(0, 0)
+      x1.type = cc.ProgressTimer.TYPE_BAR
+      x1.midPoint = cc.p(1, 1)
+      x1.barChangeRate = cc.p(0, 1)
+      x1.x = 961 * fix
+      x1.y = 396
+      this.addChild(x1, 5)
+      x1.runAction(cc.progressTo(1.5, 100))
+    }, 3)
 
-    // sprs[2].runAction(cc.sequence(action3.clone()).repeatForever())
+    this.scheduleOnce(function() {
+      x1 = new cc.ProgressTimer(new cc.Sprite(res.lianxian4))
+      x1.setAnchorPoint(0, 0)
+      x1.type = cc.ProgressTimer.TYPE_BAR
+      x1.midPoint = cc.p(1, 1)
+      x1.barChangeRate = cc.p(0, 1)
+      x1.x = 330 * fix
+      x1.y = 396
+      this.addChild(x1, 5)
+      x1.runAction(cc.progressTo(1.5, 100))
+    }, 4.5)
 
-    // sprs[3].runAction(cc.sequence(action1.clone(), action2.clone()).repeatForever())
+    this.scheduleOnce(function() {
+      x1 = new cc.ProgressTimer(new cc.Sprite(res.lianxian3))
+      x1.setAnchorPoint(0, 0)
+      x1.type = cc.ProgressTimer.TYPE_BAR
+      x1.midPoint = cc.p(0, 1)
+      x1.barChangeRate = cc.p(1, 0)
+      x1.x = 1220 * fix
+      x1.y = 396
+      this.addChild(x1, 5)
+      x1.runAction(cc.progressTo(1.5, 100))
+    }, 6)
 
-    // sprs[4].runAction(action4.repeatForever())
-
-    // sprs[5].runAction(cc.sequence(action1.clone(), action2.clone()).repeatForever())
-    // 
-    
-    this.scheduleOnce(function(){
-      this.unscheduleUpdate()
-      this.sArr.forEach(function(item){
-        item.removeFromParent()
-      })
+    this.scheduleOnce(function() {
       this.next()
-    }, 53)
-  },
-  update: function (dt) {
-    var self = this
-    this.t += dt
-    var _r = getNum(0, 5)
-    if(this.t > this.f){
-      this.t = 0
-      this.f = getNum(6, 8) / 10
-      var note = new cc.Sprite(this.sRes[_r])
-      note.setAnchorPoint(0, 0)
-      note.setPosition(getNum(409, 1423), getNum(179, 541))
-      this.addChild(note, 0)
-      note.speed = Math.random() * 4 + 6
-      note.runAction(cc.sequence(cc.scaleBy(0.5, 1/1.1),cc.scaleBy(0.5, 1.1)).repeatForever())
-      this.sArr.push(note)
-    }
-    this.sArr.forEach(function(item, index){
-      if(item.y > 800){
-        item.stopAllActions()
-        item.removeFromParent()
-        self.sArr.splice(index, 1); 
-      }else{
-        item.y += item.speed
-      }
-    })
+    }, 8)
   }
 })
 

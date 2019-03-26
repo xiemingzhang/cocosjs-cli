@@ -163,11 +163,17 @@ var MyLayer = cc.LayerColor.extend({
   finish: function(){
     this.getParent().finish()
   },
-  next: function(t){
+  // next: function(t){
+  //   if(this.hornListener){
+  //     cc.eventManager.removeListener(this.hornListener)
+  //   }
+  //   this.getParent().nextLayer(t)
+  // },
+  next: function(t, n){
     if(this.hornListener){
       cc.eventManager.removeListener(this.hornListener)
     }
-    this.getParent().nextLayer(t)
+    this.getParent().nextLayer(this, t, n)
   },
   becomeFalse: function(t) {
     if(t){

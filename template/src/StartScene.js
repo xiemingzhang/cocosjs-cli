@@ -67,10 +67,12 @@ var StartScene = cc.Scene.extend({
     }
     if(this.l < this.randomArr.length) {
       if(this._layerArr[self.v[0]].length === self.v[1] + 1) {
-        var myScene = new StartScene()
-        myScene.l = this.l 
-        var transition = new cc.TransitionCrossFade(1, myScene, false)
-        cc.director.runScene(transition)
+        this.scheduleOnce(function() {
+          var myScene = new StartScene()
+          myScene.l = this.l 
+          var transition = new cc.TransitionCrossFade(1, myScene, false)
+          cc.director.runScene(transition)
+        }.bind(this), time)
       }else{
         this.scheduleOnce(function() {
           // sound.stopAllEffects()

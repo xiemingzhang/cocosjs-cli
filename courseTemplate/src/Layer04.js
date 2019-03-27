@@ -9,7 +9,7 @@ var Layer04 = MyLayer.extend({
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)
 
-    this.createBtn('下一页：物品点数 3/12')
+    this.createBtn('下一页：认识事物 2/4')
 
     this.sprs = this.sprites(gameData.layer04_data, true)
   },
@@ -19,41 +19,14 @@ var Layer04 = MyLayer.extend({
     var self = this
     var sprs = this.sprs
 
-    sprs[1].frame([res.peach2, res.peach1], 0.5, 1)
-    sprs[7].flash(0.5, 1)
+    sprs[1].runAction(cc.fadeIn(1.2))
+
+    sprs[2].frame([res.miya5, res.miya6], 0.5, 0)
 
     this.scheduleOnce(function(){
-      sprs[2].frame([res.peach2, res.peach1], 0.5, 1)
-      sprs[8].flash(0.5, 1)
-    }, 0.6)
-
-    this.scheduleOnce(function(){
-      sprs[3].frame([res.peach2, res.peach1], 0.5, 1)
-      sprs[9].flash(0.5, 1)
-    }, 1.2)
-
-    this.scheduleOnce(function(){
-      sprs[4].frame([res.peach2, res.peach1], 0.5, 1)
-      sprs[10].flash(0.5, 1)
-    }, 1.8)
-
-    this.scheduleOnce(function(){
-      sprs[5].frame([res.peach2, res.peach1], 0.5, 1)
-      sprs[11].flash(0.5, 1)
-    }, 2.4)
-
-    this.scheduleOnce(function(){
-      sprs[6].frame([res.peach2, res.peach1], 0.5, 1)
-      sprs[12].flash(0.5, 1)
-    }, 3)
-
-    this.scheduleOnce(function(){
-      sprs[13].flash(0.5, 1)
-    }, 4)
-
-    this.scheduleOnce(function(){
+      sprs[2].stopAllActions()
       this.next()
-    }, 6)
+    }, 3)
   }
 })
 

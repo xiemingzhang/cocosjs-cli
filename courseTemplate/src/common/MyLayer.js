@@ -172,15 +172,11 @@ var MyLayer = cc.LayerColor.extend({
     var len = sp.length
     for (var i = 0; i < len; i++) {
       sprite[i] = new MySprite(sp[i].sprUrl)
-      if(sp[i].dY){
-        sprite[i].setPosition(sp[i].pos[0] * fix, sp[i].pos[1] * fix + sp[i].dY)
-      }else{
-        sprite[i].setPosition(sp[i].pos[0] * fix, sp[i].pos[1] * fix)
-      }
       sprite[i].setAnchorPoint(sp[i].chorPoint[0], sp[i].chorPoint[1])
       sprite[i].setOpacity(sp[i].opacity)
       sprite[i].setScale(sp[i].scale[0] * fix, sp[i].scale[1] * fix)
       sprite[i].setRotation(sp[i].rotation)
+      sprite[i].setPosition(sp[i].pos[0] * fix + sprite[i].width * sp[i].scale[0] * sp[i].chorPoint[0], sp[i].pos[1] * fix + sprite[i].height * sp[i].scale[1] * sp[i].chorPoint[1] + (sp[i].dY ? sp[i].dY : 0))
       sprite[i].data = sp[i]
       sprite[i].id = sp[i].id
       sprite[i].zindex = sp[i].zindex

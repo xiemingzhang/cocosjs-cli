@@ -9,7 +9,7 @@ var Layer06 = MyLayer.extend({
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)
 
-    this.btn = this.createBtn('下一页：物品点数 5/12')
+    this.btn = this.createBtn('下一页：认识事物 3/4')
     this.btn.setLocalZOrder(12)
 
     this.sprs = this.sprites(gameData.layer06_data, true)
@@ -19,46 +19,29 @@ var Layer06 = MyLayer.extend({
     var self = this
     var sprs = this.sprs
 
-    sprs[1].frame([res.chengzi2, res.chengzi1], 0.5, 1)
-    sprs[8].flash(0.5, 1)
+    sprs[5].frame([res.miya1, res.miya2, res.miya3], 0.35, 0)
+    sprs[0].runAction(cc.fadeIn(0.8))
 
-    this.scheduleOnce(function(){
-      sprs[2].frame([res.chengzi2, res.chengzi1], 0.5, 1)
-      sprs[9].flash(0.5, 1)
-    }, 0.6)
+    this.scheduleOnce(function() {
+      sprs[1].flash(0.5, 1)
+    }, 2)
 
-    this.scheduleOnce(function(){
-      sprs[3].frame([res.chengzi2, res.chengzi1], 0.5, 1)
-      sprs[10].flash(0.5, 1)
-    }, 1.2)
-
-    this.scheduleOnce(function(){
-      sprs[4].frame([res.chengzi2, res.chengzi1], 0.5, 1)
-      sprs[11].flash(0.5, 1)
-    }, 1.8)
-
-    this.scheduleOnce(function(){
-      sprs[5].frame([res.chengzi2, res.chengzi1], 0.5, 1)
-      sprs[12].flash(0.5, 1)
-    }, 2.4)
-
-    this.scheduleOnce(function(){
-      sprs[6].frame([res.chengzi2, res.chengzi1], 0.5, 1)
-      sprs[13].flash(0.5, 1)
+    this.scheduleOnce(function() {
+      sprs[2].flash(0.5, 1)
     }, 3)
 
-    this.scheduleOnce(function(){
-      sprs[7].frame([res.chengzi2, res.chengzi1], 0.5, 1)
-      sprs[14].flash(0.5, 1)
-    }, 3.6)
+    this.scheduleOnce(function() {
+      sprs[3].flash(0.5, 1)
+    }, 3.5)
 
-    this.scheduleOnce(function(){
-      sprs[15].flash(0.5, 1)
-    }, 4.6)
+    this.scheduleOnce(function() {
+      sprs[4].flash(0.5, 1)
+    }, 4.5)
 
-    this.scheduleOnce(function(){
+    this.scheduleOnce(function() {
+      sprs[5].stopAllActions()
       this.next()
-    }, 7)
+    }, 12)
   }
   // update: function (dt) {
 

@@ -15,23 +15,17 @@ var Layer13 = MyLayer.extend({
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)
 
-    this.createBtn('下一页：物品点数 12/12')
-    this.sprs = this.sprites(gameData.layer13_data, true)
+    this.btn = this.createBtn('下一页：科学认知 4/5')
+    this.sprs = this.sprites(gameData.layer12_data, true)
   },
   onStart: function() {
     // sound.s13_sound()
     var self = this
     var sprs = this.sprs
 
-    sprs[0].runAction(cc.fadeIn(0.8))
-    sprs[1].runAction(cc.fadeIn(0.8))
-
-    sprs[2].frame([res.miya1, res.miya2], 0.5, 0)
-
     this.scheduleOnce(function() {
-      sprs[2].stopAllActions()
       this.next()
-    }, 7)
+    }, 2)
   }
   // update: function (dt) {
 

@@ -4,7 +4,7 @@ var Layer01 = MyLayer.extend({
     var size = cc.winSize
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.bg)
+    var bg = new cc.Sprite(res.bg1)
     // bg.setScale(size.height / bg.height)
     bg.setAnchorPoint(0, 0.5)
     bg.setPosition({x: 0, y: size.height / 2})

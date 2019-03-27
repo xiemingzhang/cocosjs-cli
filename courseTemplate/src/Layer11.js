@@ -4,12 +4,12 @@ var Layer11 = MyLayer.extend({
     var size = cc.winSize
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.bg2)
+    var bg = new cc.Sprite(res.bg04)
     bg.setAnchorPoint(0, 0.5)
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)
 
-    // this.btn = this.createBtn('下一页：物品点数 10/12')
+    this.createBtn('下一页：分句欣赏 6/11')
 
     this.sprs = this.sprites(gameData.layer11_data, true)
   },
@@ -17,86 +17,62 @@ var Layer11 = MyLayer.extend({
     // sound.s11_sound()
     var self = this
     var sprs = this.sprs
-    var size = cc.winSize
 
-    sprs[0].setLocalZOrder(50)
-    sprs[0]._x = sprs[0].x
-    sprs[0]._y = sprs[0].y
-    sprs[0].runAction(cc.moveTo(0.6, size.width / 2, size.height / 2))
-    sprs[0].runAction(cc.sequence(
-      cc.scaleBy(0.6, 2),
-      cc.delayTime(1.2),
-      cc.spawn(
-        cc.scaleBy(0.6, 1 / 2),
-        cc.moveTo(0.6, sprs[0]._x, sprs[0]._y)
-      ),
-      cc.delayTime(0.2),
-      cc.callFunc(function() {
-        sprs[0].setLocalZOrder(5)
-      })
+    var left = new cc.ProgressTimer(new cc.Sprite(res.chi9))
+    left.setAnchorPoint(0, 0)
+    left.type = cc.ProgressTimer.TYPE_BAR
+    //    Setup for a bar starting from the bottom since the midpoint is 0 for the y
+    left.midPoint = cc.p(0, 1)
+    //    Setup for a vertical bar since the bar change rate is 0 for x meaning no horizontal change
+    left.barChangeRate = cc.p(0, 1)
+    left.x = 817
+    left.y = 910
+    this.addChild(left, 5)
+    left.runAction(cc.progressTo(2, 100))
+
+    sprs[1].frame([res.frog2, res.frog1], 0.5, 1)
+    sprs[1].runAction(cc.moveTo(0.6, 718, 575))
+    this.scheduleOnce(function(){
+      sprs[1].frame([res.frog3, res.frog4], 0.5, 0)
+    }, 1)
+
+    this.scheduleOnce(function(){
+      sprs[2].frame([res.frog2, res.frog1], 0.5, 1)
+      sprs[2].runAction(cc.moveTo(0.6, 489, 387))
+    }, 0.5)
+
+    this.scheduleOnce(function(){
+      sprs[2].frame([res.frog3, res.frog4], 0.5, 0)
+    }, 1.5)
+
+    // this.scheduleOnce(function(){
+    //   sprs[3].frame([res.frog2, res.frog1], 0.5, 1)
+    //   sprs[3].runAction(cc.moveTo(0.6, 357, 198))
+    // }, 1)
+
+    // this.scheduleOnce(function(){
+    //   sprs[4].frame([res.frog2, res.frog1], 0.5, 1)
+    //   sprs[4].runAction(cc.moveTo(0.6, 440, 91))
+    // }, 1.5)
+
+    sprs[5].runAction(cc.sequence(
+      cc.fadeTo(0.5, 180),
+      cc.callFunc(function(){sprs[5].setTexture(res.h2)}),
+      cc.fadeTo(0.5, 255)
+      // cc.fadeTo(0.5, 180),
+      // cc.callFunc(function(){sprs[5].setTexture(res.h3)}),
+      // cc.fadeTo(0.5, 255)
     ))
 
     this.scheduleOnce(function() {
-      sprs[1].setLocalZOrder(50)
-      sprs[1]._x = sprs[1].x
-      sprs[1]._y = sprs[1].y
-      sprs[1].runAction(cc.moveTo(0.6, size.width / 2, size.height / 2))
-      sprs[1].runAction(cc.sequence(
-        cc.scaleBy(0.6, 2),
-        cc.delayTime(1.2),
-        cc.spawn(
-          cc.scaleBy(0.6, 1 / 2),
-          cc.moveTo(0.6, sprs[1]._x, sprs[1]._y)
-        ),
-        cc.delayTime(0.2),
-        cc.callFunc(function() {
-          sprs[1].setLocalZOrder(5)
-        })
-      ))
-    }, 2.4)
-
-    this.scheduleOnce(function() {
-      sprs[2].setLocalZOrder(50)
-      sprs[2]._x = sprs[2].x
-      sprs[2]._y = sprs[2].y
-      sprs[2].runAction(cc.moveTo(0.6, size.width / 2, size.height / 2))
-      sprs[2].runAction(cc.sequence(
-        cc.scaleBy(0.6, 2),
-        cc.delayTime(1.2),
-        cc.spawn(
-          cc.scaleBy(0.6, 1 / 2),
-          cc.moveTo(0.6, sprs[2]._x, sprs[2]._y)
-        ),
-        cc.delayTime(0.2),
-        cc.callFunc(function() {
-          sprs[2].setLocalZOrder(5)
-        })
-      ))
-    }, 4.8)
-
-    this.scheduleOnce(function() {
-      sprs[3].setLocalZOrder(50)
-      sprs[3]._x = sprs[3].x
-      sprs[3]._y = sprs[3].y
-      sprs[3].runAction(cc.moveTo(0.6, size.width / 2, size.height / 2))
-      sprs[3].runAction(cc.sequence(
-        cc.scaleBy(0.6, 2),
-        cc.delayTime(1.2),
-        cc.spawn(
-          cc.scaleBy(0.6, 1 / 2),
-          cc.moveTo(0.6, sprs[3]._x, sprs[3]._y)
-        ),
-        cc.delayTime(0.2),
-        cc.callFunc(function() {
-          sprs[3].setLocalZOrder(5)
-        })
-      ))
-    }, 7.2)
-
-    this.scheduleOnce(function() {
-      sprs[0].stopAllActions()
+      sprs[1].stopAllActions()
+      sprs[2].stopAllActions()
+      sprs[3].stopAllActions()
+      sprs[4].stopAllActions()
+      sprs[1].stopAllActions()
+      sprs[2].stopAllActions()
       this.next()
-    }, 9)
+    }, 3)
   }
   // update: function (dt) {
 

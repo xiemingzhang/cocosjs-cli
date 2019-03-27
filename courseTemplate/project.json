@@ -27,6 +27,10 @@
         "src/Layer14.js",
         "src/Layer15.js",
         "src/Layer16.js",
+        "src/Layer17.js",
+        "src/Layer18.js",
+        "src/Layer19.js",
+        "src/Layer20.js",
         "src/StartScene.js"
     ]
 }

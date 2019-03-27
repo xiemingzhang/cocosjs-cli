@@ -4,12 +4,12 @@ var Layer08 = MyLayer.extend({
     var size = cc.winSize
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.bg2)
+    var bg = new cc.Sprite(res.bg04)
     bg.setAnchorPoint(0, 0.5)
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)
 
-    this.btn = this.createBtn('下一页：科学认知 1/5')
+    this.createBtn('下一页：分句欣赏 3/11')
 
     this.sprs = this.sprites(gameData.layer08_data, true)
     // this.sprs1 = this.sprites(layer08_data[1])
@@ -19,19 +19,43 @@ var Layer08 = MyLayer.extend({
     var self = this
     var sprs = this.sprs
 
-    sprs[2].runAction(cc.fadeIn(0.8))
+    var left = new cc.ProgressTimer(new cc.Sprite(res.chi4))
+    left.setAnchorPoint(0, 0)
+    left.type = cc.ProgressTimer.TYPE_BAR
+    //    Setup for a bar starting from the bottom since the midpoint is 0 for the y
+    left.midPoint = cc.p(0, 1)
+    //    Setup for a vertical bar since the bar change rate is 0 for x meaning no horizontal change
+    left.barChangeRate = cc.p(0, 1)
+    left.x = 817
+    left.y = 910
+    this.addChild(left, 5)
+    left.runAction(cc.progressTo(2, 100))
+
+    sprs[1].runAction(cc.fadeIn(0.7))
+    sprs[1].runAction(cc.moveBy(0.45, -50, 0))
+    sprs[1].frame([res.frog2, res.frog1], 0.5, 1)
 
     this.scheduleOnce(function() {
-      sprs[0].runAction(cc.fadeIn(0.8))
-      sprs[1].runAction(cc.fadeIn(0.8))
-    }, 0.8)
-
-    sprs[3].frame([res.miya5, res.miya6], 0.5, 0)
+      sprs[2].runAction(cc.fadeIn(0.7))
+      sprs[2].runAction(cc.moveBy(0.45, -50, 0))
+      sprs[2].frame([res.frog2, res.frog1], 0.5, 1)
+    }, 1)
 
     this.scheduleOnce(function() {
-      sprs[3].stopAllActions()
+      sprs[3].runAction(cc.fadeIn(0.7))
+      sprs[3].runAction(cc.moveBy(0.45, -50, 0))
+      sprs[3].frame([res.frog2, res.frog1], 0.5, 1)
+    }, 2)
+
+    this.scheduleOnce(function() {
+      sprs[4].runAction(cc.fadeIn(0.7))
+      sprs[4].runAction(cc.moveBy(0.45, -50, 0))
+      sprs[4].frame([res.frog2, res.frog1], 0.5, 1)
+    }, 3)
+
+    this.scheduleOnce(function() {
       this.next()
-    }, 10)
+    }, 4)
   }
   // update: function (dt) {
 

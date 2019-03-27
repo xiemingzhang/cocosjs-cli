@@ -4,12 +4,12 @@ var Layer04 = MyLayer.extend({
     var size = cc.winSize
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.bg2)
+    var bg = new cc.Sprite(res.bg02)
     bg.setAnchorPoint(0, 0.5)
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)
 
-    this.createBtn('下一页：认识事物 2/4')
+    this.createBtn('下一页：分句欣赏 1/11')
 
     this.sprs = this.sprites(gameData.layer04_data, true)
   },
@@ -19,14 +19,19 @@ var Layer04 = MyLayer.extend({
     var self = this
     var sprs = this.sprs
 
-    sprs[1].runAction(cc.fadeIn(1.2))
-
-    sprs[2].frame([res.miya5, res.miya6], 0.5, 0)
+    sprs[2].runAction(cc.fadeIn(0.8))
 
     this.scheduleOnce(function(){
-      sprs[2].stopAllActions()
+      sprs[0].runAction(cc.fadeIn(0.8))
+      sprs[1].runAction(cc.fadeIn(0.8))
+    }, 0.8)
+
+    sprs[3].frame([res.miya4, res.miya3], 0.5 ,0)
+
+    this.scheduleOnce(function(){
+      sprs[3].stopAllActions()
       this.next()
-    }, 3)
+    }, 10)
   }
 })
 

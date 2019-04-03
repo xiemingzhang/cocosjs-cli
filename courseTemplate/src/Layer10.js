@@ -1,45 +1,58 @@
 var Layer10 = MyLayer.extend({
-  onEnter: function () {
+  onEnter: function() {
     this._super()
     var size = cc.winSize
     var self = this
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.bg04)
+    var bg = new cc.Sprite(res.bg1)
     bg.setAnchorPoint(0, 0.5)
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)
 
-    this.createBtn('下一页：分句欣赏 5/11')
+    this.createBtn('下一页：总结结束1/1')
 
     this.sprs = this.sprites(gameData.layer10_data, true)
   },
-  onStart: function(){
-    // sound.s10_sound()
-    // sound.niaojiao_sound()
+  onStart: function() {
+    sound.s10_sound()
     var sprs = this.sprs
 
-    var left = new cc.ProgressTimer(new cc.Sprite(res.chi16))
-    left.setAnchorPoint(0, 0)
-    left.type = cc.ProgressTimer.TYPE_BAR
-    //    Setup for a bar starting from the bottom since the midpoint is 0 for the y
-    left.midPoint = cc.p(0, 1)
-    //    Setup for a vertical bar since the bar change rate is 0 for x meaning no horizontal change
-    left.barChangeRate = cc.p(0, 1)
-    left.x = 817
-    left.y = 910
-    this.addChild(left, 5)
-    left.runAction(cc.progressTo(2, 100))
+    this.scheduleOnce(function(){
+      sprs[0].flash(0.5, 1)
+    }, 11)
 
-    sprs.forEach(function(item, index){
-       if(index > 0){
-         item.frame([res.frogg3, res.frogg1], 0.5, 3)
-       }
-    })
+    this.scheduleOnce(function(){
+      sprs[1].flash(0.5, 1)
+    }, 13) 
+
+    this.scheduleOnce(function(){
+      sprs[2].flash(0.5, 1)
+    }, 14.5)
+
+    this.scheduleOnce(function(){
+      sprs[3].flash(0.5, 1)
+    }, 16.5)
+
+    this.scheduleOnce(function(){
+      sprs[4].flash(0.5, 1)
+    }, 18)
+
+    this.scheduleOnce(function(){
+      sprs[5].flash(0.5, 1)
+    }, 20)
+
+    this.scheduleOnce(function(){
+      sprs[6].flash(0.5, 1)
+    }, 21.5)
+
+    this.scheduleOnce(function(){
+      sprs[7].flash(0.5, 1)
+    }, 23.5)
 
     this.scheduleOnce(function() {
       this.next()
-    }, 3)
+    }, 25)
   }
   // update: function (dt) {
 

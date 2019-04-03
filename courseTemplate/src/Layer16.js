@@ -4,12 +4,12 @@ var Layer16 = MyLayer.extend({
     var size = cc.winSize
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.bg02)
+    var bg = new cc.Sprite(res.bg4)
     bg.setAnchorPoint(0, 0.5)
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)
 
-    this.createBtn('下一页：分句欣赏 11/11')
+    this.createBtn('下一页：整体与部分15/15')
     this.sprs = this.sprites(gameData.layer16_data, true)
   },
   onStart: function() {
@@ -17,19 +17,22 @@ var Layer16 = MyLayer.extend({
     var self = this
     var sprs = this.sprs
 
-    sprs[2].runAction(cc.fadeIn(0.8))
+    sprs[0].runAction(cc.scaleTo(0.6, 1))
 
     this.scheduleOnce(function(){
-      sprs[0].runAction(cc.fadeIn(0.8))
-      sprs[1].runAction(cc.fadeIn(0.8))
-    }, 0.8)
+      sprs[1].enlarge(0.65, 1.1, 1)
+    }, 1)
 
-    sprs[3].frame([res.miya4, res.miya3], 0.5 ,0)
+    // this.scheduleOnce(function(){
+    //   sprs[2].runAction(cc.moveTo(0.8, 206, 99))
+    // }, 8)
+    // this.scheduleOnce(function(){
+    //   sprs[3].runAction(cc.moveTo(0.8, 623.7, 480))
+    // }, 9)
 
     this.scheduleOnce(function(){
-      sprs[3].stopAllActions()
       this.next()
-    }, 10)
+    }, 6)
   }
 })
 

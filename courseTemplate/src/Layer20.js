@@ -4,7 +4,7 @@ var Layer20 = MyLayer.extend({
     var size = cc.winSize
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.bg02)
+    var bg = new cc.Sprite(res.bg4)
     bg.setAnchorPoint(0, 0.5)
     bg.setPosition({x: 0, y: size.height / 2})
     this.addChild(bg)
@@ -17,11 +17,14 @@ var Layer20 = MyLayer.extend({
     var self = this
     var sprs = this.sprs
 
-    sprs[0].frame([res.miya5, res.miya6], 0.5, 0)
-    sprs[2].runAction(cc.fadeIn(1))
+    sprs[0].runAction(cc.scaleTo(0.8, 1))
+
+    this.scheduleOnce(function(){
+      sprs[1].enlarge(0.9, 1.1, 1)
+      sprs[4].enlarge(0.9, 1.1, 1)
+    }, 2)
 
     this.scheduleOnce(function() {
-        sprs[0].stopAllActions()
       this.next()
     }, 5)
   }

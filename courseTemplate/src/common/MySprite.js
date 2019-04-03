@@ -31,11 +31,11 @@ var MySprite = cc.Sprite.extend({
     }
   },
   // 抖动
-  shake: function(angle, re){
-    var action1 = cc.rotateTo(0.1, angle)
-    var action2 = cc.rotateTo(0.1, 0)
-    var action3 = cc.rotateTo(0.1, -angle)
-    var action4 = cc.rotateTo(0.1, 0)
+  shake: function(angle, time, re){
+    var action1 = cc.rotateTo(time, angle)
+    var action2 = cc.rotateTo(time, 0)
+    var action3 = cc.rotateTo(time, -angle)
+    var action4 = cc.rotateTo(time, 0)
     var action = cc.sequence(action1, action2, action3, action4)
     if(re == 0){
       this.runAction(action.repeatForever())
@@ -44,7 +44,7 @@ var MySprite = cc.Sprite.extend({
     }
   },
   // 放大的动画
-  enlarge: function(time, multiple, re){
+  enlarge: function(multiple, time, re){
     var action1 = cc.scaleBy(time, multiple)
     var action3 = cc.scaleBy(time, 1 / multiple)
     var action = cc.sequence(action1, action3)

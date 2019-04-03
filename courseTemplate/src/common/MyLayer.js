@@ -14,7 +14,7 @@ var MyLayer = cc.LayerColor.extend({
         cc.log(keyCode)
         if(keyCode === 32){
           sound.stopAllEffects()
-          cc.log("kongge")
+          // cc.log("kongge")
           if(!self._go){
             cc.director.pause()
           }else{
@@ -23,7 +23,7 @@ var MyLayer = cc.LayerColor.extend({
           self._go = !self._go
         }
         if(keyCode === 39){
-          cc.log("xiayiye")
+          // cc.log("xiayiye")
           if(!self._nextPage){
             sound.stopAllEffects()
             self.next()
@@ -31,7 +31,7 @@ var MyLayer = cc.LayerColor.extend({
           self._nextPage = true
         }
         if(keyCode === 37){ 
-          cc.log("shangyiye")
+          // cc.log("shangyiye")
           if(!self._prePage){
             sound.stopAllEffects()
             self.pre()
@@ -52,40 +52,40 @@ var MyLayer = cc.LayerColor.extend({
     // cc.log("onExit");
     // cc.eventManager.removeListeners(cc.EventListener.KEYBOARD)
   },
-  addSoundButton: function(spr){
-    // var horn = this.createSprite(res.sound, 1 / 3 * fix, [0, 0], {x: 15, y: 15})
-    // this.addChild(horn, 5)
+  // addSoundButton: function(spr){
+  //   // var horn = this.createSprite(res.sound, 1 / 3 * fix, [0, 0], {x: 15, y: 15})
+  //   // this.addChild(horn, 5)
 
-    this.hornListener = cc.EventListener.create({
-      event: cc.EventListener.TOUCH_ONE_BY_ONE,
-      swallowTouches: true,
-      onTouchBegan: function (touch, event) {
-        var target = event.getCurrentTarget()
-        var pos = touch.getLocation()
-        var targetObj = target.getBoundingBox()
+  //   this.hornListener = cc.EventListener.create({
+  //     event: cc.EventListener.TOUCH_ONE_BY_ONE,
+  //     swallowTouches: true,
+  //     onTouchBegan: function (touch, event) {
+  //       var target = event.getCurrentTarget()
+  //       var pos = touch.getLocation()
+  //       var targetObj = target.getBoundingBox()
 
-        if (cc.rectContainsPoint(targetObj, pos)) {
-          if(!this.finished){
-            sound.stopAllEffects()
-            // sound.gameInfo()
-            // cc.audioEngine.playEffect(spr.effect)
-            spr.sound()
-          }
-          return true
-        }
-        return false
-      }.bind(this)
-    })
-    cc.eventManager.addListener(this.hornListener, spr)
-  },
-  addHand: function(pointX, ponitY){
-    var hander = new MySprite(res.hand)
-    hander.setPosition(pointX, ponitY)
-    hander.setAnchorPoint(0.1, 0.9)
-    hander.setScale(1 / 3 * fix)
-    this.addChild(hander, 6)
-    return hander
-  },
+  //       if (cc.rectContainsPoint(targetObj, pos)) {
+  //         if(!this.finished){
+  //           sound.stopAllEffects()
+  //           // sound.gameInfo()
+  //           // cc.audioEngine.playEffect(spr.effect)
+  //           spr.sound()
+  //         }
+  //         return true
+  //       }
+  //       return false
+  //     }.bind(this)
+  //   })
+  //   cc.eventManager.addListener(this.hornListener, spr)
+  // },
+  // addHand: function(pointX, ponitY){
+  //   var hander = new MySprite(res.hand)
+  //   hander.setPosition(pointX, ponitY)
+  //   hander.setAnchorPoint(0.1, 0.9)
+  //   hander.setScale(1 / 3 * fix)
+  //   this.addChild(hander, 6)
+  //   return hander
+  // },
   //截屏 使用时注意start_x start_y需要用getBoundingBox()获得,防止锚点不是精灵的左下角
   capture: function(start_x, start_y, width, height){
     var size = cc.winSize
@@ -176,7 +176,7 @@ var MyLayer = cc.LayerColor.extend({
       sprite[i].setOpacity(sp[i].opacity)
       sprite[i].setScale(sp[i].scale[0] * fix, sp[i].scale[1] * fix)
       sprite[i].setRotation(sp[i].rotation)
-      sprite[i].setPosition(sp[i].pos[0] * fix + sprite[i].width * sp[i].scale[0] * sp[i].chorPoint[0], sp[i].pos[1] * fix + sprite[i].height * sp[i].scale[1] * sp[i].chorPoint[1] + (sp[i].dY ? sp[i].dY : 0))
+      sprite[i].setPosition(sp[i].pos[0] * fix + sprite[i].width * sp[i].chorPoint[0] + (sp[i].offset ? sprite[i].width * sp[i].offset[0] : 0), sp[i].pos[1] * fix + sprite[i].height * sp[i].chorPoint[1] + (sp[i].offset ? sprite[i].height * sp[i].offset[1] : 0) + (sp[i].dY ? sp[i].dY : 0))
       sprite[i].data = sp[i]
       sprite[i].id = sp[i].id
       sprite[i].zindex = sp[i].zindex

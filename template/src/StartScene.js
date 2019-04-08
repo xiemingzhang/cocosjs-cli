@@ -4,6 +4,10 @@ var StartScene = cc.Scene.extend({
 
     // sound.bgm_happyday_sound()
     this.l = this.l ? this.l : 0
+    this.random1 = shuffle(getArr(6))
+    this.random2 = shuffle(getArr(6))
+    this.index = 0
+    cc.log(this.random1, this.random2)
     /* 飞星层*/
     this.starLayer = new StarLayer(common_data[1])
     // this.starLayer = new StarLayer(common_data[0])
@@ -18,11 +22,8 @@ var StartScene = cc.Scene.extend({
     var size = cc.winSize
 
     // sound.gameBgAudio()
-    // this.layerArr = [Layer01, Layer02, Layer03, Layer04, Layer05, Layer06]
-    this._layerArr = [[Layer01],
-      [Layer02, Layer03],
-      [Layer04, Layer05],
-      [Layer06]]
+    // this._layerArr = [Layer01]
+    this._layerArr = [[Layer01, Layer02, Layer03, Layer04]]
     this.layerArr = this.doArr(this._layerArr)
     // this.randomArr = shuffle([0])
     this.randomArr = getArr(this.layerArr.length)
@@ -37,7 +38,7 @@ var StartScene = cc.Scene.extend({
     var res = []
     for(var i = 0;i < arr.length;i++) {
       arr[i].v = i
-      if(isArray(arr[i])) {
+      if(cc.isArray(arr[i])) {
         res = res.concat(this.doArr(arr[i]))
       }else{
         arr[i].v = [arr.v, i]
@@ -109,6 +110,10 @@ var StartScene = cc.Scene.extend({
 
     common_data[0].obtain = sum
     // cc.log(common_data)
+  },
+  wrong: function(){
+    sound.wrongAudio()
+    this.starLayer.wrongStar()
   }
 })
 

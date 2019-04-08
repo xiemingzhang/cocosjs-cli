@@ -10,7 +10,7 @@ var MySprite = cc.Sprite.extend({
     // this.addTouchEventListenser();
   },
   onExit: function () {
-    this._super()
+    this._super() 
     // cc.log("onExit");
   },
   // 闪动
@@ -147,8 +147,7 @@ var MySprite = cc.Sprite.extend({
           sound.buttonAudio()
           updata.finish_steps++
 
-          fun1(target)
-          return true
+          return fun1(target)
         }
         return false
       },

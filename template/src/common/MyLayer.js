@@ -38,14 +38,14 @@ var MyLayer = cc.LayerColor.extend({
     })
     cc.eventManager.addListener(this.hornListener, spr)
   },
-  addHand: function(pointX, ponitY){
-    var hander = new MySprite(res.hand)
-    hander.setPosition(pointX, ponitY)
-    hander.setAnchorPoint(0.1, 0.9)
-    hander.setScale(1 / 3 * fix)
-    this.addChild(hander, 6)
-    return hander
-  },
+  // addHand: function(pointX, ponitY){
+  //   var hander = new MySprite(res.hand)
+  //   hander.setPosition(pointX, ponitY)
+  //   hander.setAnchorPoint(0.1, 0.9)
+  //   hander.setScale(1 / 3 * fix)
+  //   this.addChild(hander, 6)
+  //   return hander
+  // },
   //截屏 使用时注意start_x start_y需要用getBoundingBox()获得,防止锚点不是精灵的左下角
   capture: function(start_x, start_y, width, height){
     var size = cc.winSize
@@ -132,19 +132,20 @@ var MyLayer = cc.LayerColor.extend({
     var len = sp.length
     for (var i = 0; i < len; i++) {
       sprite[i] = new MySprite(sp[i].sprUrl)
-      // sprite[i].setPosition(sp[i].pos[0] * fix, sp[i].pos[1] * fix + (sp[i].fix ? this.fix_height : 0))
-      // sprite[i].setPosition(sp[i].pos[0] * fix, (sp[i].fix ? sp[i].pos[1] * fix : sp[i].pos[1]))
-      if(sp[i].fix === 0){
-        sprite[i].setPosition(sp[i].pos[0] * fix, sp[i].pos[1])
-      }else if(sp[i].fix === 1){
-        sprite[i].setPosition(sp[i].pos[0] * fix, sp[i].pos[1] * fix + this.fix_height)
-      }else if(sp[i].fix === 2){
-        sprite[i].setPosition(sp[i].pos[0] * fix, sp[i].pos[1] * fix)
-      }
       sprite[i].setAnchorPoint(sp[i].chorPoint[0], sp[i].chorPoint[1])
-      sprite[i].setOpacity(sp[i].opacity)
       sprite[i].setScale(sp[i].scale[0] / 3 * fix, sp[i].scale[1] / 3 * fix)
       sprite[i].setRotation(sp[i].rotation)
+      // if(sp[i].fix === 0){
+      //   sprite[i].setPosition(sp[i].pos[0] * fix, sp[i].pos[1])
+      // }else if(sp[i].fix === 1){
+      //   sprite[i].setPosition(sp[i].pos[0] * fix, sp[i].pos[1] * fix + this.fix_height)
+      // }else if(sp[i].fix === 2){
+      //   sprite[i].setPosition(sp[i].pos[0] * fix, sp[i].pos[1] * fix)
+      // }else if(sp[i].fix === 3){
+      //   sprite[i].setPosition(sp[i].pos[0], sp[i].pos[1])
+      // }
+      sprite[i].setPosition(sp[i].pos[0] * fix + sprite[i].width * sp[i].chorPoint[0] + (sp[i].offset ? sprite[i].width * sp[i].offset[0] : 0), sp[i].pos[1] * fix + sprite[i].height * sp[i].chorPoint[1] + (sp[i].offset ? sprite[i].height * sp[i].offset[1] : 0) + (sp[i].dY ? sp[i].dY : 0))
+      sprite[i].setOpacity(sp[i].opacity)
       sprite[i].data = sp[i]
       sprite[i].id = sp[i].id
       sprite[i].zindex = sp[i].zindex

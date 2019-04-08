@@ -592,60 +592,60 @@ function getPointArr(svgPath, i, varianceX, varianceY) {
   }
   return pointArr
 }
-/**
- * Check the obj whether is function or not
- * @param {*} obj
- * @returns {boolean}
- */
-function isFunction(obj) {
-  return typeof obj === 'function'
-}
+// /**
+//  * Check the obj whether is function or not
+//  * @param {*} obj
+//  * @returns {boolean}
+//  */
+// function isFunction(obj) {
+//   return typeof obj === 'function'
+// }
 
-/**
- * Check the obj whether is number or not
- * @param {*} obj
- * @returns {boolean}
- */
-function isNumber(obj) {
-  return typeof obj === 'number' || Object.prototype.toString.call(obj) === '[object Number]'
-}
+// /**
+//  * Check the obj whether is number or not
+//  * @param {*} obj
+//  * @returns {boolean}
+//  */
+// function isNumber(obj) {
+//   return typeof obj === 'number' || Object.prototype.toString.call(obj) === '[object Number]'
+// }
 
-/**
- * Check the obj whether is string or not
- * @param {*} obj
- * @returns {boolean}
- */
-function isString(obj) {
-  return typeof obj === 'string' || Object.prototype.toString.call(obj) === '[object String]'
-}
+// /**
+//  * Check the obj whether is string or not
+//  * @param {*} obj
+//  * @returns {boolean}
+//  */
+// function isString(obj) {
+//   return typeof obj === 'string' || Object.prototype.toString.call(obj) === '[object String]'
+// }
 
-/**
- * Check the obj whether is array or not
- * @param {*} obj
- * @returns {boolean}
- */
-function isArray(obj) {
-  return Array.isArray(obj) || obj instanceof Array || 
-        (typeof obj === 'object' && Object.prototype.toString.call(obj) === '[object Array]')
-}
+// *
+//  * Check the obj whether is array or not
+//  * @param {*} obj
+//  * @returns {boolean}
+ 
+// function isArray(obj) {
+//   return Array.isArray(obj) || obj instanceof Array || 
+//         (typeof obj === 'object' && Object.prototype.toString.call(obj) === '[object Array]')
+// }
 
-/**
- * Check the obj whether is undefined or not
- * @param {*} obj
- * @returns {boolean}
- */
-function isUndefined(obj) {
-  return typeof obj === 'undefined'
-}
+// /**
+//  * Check the obj whether is undefined or not
+//  * @param {*} obj
+//  * @returns {boolean}
+//  */
+// function isUndefined(obj) {
+//   return typeof obj === 'undefined'
+// }
 
-/**
- * Check the obj whether is object or not
- * @param {*} obj
- * @returns {boolean}
- */
-function isObject(obj) {
-  return typeof obj === 'object' && Object.prototype.toString.call(obj) === '[object Object]'
-}
+// /**
+//  * Check the obj whether is object or not
+//  * @param {*} obj
+//  * @returns {boolean}
+//  */
+// function isObject(obj) {
+//   return typeof obj === 'object' && Object.prototype.toString.call(obj) === '[object Object]'
+// }
 //获取从0到len-1的递增的所有元素的数组
 function getArr(len) {
   return Array.apply(null, Array(len)).map(function(item, i) {

@@ -14,6 +14,9 @@
         "src/common/MyLayer.js",
         "src/common/MyScene.js",
         "src/Layer01.js",
+        "src/Layer02.js",
+        "src/Layer03.js",
+        "src/Layer04.js",
         "src/StartScene.js"
     ]
 }

@@ -1,4 +1,4 @@
-var Layer01 = MyLayer.extend({
+var Layer02 = MyLayer.extend({
   onEnter: function() {
     this._super()
     this.fix_height = 180 / fix - 180
@@ -17,9 +17,9 @@ var Layer01 = MyLayer.extend({
 
     var sprs = this.sprites(gameData.layer01_data, true)
 
-    var hand = this.getChildByTag(1001)
-    hand.frame([res.hand, res.handclick], 0.4, 2)
-    this.scheduleOnce(function() {hand.runAction(cc.fadeOut(1))}, 1.6)
+    this.getChildByTag(1001).opacity = 0
+    // hand.frame([res.hand, res.handclick], 0.4, 2)
+    // this.scheduleOnce(function() {hand.runAction(cc.fadeOut(1))}, 1.6)
 
     this.numArr = []
 
@@ -59,7 +59,6 @@ var Layer01 = MyLayer.extend({
     var beizi = this.getChildByTag(1002)
     beizi.clickEvent(
       function(target) {
-        hand.removeFromParent()
         target.runAction(cc.moveBy(1.5, 0, 250))
         return true
       },

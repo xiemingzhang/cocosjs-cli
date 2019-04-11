@@ -15,7 +15,22 @@ var updata = {
   finish_time: 0// 时长
 }
 
-var textArr = []
+var textArr = ['',
+      '下一页：导入环节2/2',
+      '下一页：欣赏故事1/7',
+      '下一页：欣赏故事2/7',
+      '下一页：欣赏故事3/7',
+      '下一页：欣赏故事4/7',
+      '下一页：欣赏故事5/7',
+      '下一页：欣赏故事6/7',
+      '下一页：欣赏故事7/7',
+      '下一页：回忆巩固1/5',
+      '下一页：回忆巩固2/5',
+      '下一页：回忆巩固3/5',
+      '下一页：回忆巩固4/5',
+      '下一页：回忆巩固5/5',
+      '下一页：总结结束1/1'
+    ]
 // 生成精灵随机ID
 var idArr = []
 var getID = function() {
@@ -27,85 +42,75 @@ var getID = function() {
 function getData() {
   var size = cc.winSize
   return {
-    layer09_data: [
-      // {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.dashu3, pos: [-115, -115], rotation: 0, zindex: 4, scale: [1, 1], opacity: 0},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.niao1, pos: [162, 445], rotation: 0, zindex: 4, scale: [1, 1], opacity: 0},
-      // {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.niao1, pos: [1029, 405], rotation: 0, zindex: 4, scale: [-1, 1], opacity: 255},
-      // {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.niao3, pos: [1406, 762], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
-      // {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.youniao1, pos: [693 - 15, 761 + 70], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
-      // {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.youniao1, pos: [782 - 15, 761 + 70], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255}
+    layer02: [
+      {id: getID(), chorPoint: [1, 0.5], sprUrl: res.talk1, pos: [252, 215], rotation: 0, zindex: 4, scale: [0, 0], opacity: 255},
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.miya1, pos: [1349, 98], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
+      // {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.shadow, pos: [1350, 57], rotation: 0, zindex: 3, scale: [1, 1], opacity: 255},
     ],
-    layer11_data: [
-      {id: getID(), chorPoint: [0.5, 0.75], offset:[0, -1/5], sprUrl: res.dashu3, pos: [0, 0], rotation: 0, zindex: 3, scale: [1.4, 1.4], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.niao1, pos: [210, 606], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.niao1, pos: [1354, 160], rotation: 0, zindex: 4, scale: [-1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.youniao1, pos: [987 - 280, 420], rotation: 0, zindex: 3, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.youniao1, pos: [1104 - 280, 420], rotation: 0, zindex: 3, scale: [1, 1], opacity: 255}
+    layer03: [
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.wenzi0_1, pos: [200, 915], rotation: 0, zindex: 4, scale: [1, 1], opacity: 0},
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.wenzi0_2, pos: [110, 855], rotation: 0, zindex: 4, scale: [1, 1], opacity: 0},
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.zhi_tao, pos: [1597, 732], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.zhi_shu, pos: [1597, 560], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.zhi_xia, pos: [1597, 391], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.zhi_de, pos: [1601, 224], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.zhi_xiao, pos: [1427, 693], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.zhi_bai, pos: [1405, 533], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.zhi_tu, pos: [1428, 366], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
     ],
-    layer13_data: [
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.yun, pos: [166 + 300, 540 + 100], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0, 0], offset:[-1/3, -1/5], sprUrl: res.dashu1, pos: [0, 0], rotation: 0, zindex: 6, scale: [2.5, 2.5], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [186, 258], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [81, 107], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [530, 53], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [432, 286], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [551, 220], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [799, 284], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [1236, 218], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [1520, 131], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [1553, 298], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [1724, 215], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255}
+    layer04: [
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.wenzi1, pos: [1049, 866], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
     ],
-    layer15_data: [
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.yun, pos: [166 + 300, 540 + 100], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0], sprUrl: res.dashu3, pos: [0, -170], rotation: 0, zindex: 7, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0, 0], sprUrl: res.youniao1, pos: [793, 771], rotation: 0, zindex: 7, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0, 0], sprUrl: res.youniao1, pos: [882, 771], rotation: 0, zindex: 7, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0, 0], sprUrl: res.niao1, pos: [162, 445], rotation: 0, zindex: 7, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.niao1, pos: [1029, 405], rotation: 0, zindex: 7, scale: [-1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0, 0], sprUrl: res.dashuye, pos: [99, 195], rotation: 0, zindex: 6, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0, 0], sprUrl: res.dashuye, pos: [289, 75], rotation: 0, zindex: 6, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0, 0], sprUrl: res.dashuye, pos: [290, 217], rotation: 0, zindex: 6, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0, 0], sprUrl: res.dashuye, pos: [487, 173], rotation: 0, zindex: 6, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0, 0], sprUrl: res.dashuye, pos: [707, 223], rotation: 0, zindex: 6, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0, 0], sprUrl: res.dashuye, pos: [1267, 153], rotation: 0, zindex: 6, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0, 0], sprUrl: res.dashuye, pos: [1340, 277], rotation: 0, zindex: 6, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0, 0], sprUrl: res.dashuye, pos: [1549, 95], rotation: 0, zindex: 6, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0, 0], sprUrl: res.dashuye, pos: [1753, 246], rotation: 0, zindex: 6, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [186, 258], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [81, 107], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [530, 53], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [432, 286], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [551, 220], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [799, 284], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [1236, 218], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [1520, 131], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [1553, 298], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [1724, 215], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255}
+    layer05: [
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.wenzi2, pos: [295, 818], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
     ],
-    layer17_data: [
-      {id: getID(), chorPoint: [0.5, 0.75], offset:[0, -1/5], sprUrl: res.dashu3, pos: [0, 0], rotation: 0, zindex: 3, scale: [1.4, 1.4], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.niao6, pos: [403 - 280, 591 - 110], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.youniao1, pos: [987 - 280, 420], rotation: 0, zindex: 3, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.youniao1, pos: [1104 - 280, 420], rotation: 0, zindex: 3, scale: [1, 1], opacity: 255}
+    layer06: [
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.wenzi3, pos: [257, 731], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
     ],
-    layer19_data: [
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.dashu3, pos: [-115, -115], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.niao1, pos: [162, 445], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.niao1, pos: [1029, 405], rotation: 0, zindex: 4, scale: [-1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.niao3, pos: [1406, 762], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.youniao1, pos: [693 - 15, 761 + 70], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.youniao1, pos: [782 - 15, 761 + 70], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [186, 258], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [81, 107], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [530, 53], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [432, 286], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [551, 220], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [799, 284], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [1236, 218], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [1520, 131], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [1553, 298], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255},
-      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.cao1, pos: [1724, 215], rotation: 0, zindex: 5, scale: [1, 1], opacity: 255}
+    layer07: [
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.wenzi4, pos: [268, 848], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
+    ],
+    layer08: [
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.wenzi5, pos: [238, 706], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
+    ],
+    layer09: [
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.wenzi6, pos: [100, 794], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
+    ],
+    layer10: [
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.wenzi7, pos: [717, 856], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
+    ],
+    layer11: [
+      {id: getID(), chorPoint: [1, 0.5], sprUrl: res.talk2, pos: [252, 306], rotation: 0, zindex: 3, scale: [0, 0], opacity: 255},
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.miya3, pos: [1122, 154], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.shadow, pos: [1212, 108], rotation: 0, zindex: 3, scale: [1, 1], opacity: 255},
+    ],
+    layer12: [
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.gl_yang, pos: [0, 0], rotation: 0, zindex: 3, scale: [1, 1], opacity: 0},
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.gl_mao, pos: [0, 0], rotation: 0, zindex: 3, scale: [1, 1], opacity: 0},
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.gl_songshu, pos: [0, 0], rotation: 0, zindex: 3, scale: [1, 1], opacity: 0},
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.gl_tuzhi, pos: [0, 0], rotation: 0, zindex: 3, scale: [1, 1], opacity: 0},
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.wenzi8, pos: [742, 859], rotation: 0, zindex: 3, scale: [1, 1], opacity: 255},
+    ],
+    layer13: [
+      {id: getID(), chorPoint: [1, 0.5], sprUrl: res.talk3, pos: [252, 306], rotation: 0, zindex: 3, scale: [0, 0], opacity: 255},
+      {id: getID(), chorPoint: [1, 0.5], sprUrl: res.miya3, pos: [1121, 154], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
+      {id: getID(), chorPoint: [1, 0.5], sprUrl: res.shadow, pos: [1212, 108], rotation: 0, zindex: 3, scale: [1, 1], opacity: 255},
+    ],
+    layer14: [
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.img1, pos: [321, 559], rotation: 0, zindex: 3, scale: [0, 0], opacity: 255},
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.img2, pos: [1159, 559], rotation: 0, zindex: 3, scale: [0, 0], opacity: 255},
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.img4, pos: [321, 64], rotation: 0, zindex: 3, scale: [0, 0], opacity: 255},
+      {id: getID(), chorPoint: [0.5, 0.5], sprUrl: res.img3, pos: [1159, 64], rotation: 0, zindex: 3, scale: [0, 0], opacity: 255},
+    ],
+    layer15: [
+      {id: getID(), chorPoint: [1, 0.5], sprUrl: res.talk4, pos: [252, 306], rotation: 0, zindex: 3, scale: [0, 0], opacity: 255},
+      {id: getID(), chorPoint: [1, 0.5], sprUrl: res.miya3, pos: [1121, 154], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
+      {id: getID(), chorPoint: [1, 0.5], sprUrl: res.shadow, pos: [1212, 108], rotation: 0, zindex: 3, scale: [1, 1], opacity: 255},
+    ],
+    layer16: [
+      {id: getID(), chorPoint: [1, 0.5], sprUrl: res.talk6, pos: [252, 306], rotation: 0, zindex: 3, scale: [0, 0], opacity: 255},
+      {id: getID(), chorPoint: [1, 0.5], sprUrl: res.miya3, pos: [1121, 154], rotation: 0, zindex: 4, scale: [1, 1], opacity: 255},
+      {id: getID(), chorPoint: [1, 0.5], sprUrl: res.shadow, pos: [1212, 108], rotation: 0, zindex: 3, scale: [1, 1], opacity: 255},
     ]
   }
 }

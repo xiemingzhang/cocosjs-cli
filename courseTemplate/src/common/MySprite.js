@@ -48,7 +48,7 @@ var MySprite = cc.Sprite.extend({
     var action1 = cc.scaleBy(time, multiple)
     var action3 = cc.scaleBy(time, 1 / multiple)
     var action = cc.sequence(action1, action3)
-    if(re == 0){
+    if(!re){
       this.runAction(action.repeatForever())
     }else{
       this.runAction(action.repeat(re))

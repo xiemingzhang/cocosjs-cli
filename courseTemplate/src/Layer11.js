@@ -1,7 +1,11 @@
 var Layer11 = MyLayer.extend({
+  ctor: function(){
+    this._super(cc.color(255,255,255,255))
+  },
   onEnter: function() {
     this._super()
     var size = cc.winSize
+
     this.scheduleOnce(this.onStart, 1)
 
     var bg = new cc.Sprite(res.bg1)
@@ -9,43 +13,21 @@ var Layer11 = MyLayer.extend({
     bg.setPosition({x: size.width / 2, y: size.height / 2})
     this.addChild(bg)
 
-    // this.btn = this.createBtn('下一页：分句欣赏8/18')
-
-    // var clip = new cc.LayerColor(cc.color(0, 0, 0), 1920, 1080)
-    // clip.setAnchorPoint(0, 0)
-    // clip.setScale(1)
-    // clip.setPosition(0, 0)
-
-    // var mask = new cc.ClippingNode(clip)
-    // mask.setAnchorPoint(0, 0)
-    // this.addChild(mask, 12)
-    // mask.addChild(bg)
-
-    this.sprs = this.sprites(gameData.layer11_data, true)
-    // this.sprs.forEach(function(item){
-    //   mask.addChild(item, item.data.zindex)
-    // })
+    this.createBtn(textArr[10])
+    this.sprs = this.sprites(gameData.layer11, true)
   },
   onStart: function(num) {
-    num !== 1 && sound.s11_sound()
+    sound.s11_sound()
     var self = this
     var sprs = this.sprs
 
-    sprs[1].frame([res.niao2, res.niao1], 0.5, 0)
-    sprs[1].runAction(cc.moveBy(6, 1300, 0))
-    sprs[2].frame([res.niao2, res.niao1], 0.45, 0)
-    sprs[2].runAction(cc.moveBy(6, -1000, 0))
-
-    sprs[3].frame([res.youniao1, res.youniao2], 0.45, 0)
-    sprs[4].frame([res.youniao1, res.youniao2], 0.47, 0)
+    sprs[1].frame([res.miya4, res.miya3], 0.5, 0)
+    sprs[0].runAction(cc.scaleTo(1, 1))
 
     this.scheduleOnce(function() {
       sprs[1].stopAllActions()
-      sprs[2].stopAllActions()
-      sprs[3].stopAllActions()
-      sprs[4].stopAllActions()
       this.next()
-    }, 7)
+    }, 5)
   }
   // update: function (dt) {
 

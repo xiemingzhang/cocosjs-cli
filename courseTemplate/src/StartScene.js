@@ -20,7 +20,7 @@ var StartScene = cc.Scene.extend({
     var size = cc.winSize
 
     // sound.gameBgAudio()
-    this._layerArr = [Layer09]
+    this._layerArr = [Layer01]
     // this._layerArr = [[Layer09], [Layer11, Layer13], [Layer15, Layer17], [Layer19]]
     this.layerArr = this.doArr(this._layerArr)
     // this.randomArr = shuffle([0])

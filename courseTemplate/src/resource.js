@@ -1,1 +1,26 @@
-var res = {    // 公共声音    Right_audio: 'common/audios/right.mp3',    Wrong_audio: 'common/audios/wrong.mp3',    Win_audio: 'common/audios/celebration.mp3',    Star_audio: 'common/audios/star.mp3',    Button_audio: 'common/audios/button.mp3',    // 公共图片    // bar_plist: 'common/imgs/bar.plist',    // color_bar: 'common/imgs/color_bar.png',    Back: 'common/imgs/back.png',    BlackStar: 'common/imgs/shape.png',    FlyStar: 'common/imgs/flay-star.png',    LightStar: 'common/imgs/light-star.png',    ResultBg: 'common/imgs/result-image-bg.png',    hand: 'common/imgs/hand.png',    handclick: 'common/imgs/handclick.png',    sound: 'common/imgs/sound_button.png',    button_green: 'common/imgs/button_green.png',    button_next: 'common/imgs/button_next.png',    star_finish: 'common/imgs/star_finish.png',//source图片bg1: 'source/bg1.png',bg2: 'source/bg2.png',cao1: 'source/cao1.png',cao2: 'source/cao2.png',cao3: 'source/cao3.png',cao4: 'source/cao4.png',dashu1: 'source/dashu1.png',dashu2: 'source/dashu2.png',dashu3: 'source/dashu3.png',dashu4: 'source/dashu4.png',dashuye: 'source/dashuye.png',img1: 'source/img1.png',img2: 'source/img2.png',img3: 'source/img3.png',img4: 'source/img4.png',img5: 'source/img5.png',img6: 'source/img6.png',niao1: 'source/niao1.png',niao2: 'source/niao2.png',niao3: 'source/niao3.png',niao4: 'source/niao4.png',niao5: 'source/niao5.png',niao6: 'source/niao6.png',youniao1: 'source/youniao1.png',youniao2: 'source/youniao2.png',youniao3: 'source/youniao3.png',youniao4: 'source/youniao4.png',yun: 'source/yun.png',//source声音s11_sound: 'audio/s11.mp3',s13_sound: 'audio/s13.mp3',s15_sound: 'audio/s15.mp3',s17_sound: 'audio/s17.mp3',s19_sound: 'audio/s19.mp3',s9_sound: 'audio/s9.mp3'}/* 预加载资源*/  var g_resources = []  for (var i in res) {    g_resources.push(res[i])  }
+var res = {
+    // 公共声音
+    Right_audio: 'common/audios/right.mp3',
+    Wrong_audio: 'common/audios/wrong.mp3',
+    Win_audio: 'common/audios/celebration.mp3',
+    Star_audio: 'common/audios/star.mp3',
+    Button_audio: 'common/audios/button.mp3',
+
+    // 公共图片
+    // bar_plist: 'common/imgs/bar.plist',
+    // color_bar: 'common/imgs/color_bar.png',
+    Back: 'common/imgs/back.png',
+    BlackStar: 'common/imgs/shape.png',
+    FlyStar: 'common/imgs/flay-star.png',
+    LightStar: 'common/imgs/light-star.png',
+    ResultBg: 'common/imgs/result-image-bg.png',
+    hand: 'common/imgs/hand.png',
+    handclick: 'common/imgs/handclick.png',
+    sound: 'common/imgs/sound_button.png',
+    button_green: 'common/imgs/button_green.png',
+    button_next: 'common/imgs/button_next.png',
+    star_finish: 'common/imgs/star_finish.png',//source图片bg1: 'source/bg1.png',bg2: 'source/bg2.png',bg3: 'source/bg3.png',bg4: 'source/bg4.png',bg6: 'source/bg6.png',bg7: 'source/bg7.png',bg8: 'source/bg8.png',bg9: 'source/bg9.png',blackboard: 'source/blackboard.png',gl_mao: 'source/gl_mao.png',gl_songshu: 'source/gl_songshu.png',gl_tuzhi: 'source/gl_tuzhi.png',gl_yang: 'source/gl_yang.png',img1: 'source/img1.png',img2: 'source/img2.png',img3: 'source/img3.png',img4: 'source/img4.png',miya1: 'source/miya1.png',miya2: 'source/miya2.png',miya3: 'source/miya3.png',miya4: 'source/miya4.png',shadow: 'source/shadow.png',talk1: 'source/talk1.png',talk2: 'source/talk2.png',talk3: 'source/talk3.png',talk4: 'source/talk4.png',talk5: 'source/talk5.png',talk6: 'source/talk6.png',wenzi0: 'source/wenzi0.png',wenzi1: 'source/wenzi1.png',wenzi2: 'source/wenzi2.png',wenzi3: 'source/wenzi3.png',wenzi4: 'source/wenzi4.png',wenzi5: 'source/wenzi5.png',wenzi6: 'source/wenzi6.png',wenzi7: 'source/wenzi7.png',wenzi8: 'source/wenzi8.png',zhi_bai: 'source/zhi_bai.png',zhi_de: 'source/zhi_de.png',zhi_shu: 'source/zhi_shu.png',zhi_tao: 'source/zhi_tao.png',zhi_tu: 'source/zhi_tu.png',zhi_xia: 'source/zhi_xia.png',zhi_xiao: 'source/zhi_xiao.png',桃树下的小白兔01: 'source/桃树下的小白兔01.png',//source声音s10_sound: 'audio/s10.mp3',s11_sound: 'audio/s11.mp3',s12_sound: 'audio/s12.mp3',s13_sound: 'audio/s13.mp3',s14_sound: 'audio/s14.mp3',s15_sound: 'audio/s15.mp3',s16_sound: 'audio/s16.mp3',s2_sound: 'audio/s2.mp3',s3_sound: 'audio/s3.mp3',s4_sound: 'audio/s4.mp3',s5_sound: 'audio/s5.mp3',s6_sound: 'audio/s6.mp3',s7_sound: 'audio/s7.mp3',s8_sound: 'audio/s8.mp3',s9_sound: 'audio/s9.mp3'}/* 预加载资源*/
+  var g_resources = []
+  for (var i in res) {
+    g_resources.push(res[i])
+  }

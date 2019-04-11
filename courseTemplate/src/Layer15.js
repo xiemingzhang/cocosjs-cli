@@ -6,37 +6,89 @@ var Layer15 = MyLayer.extend({
     var self = this
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.bg1)
-    bg.setAnchorPoint(0, 0.5)
-    bg.setPosition({x: 0, y: size.height / 2})
+    var bg = new cc.Sprite(res.bg2)
+    bg.setAnchorPoint(0.5, 0.5)
+    bg.setPosition({x: size.width / 2, y: size.height / 2})
     this.addChild(bg)
 
-    this.createBtn('下一页：整体与部分14/15')
+    // this.btn = this.createBtn('下一页：分句欣赏12/18')
+    // var clip = new cc.LayerColor(cc.color(0, 0, 0), 1920, 1080)
+    // clip.setAnchorPoint(0, 0)
+    // clip.setScale(1)
+    // clip.setPosition(0, 0)
+
+    // var mask = new cc.ClippingNode(clip)
+    // mask.setAnchorPoint(0, 0)
+    // this.addChild(mask, 12)
+    // mask.addChild(bg)
+
     this.sprs = this.sprites(gameData.layer15_data, true)
+    // this.sprs.forEach(function(item){
+    //   mask.addChild(item, item.data.zindex)
+    // })
+
+    this.sprs.forEach(function(item, index){
+      if(index > 5 && index < 15){
+        item.y = 635
+      }
+    })
   },
-  onStart: function(){
-    // sound.s15_sound()
+  onStart: function(num){
+    num !== 1 && sound.s15_sound()
     var self = this
     var sprs = this.sprs
 
-    var left = new cc.ProgressTimer(new cc.Sprite(res.wenzi14))
-    left.setAnchorPoint(0, 0)
-    left.type = cc.ProgressTimer.TYPE_BAR
-    //    Setup for a bar starting from the bottom since the midpoint is 0 for the y
-    left.midPoint = cc.p(0, 1)
-    //    Setup for a vertical bar since the bar change rate is 0 for x meaning no horizontal change
-    left.barChangeRate = cc.p(1, 0)
-    left.x = 575
-    left.y = 910
-    this.addChild(left, 5)
-    left.runAction(cc.progressTo(6, 100))
+    sprs[0].runAction(cc.moveBy(18, -800, 0))
 
-    sprs[0].frame([res.miya1, res.miya2], 0.5, 0)
+    sprs.forEach(function(item, index){
+      var r = getNum(4, 6)
+      var dy = 635 - item.data.pos[1]
+      var _x = item.x
+      var _y = item.y
+      if(index > 5 && index < 15){
+        item.runAction(cc.cardinalSplineTo(r, [cc.p(_x, _y), cc.p(_x-25, _y-dy/4), cc.p(_x-50, _y-dy/2), cc.p(_x-50, _y-dy/4*3), cc.p(_x-25, _y-dy)], 0))
+      }
+    })
+
+    sprs.forEach(function(item, index){
+      if(index > 14){
+        item.frame([res.cao2, res.cao1], getNum(8, 11) / 10 , 0)
+      }
+    })
+
+    sprs[2].frame([res.youniao1, res.youniao2], 0.45, 0)
+    sprs[3].frame([res.youniao1, res.youniao2], 0.47, 0)
+
+    sprs[4].frame([res.niao2, res.niao1], 0.5, 0)
+    sprs[4].runAction(cc.moveBy(9, 1300, 0))
+    sprs[5].frame([res.niao2, res.niao1], 0.45, 0)
+    sprs[5].runAction(cc.moveBy(9, -1000, 0))
+
+    this.scheduleOnce(function(){
+      sprs[2].runAction(cc.sequence(
+        cc.moveBy(0.6, -30, 0),
+        cc.moveBy(1.2, 60, 0),
+        cc.moveBy(0.6, -30, 0)
+      ))
+      sprs[3].runAction(cc.sequence(
+        cc.moveBy(0.6, -30, 0),
+        cc.moveBy(1.2, 60, 0),
+        cc.moveBy(0.6, -30, 0)
+      ))
+      sprs[1].runAction(cc.sequence(
+        cc.rotateBy(0.6, -1.5),
+        cc.rotateBy(1.2, 3),
+        cc.rotateBy(0.6, -1.5)
+      ).repeat(1))
+    },3)
 
     this.scheduleOnce(function() {
-      sprs[0].stopAllActions()
+      sprs[2].stopAllActions()
+      sprs[3].stopAllActions()
+      sprs[4].stopAllActions()
+      sprs[5].stopAllActions()
       this.next()
-    }, 7)
+    }, 9)
   }
   // update: function (dt) {
 

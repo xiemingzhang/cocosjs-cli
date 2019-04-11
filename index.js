@@ -398,6 +398,12 @@ function createAudio(name){
     stopAllEffects: function () {
       cc.audioEngine.stopAllEffects()
     },
+    voice: function (voice) {
+      cc.audioEngine.playEffect(voice)
+    },
+    voiceTrue: function (voice) {
+      cc.audioEngine.playEffect(voice, true)
+    },
     // 个性
     gameBgAudio: function () {// 背景
       cc.audioEngine.playMusic(res.bgm_happyday_sound, true)

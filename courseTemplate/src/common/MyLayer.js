@@ -3,36 +3,36 @@ var MyLayer = cc.LayerColor.extend({
   // ctor: function(){
   //   this._super()
   // },
-  onEnter: function () {
+  onEnter: function() {
     this._super()
     var self = this
     // cc.log("onEnter");
     // this.listenerArr = []
     this._listener = cc.EventListener.create({
       event: cc.EventListener.KEYBOARD,
-      onKeyPressed: function (keyCode, event) {
+      onKeyPressed: function(keyCode, event) {
         cc.log(keyCode)
-        if(keyCode === 32){
+        if(keyCode === 32) {
           sound.stopAllEffects()
           // cc.log("kongge")
-          if(!self._go){
+          if(!self._go) {
             cc.director.pause()
           }else{
             cc.director.resume()
           }
           self._go = !self._go
         }
-        if(keyCode === 39){
+        if(keyCode === 39) {
           // cc.log("xiayiye")
-          if(!self._nextPage){
+          if(!self._nextPage) {
             sound.stopAllEffects()
             self.next()
           }
           self._nextPage = true
         }
-        if(keyCode === 37){ 
+        if(keyCode === 37) {
           // cc.log("shangyiye")
-          if(!self._prePage){
+          if(!self._prePage) {
             sound.stopAllEffects()
             self.pre()
           }
@@ -40,17 +40,36 @@ var MyLayer = cc.LayerColor.extend({
         }
         // return true
       },
-      onKeyReleased: function (keyCode, event) {
-        cc.log("up")
+      onKeyReleased: function(keyCode, event) {
+        cc.log('up')
       }
     })
     // 添加监听器到管理器
     cc.eventManager.addListener(this._listener, this)
   },
-  onExit: function () {
+  onExit: function() {
     this._super()
     // cc.log("onExit");
     // cc.eventManager.removeListeners(cc.EventListener.KEYBOARD)
+  },
+  sprites: function(sp, bool) {
+    var sprite = []
+    var len = sp.length
+    for (var i = 0; i < len; i++) {
+      sprite[i] = new MySprite(sp[i].sprUrl)
+      sprite[i].setAnchorPoint(sp[i].chorPoint[0], sp[i].chorPoint[1])
+      sprite[i].setOpacity(sp[i].opacity)
+      sprite[i].setScale(sp[i].scale[0] * fix, sp[i].scale[1] * fix)
+      sprite[i].setRotation(sp[i].rotation)
+      sprite[i].setPosition(sp[i].pos[0] * fix + sprite[i].width * fix * sp[i].chorPoint[0] + (sp[i].offset ? sprite[i].width * fix * sp[i].offset[0] : 0), sp[i].pos[1] * fix + sprite[i].height * fix * sp[i].chorPoint[1] + (sp[i].offset ? sprite[i].height * fix * sp[i].offset[1] : 0) + (sp[i].dY ? sp[i].dY : 0))
+      sprite[i].data = sp[i]
+      sprite[i].id = sp[i].id
+      sprite[i].zindex = sp[i].zindex
+      if(bool) {
+        this.addChild(sprite[i], sprite[i].zindex, sprite[i].id)
+      }
+    }
+    return sprite
   },
   // addSoundButton: function(spr){
   //   // var horn = this.createSprite(res.sound, 1 / 3 * fix, [0, 0], {x: 15, y: 15})
@@ -86,8 +105,8 @@ var MyLayer = cc.LayerColor.extend({
   //   this.addChild(hander, 6)
   //   return hander
   // },
-  //截屏 使用时注意start_x start_y需要用getBoundingBox()获得,防止锚点不是精灵的左下角
-  capture: function(start_x, start_y, width, height){
+  // 截屏 使用时注意start_x start_y需要用getBoundingBox()获得,防止锚点不是精灵的左下角
+  capture: function(start_x, start_y, width, height) {
     var size = cc.winSize
     var renderText = new cc.RenderTexture(size.width, size.height)
     renderText.begin()
@@ -102,8 +121,8 @@ var MyLayer = cc.LayerColor.extend({
     this.addChild(_screen, 10)
     return _screen
   },
-  drawLine: function(ponitArr, lineWidth, colorArr){
-    if(colorArr){
+  drawLine: function(ponitArr, lineWidth, colorArr) {
+    if(colorArr) {
       var color = colorArr
     }else{
       var color = [0, 0, 0]
@@ -115,19 +134,19 @@ var MyLayer = cc.LayerColor.extend({
     this.addChild(drawNode, 11)
     return drawNode
   },
-  drawRect: function(rect){
+  drawRect: function(rect) {
     var p1 = cc.p(rect.x, rect.y)
     var p2 = cc.p(rect.x + rect.width, rect.y + rect.height)
     var Rect = new cc.DrawNode()
     Rect.drawRect(p1, p2, cc.color.BLUE, 1, cc.color.BLACK)
     this.addChild(Rect, 11)
   },
-  circleMove: function(spr){
+  circleMove: function(spr) {
     spr.angle += 1
-    if(spr.angle >= 360){
+    if(spr.angle >= 360) {
       spr.angle = 0
     }
-    if(spr.angle >= 270 && spr.angle <= 360){
+    if(spr.angle >= 270 && spr.angle <= 360) {
       var _angle = ((360 - spr.angle) / 2) * (Math.PI / 180)
       var r = this.r
       var y = 2 * r * Math.sin(_angle) * Math.cos(_angle)
@@ -151,73 +170,33 @@ var MyLayer = cc.LayerColor.extend({
   //   })
   //   cc.eventManager.addListener(this.listenerArr[LnerName - 1000], sprite)
   // },
-  getAngle: function(ponit1, point2){
+  getAngle: function(ponit1, point2) {
     var angle = -Math.atan2(point2.y - ponit1.y, point2.x - ponit1.x) * 180 / Math.PI
     return angle
   },
-  getDistance: function(ponit1, point2){
+  getDistance: function(ponit1, point2) {
     return Math.sqrt(Math.pow((ponit1.x - point2.x), 2) + Math.pow((ponit1.y - point2.y), 2))
   },
-  createSprite: function (path, scale, anchor, pos, z) {
-    var sprite = new MySprite(path)
-    sprite.setScale(scale)
-    sprite.setAnchorPoint(anchor[0], anchor[1])
-    sprite.setPosition(pos[0], pos[1])
-    sprite.setLocalZOrder(z ? z : 1)
-    this.addChild(sprite)
-    return sprite
-  },
-  sprites: function (sp, bool) {
-    var sprite = []
-    var len = sp.length
-    for (var i = 0; i < len; i++) {
-      sprite[i] = new MySprite(sp[i].sprUrl)
-      sprite[i].setAnchorPoint(sp[i].chorPoint[0], sp[i].chorPoint[1])
-      sprite[i].setOpacity(sp[i].opacity)
-      sprite[i].setScale(sp[i].scale[0] * fix, sp[i].scale[1] * fix)
-      sprite[i].setRotation(sp[i].rotation)
-      sprite[i].setPosition(sp[i].pos[0] * fix + sprite[i].width * sp[i].chorPoint[0] + (sp[i].offset ? sprite[i].width * sp[i].offset[0] : 0), sp[i].pos[1] * fix + sprite[i].height * sp[i].chorPoint[1] + (sp[i].offset ? sprite[i].height * sp[i].offset[1] : 0) + (sp[i].dY ? sp[i].dY : 0))
-      sprite[i].data = sp[i]
-      sprite[i].id = sp[i].id
-      sprite[i].zindex = sp[i].zindex
-      if(bool){
-        this.addChild(sprite[i], sprite[i].zindex, sprite[i].id)
-      }
-    }
-    return sprite
-  },
-  right: function(){
-    this.getParent().right()
-  },
-  wrong: function(){
-    this.getParent().wrong()
-  },
-  finish: function(){
-    this.getParent().finish()
-  },
-  next: function(t, n){
-    if(this.hornListener){
-      cc.eventManager.removeListener(this.hornListener)
-    }
-    this.getParent().nextLayer(this, t, n)
-  },
-  pre: function(t, n){
-    if(this.hornListener){
-      cc.eventManager.removeListener(this.hornListener)
-    }
-    this.getParent().preLayer(this, t, n)
-  },
-  becomeFalse: function(t) {
-    if(t){
-      // setTimeout(function(){this.move = false}.bind(this), t)
-      this.scheduleOnce(function(){
-        this.move = false
-      }, t)
-    }else{
-      this.move = false
-    }
-  },
-  colorBar: function(){
+  // createSprite: function (path, scale, anchor, pos, z) {
+  //   var sprite = new MySprite(path)
+  //   sprite.setScale(scale)
+  //   sprite.setAnchorPoint(anchor[0], anchor[1])
+  //   sprite.setPosition(pos[0], pos[1])
+  //   sprite.setLocalZOrder(z ? z : 1)
+  //   this.addChild(sprite)
+  //   return sprite
+  // },
+  // becomeFalse: function(t) {
+  //   if(t){
+  //     // setTimeout(function(){this.move = false}.bind(this), t)
+  //     this.scheduleOnce(function(){
+  //       this.move = false
+  //     }, t)
+  //   }else{
+  //     this.move = false
+  //   }
+  // },
+  colorBar: function() {
     var size = cc.director.getWinSize()
     var colorBar = new cc.ParticleSystem(res.bar_plist)
     colorBar.texture = cc.textureCache.addImage(res.color_bar)
@@ -226,8 +205,8 @@ var MyLayer = cc.LayerColor.extend({
     colorBar.setDuration(3)
     this.addChild(colorBar, 11)
   },
-  boomStar: function(x, y){
-    //星星
+  boomStar: function(x, y) {
+    // 星星
     // var particleSystem = new cc.ParticleSystem(res.star_plist)
     // particleSystem.x = 368 * fix
     // particleSystem.y = 268 * fix
@@ -253,15 +232,15 @@ var MyLayer = cc.LayerColor.extend({
     this.addChild(rainParticle)
   },
   // removeListeners
-  reListen: function(){
-    cc.eventManager.removeAllListeners()
-    // 返回游戏列表
-    this.getParent().starLayer.gameClose()
-  },
-  createBtn: function(name, fontSize){
+  // removeAllListeners: function(){
+  //   cc.eventManager.removeAllListeners()
+  // 返回游戏列表
+  // this.getParent().starLayer.gameClose()
+  // },
+  createBtn: function(name, fontSize) {
     var size = cc.winSize
-    if(fontSize){
-      var _fontSize = fontSize 
+    if(fontSize) {
+      var _fontSize = fontSize
     }else{
       var _fontSize = 40
     }
@@ -279,6 +258,51 @@ var MyLayer = cc.LayerColor.extend({
     box.addChild(word, 1)
 
     return box
+  },
+  right: function() {
+    this.getParent().right()
+  },
+  wrong: function() {
+    this.getParent().wrong()
+  },
+  finish: function() {
+    this.getParent().finish()
+  },
+  next: function(t, n) {
+    if(this.hornListener) {
+      cc.eventManager.removeListener(this.hornListener)
+    }
+    this.getParent().nextLayer(this, t, n)
+  },
+  pre: function(t, n) {
+    if(this.hornListener) {
+      cc.eventManager.removeListener(this.hornListener)
+    }
+    this.getParent().preLayer(this, t, n)
+  },
+  getRandomNum: function(min, max) {
+    var x, d
+    if(max > min) {
+      x = min
+      d = max
+    }else{
+      x = max
+      d = min
+    }
+    return ~~(Math.random() * (d - x + 1)) + x
+  },
+  shuffleArr: function(arr) {
+    var len = arr.length
+    if(len <= 1) {
+      return
+    }
+    return arr.sort(function(a, b) {
+      return Math.random() - 0.5
+    })
+  },
+  getRandomOne: function(arr) {
+    var len = arr.length
+    return arr[~~(Math.random() * len)]
   }
 })
 

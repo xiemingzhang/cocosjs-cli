@@ -4,36 +4,27 @@ var StartScene = cc.Scene.extend({
 
     // sound.bgm_happyday_sound()
     this.l = this.l ? this.l : 0
-    /* 飞星层*/
-    // this.starLayer = new StarLayer(common_data[1])
-    // this.starLayer = new StarLayer(common_data[0])
-    // this.addChild(this.starLayer, 100, 2)
-    // 返回游戏列表
-    // this.starLayer.gameClose()
-    // 返回游戏首场景
-    // this.starLayer.goBack()
+    if(cc.sys.isMobile){
+      /* 飞星层*/
+      // this.starLayer = new StarLayer(common_data[1])
+      this.starLayer = new StarLayer(common_data[0])
+      this.addChild(this.starLayer, 100, 2)
+      // 返回游戏列表
+      this.starLayer.gameClose()
+      // 返回游戏首场景
+      // this.starLayer.goBack()
+    }
   },
   onEnter: function() {
     this._super()
     var size = cc.winSize
 
     // sound.gameBgAudio()
-    // this._layerArr = [Layer02]
-    this._layerArr = [
-      [Layer01],
-      [Layer02],
-      [Layer03],
-      [Layer04],
-      [Layer05],
-      [Layer06],
-      [Layer07],
-      [Layer08],
-      [Layer09],
-      [Layer10],
-      [Layer11]]
+    this._layerArr = [Layer09]
+    // this._layerArr = [[Layer09], [Layer11, Layer13], [Layer15, Layer17], [Layer19]]
     this.layerArr = this.doArr(this._layerArr)
     // this.randomArr = shuffle([0])
-    this.randomArr = getArr(this.layerArr.length)
+    this.randomArr = util.getIncreaseArr(this.layerArr.length)
     // this.randomArr = [15]
 
     var layer = new this.layerArr[this.randomArr[this.l]]()
@@ -55,17 +46,23 @@ var StartScene = cc.Scene.extend({
     }
     return res
   },
-  reListen: function() {
-    cc.eventManager.removeAllListeners()
+  // reListen: function() {
+  //   cc.eventManager.removeAllListeners()
     // 返回游戏列表
     // this.starLayer.gameClose()
+  // },
+  wrong: function(){
+    sound.wrongAudio()
+    this.starLayer.wrongStar()
   },
   right: function() {
     // sound.stopAllEffects()
-    sound.starAudio()
-    common_data[1].obtain++
-    // this.starLayer.rightStar(common_data[1].obtain)
-    this.dataRefresh()
+    if(cc.sys.isMobile){
+      sound.starAudio()
+      common_data[1].obtain++
+      this.starLayer.rightStar(common_data[1].obtain)
+      this.dataRefresh()
+    }
   },
   nextLayer: function(self, t, n) {
     this.l++
@@ -91,7 +88,9 @@ var StartScene = cc.Scene.extend({
         }.bind(this), time)
       }
     }else{
-      // this.finish(t)
+      if(cc.sys.isMobile){
+        this.finish(t)
+      }
     }
   },
   preLayer: function(self, t, n) {
@@ -118,7 +117,7 @@ var StartScene = cc.Scene.extend({
       sound.stopAudio()
       sound.stopAllEffects()
       sound.winAudio()
-      // this.starLayer.gameEnd(common_data[0].obtain)
+      this.starLayer.gameEnd(common_data[0].obtain)
     }.bind(this), time)
   },
   dataRefresh: function() {

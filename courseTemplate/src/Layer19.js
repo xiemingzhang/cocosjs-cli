@@ -4,66 +4,50 @@ var Layer19 = MyLayer.extend({
     var size = cc.winSize
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.bg4)
-    bg.setAnchorPoint(0, 0.5)
-    bg.setPosition({x: 0, y: size.height / 2})
+    var bg = new cc.Sprite(res.bg2)
+    bg.setAnchorPoint(0.5, 0.5)
+    bg.setPosition({x: size.width / 2, y: size.height / 2})
     this.addChild(bg)
 
-    this.createBtn('下一页：课内练习4/4')
+    // this.createBtn('下一页：分句欣赏16/18')
     this.sprs = this.sprites(gameData.layer19_data, true)
   },
   onStart: function() {
-    // sound.s16_sound()
+    sound.s19_sound()
     var self = this
     var sprs = this.sprs
 
-    // sprs[0].runAction(cc.scaleTo(0.8, 1))
+    this.schedule(function() {
+      sprs[0].frame([res.dashu4, res.dashu3], 0.7, 1)
+    }, 3.8, cc.repeat(1), 1)
+
+    sprs[1].frame([res.niao2, res.niao1], 0.5, 0)
+    sprs[1].runAction(cc.moveBy(4, 1000, 0))
+    sprs[2].frame([res.niao2, res.niao1], 0.45, 0)
+    sprs[2].runAction(cc.moveBy(4, -800, 0))
+
+    this.schedule(function() {
+      sprs[3].frame([res.niao3, res.niao4], 0.45, 2)
+    }, 3.8, cc.repeat(2), 1)
+
+    sprs[4].frame([res.youniao1, res.youniao2], 0.45, 0)
+    sprs[5].frame([res.youniao1, res.youniao2], 0.47, 0)
+
+    sprs.forEach(function(item, index){
+      if(index > 5){
+        item.frame([res.cao2, res.cao1], getNum(8, 11) / 10 , 0)
+      }
+    })
 
     this.scheduleOnce(function() {
-      var left = new cc.ProgressTimer(new cc.Sprite(res.xian1))
-      left.setAnchorPoint(0, 0)
-      left.type = cc.ProgressTimer.TYPE_BAR
-      //    Setup for a bar starting from the bottom since the midpoint is 0 for the y
-      left.midPoint = cc.p(0, 1)
-      //    Setup for a vertical bar since the bar change rate is 0 for x meaning no horizontal change
-      left.barChangeRate = cc.p(1, 0)
-      left.x = 437
-      left.y = 210
-      this.addChild(left, 5)
-      left.runAction(cc.progressTo(2, 100))
-    }, 1)
-
-    this.scheduleOnce(function() {
-      var left = new cc.ProgressTimer(new cc.Sprite(res.xian2))
-      left.setAnchorPoint(0, 0)
-      left.type = cc.ProgressTimer.TYPE_BAR
-      //    Setup for a bar starting from the bottom since the midpoint is 0 for the y
-      left.midPoint = cc.p(1, 0)
-      //    Setup for a vertical bar since the bar change rate is 0 for x meaning no horizontal change
-      left.barChangeRate = cc.p(1, 0)
-      left.x = 435
-      left.y = 284
-      this.addChild(left, 5)
-      left.runAction(cc.progressTo(1.5, 100))
-    }, 3)
-
-    this.scheduleOnce(function() {
-      var left = new cc.ProgressTimer(new cc.Sprite(res.xian3))
-      left.setAnchorPoint(0, 0)
-      left.type = cc.ProgressTimer.TYPE_BAR
-      //    Setup for a bar starting from the bottom since the midpoint is 0 for the y
-      left.midPoint = cc.p(1, 0)
-      //    Setup for a vertical bar since the bar change rate is 0 for x meaning no horizontal change
-      left.barChangeRate = cc.p(1, 0)
-      left.x = 995
-      left.y = 264
-      this.addChild(left, 5)
-      left.runAction(cc.progressTo(1.5, 100))
-    }, 4.5)
-
-    this.scheduleOnce(function() {
+      sprs[0].stopAllActions()
+      sprs[1].stopAllActions()
+      sprs[2].stopAllActions()
+      sprs[4].stopAllActions()
+      sprs[5].stopAllActions()
+      this.right()
       this.next()
-    }, 7)
+    }, 4)
   }
 })
 

@@ -1,6 +1,4 @@
-var fix = 1
-var fixY = 1
-var gameData
+var fix = 1, fixY = 1, gameData
 cc.game.onStart = function() {
   if(!cc.sys.isNative && document.getElementById('cocosLoading')) // If referenced loading.js, please remove it
   {document.body.removeChild(document.getElementById('cocosLoading'))}

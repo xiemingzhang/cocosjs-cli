@@ -71,13 +71,13 @@ var MySprite = cc.Sprite.extend({
 
     this.runAction(action)
   },
-  frame: function(arr, time, re){
+  frame: function(arr, tim, re){
     var animation = new cc.Animation()
     for (var i = 0; i < arr.length; i++){
       animation.addSpriteFrameWithFile(arr[i])
     }
     // 设置帧动画属性
-    animation.setDelayPerUnit(time) // 每一帧停留的时间
+    animation.setDelayPerUnit(tim) // 每一帧停留的时间
     animation.setRestoreOriginalFrame(false) // 播放完后回到第一帧
     var animate = cc.animate(animation)
     if(re == 0){
@@ -86,6 +86,23 @@ var MySprite = cc.Sprite.extend({
       this.runAction(animate.repeat(re))
     }
   },
+  progress : function(tim, type){
+
+        var to2 = cc.progressTo(tim,100);
+        var jin1 = new cc.ProgressTimer(new cc.Sprite(this.data.sprUrl));
+        jin1.setAnchorPoint(0,0);
+        jin1.type = cc.ProgressTimer.TYPE_BAR;
+        jin1.midPoint = cc.p(0,1);
+        if(type === 'left'){
+          jin1.barChangeRate = cc.p(1, 0);
+        }else if(type === 'top'){
+          jin1.barChangeRate = cc.p(0, 1);
+        }
+        jin1.setLocalZOrder(this.data.zindex);
+        jin1.setPosition(this.data.pos[0],this.data.pos[1]);
+        this.parent.addChild(jin1);
+        jin1.runAction(to2); 
+    },
   getPixels: function(x, y){
     this._pixels = []
     var w = this.width

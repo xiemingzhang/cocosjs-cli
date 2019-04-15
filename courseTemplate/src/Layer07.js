@@ -8,7 +8,7 @@ var Layer07 = MyLayer.extend({
 
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.bg6)
+    var bg = new cc.Sprite(res.bg02)
     bg.setAnchorPoint(0.5, 0.5)
     bg.setPosition({x: size.width / 2, y: size.height / 2})
     this.addChild(bg)
@@ -21,6 +21,16 @@ var Layer07 = MyLayer.extend({
     sound.s7_sound()
     var self = this
     var sprs = this.sprs
+
+    sprs[0].enlarge(1.1, 0.5, 1)
+
+    this.scheduleOnce(function(){
+       sprs[2].frame([res.fenzhi_mibing_gl, res.fenzhi_mibing], 0.5, 1)
+    }, 4)
+
+    this.scheduleOnce(function(){
+       sprs[3].frame([res.fenzhi_mifan_gl, res.fenzhi_mifan], 0.5, 1)
+    }, 5)
 
     // sprs[0].enlarge(1.02, 0.8)
 

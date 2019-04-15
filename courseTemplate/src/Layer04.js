@@ -5,7 +5,7 @@ var Layer04 = MyLayer.extend({
 
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.bg2)
+    var bg = new cc.Sprite(res.bg02)
     bg.setAnchorPoint(0.5, 0.5)
     bg.setPosition({x: size.width / 2, y: size.height / 2})
     this.addChild(bg)
@@ -19,10 +19,17 @@ var Layer04 = MyLayer.extend({
     var self = this
     var sprs = this.sprs
 
-    // sprs[0].enlarge(1.02, 0.8)
+    sprs[0].runAction(cc.sequence(
+      cc.scaleTo(0.8, 1),
+      cc.callFunc(function(){
+        sprs[1].runAction(cc.fadeIn(0.8))
+      })
+    ))
+
+    sprs[2].frame([res.miyawen2, res.miyawen1], 0.5, 0)
 
     this.scheduleOnce(function() {
-      // sprs[0].stopAllActions()
+      sprs[2].stopAllActions()
       this.next()
     }, 7)
   }

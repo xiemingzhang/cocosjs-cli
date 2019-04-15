@@ -8,12 +8,12 @@ var Layer11 = MyLayer.extend({
 
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.bg1)
+    var bg = new cc.Sprite(res.bg01)
     bg.setAnchorPoint(0.5, 0.5)
     bg.setPosition({x: size.width / 2, y: size.height / 2})
     this.addChild(bg)
 
-    this.createBtn(textArr[10])
+    // this.createBtn(textArr[10])
     this.sprs = this.sprites(gameData.layer11, true)
   },
   onStart: function(num) {
@@ -21,13 +21,14 @@ var Layer11 = MyLayer.extend({
     var self = this
     var sprs = this.sprs
 
-    sprs[1].frame([res.miya4, res.miya3], 0.5, 0)
-    sprs[0].runAction(cc.scaleTo(1, 1))
+    sprs[0].frame([res.miya1, res.miya2], 0.5, 0)
+
+    sprs[2].runAction(cc.fadeIn(0.8))
 
     this.scheduleOnce(function() {
-      sprs[1].stopAllActions()
+      sprs[0].stopAllActions()
       this.next()
-    }, 5)
+    }, 17)
   }
   // update: function (dt) {
 

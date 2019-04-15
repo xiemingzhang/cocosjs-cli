@@ -61,10 +61,15 @@ var MyLayer = cc.LayerColor.extend({
       sprite[i].setOpacity(sp[i].opacity)
       sprite[i].setScale(sp[i].scale[0] * fix, sp[i].scale[1] * fix)
       sprite[i].setRotation(sp[i].rotation)
-      sprite[i].setPosition(sp[i].pos[0] * fix + sprite[i].width * fix * sp[i].chorPoint[0] + (sp[i].offset ? sprite[i].width * fix * sp[i].offset[0] : 0), sp[i].pos[1] * fix + sprite[i].height * fix * sp[i].chorPoint[1] + (sp[i].offset ? sprite[i].height * fix * sp[i].offset[1] : 0) + (sp[i].dY ? sp[i].dY : 0))
+      var sprBox = sprite[i]
+      if(sp[i].byScale){
+         sprBox = sprite[i].getBoundingBox()
+      }
+      sprite[i].setPosition(sp[i].pos[0] * fix + sprBox.width * fix * sp[i].chorPoint[0] + (sp[i].offset ? sprBox.width * fix * sp[i].offset[0] : 0), sp[i].pos[1] * fix + sprBox.height * fix * sp[i].chorPoint[1] + (sp[i].offset ? sprBox.height * fix * sp[i].offset[1] : 0) + (sp[i].dY ? sp[i].dY : 0))
       sprite[i].data = sp[i]
       sprite[i].id = sp[i].id
       sprite[i].zindex = sp[i].zindex
+      sprite[i].box = sprite[i].getBoundingBox()
       if(bool) {
         this.addChild(sprite[i], sprite[i].zindex, sprite[i].id)
       }

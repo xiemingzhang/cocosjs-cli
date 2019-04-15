@@ -35,16 +35,6 @@
     cc.audioEngine.playEffect(res.s10_sound)
   },s11_sound: function() {
     cc.audioEngine.playEffect(res.s11_sound)
-  },s12_sound: function() {
-    cc.audioEngine.playEffect(res.s12_sound)
-  },s13_sound: function() {
-    cc.audioEngine.playEffect(res.s13_sound)
-  },s14_sound: function() {
-    cc.audioEngine.playEffect(res.s14_sound)
-  },s15_sound: function() {
-    cc.audioEngine.playEffect(res.s15_sound)
-  },s16_sound: function() {
-    cc.audioEngine.playEffect(res.s16_sound)
   },s2_sound: function() {
     cc.audioEngine.playEffect(res.s2_sound)
   },s3_sound: function() {

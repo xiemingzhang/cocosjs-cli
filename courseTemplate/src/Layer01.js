@@ -8,7 +8,7 @@ var Layer01 = MyLayer.extend({
 
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.桃树下的小白兔01)
+    var bg = new cc.Sprite(res.粮食从哪里来01)
     bg.setAnchorPoint(0.5, 0.5)
     bg.setPosition({x: size.width / 2, y: size.height / 2})
     this.addChild(bg)

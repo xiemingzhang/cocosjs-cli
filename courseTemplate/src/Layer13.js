@@ -8,7 +8,7 @@ var Layer13 = MyLayer.extend({
 
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.bg1)
+    var bg = new cc.Sprite(res.space)
     bg.setAnchorPoint(0.5, 0.5)
     bg.setPosition({x: size.width / 2, y: size.height / 2})
     this.addChild(bg)
@@ -21,13 +21,15 @@ var Layer13 = MyLayer.extend({
     var self = this
     var sprs = this.sprs
 
-    sprs[1].frame([res.miya4, res.miya3], 0.5, 0)
-    sprs[0].runAction(cc.scaleTo(1, 1))
+    this.scheduleOnce(function(){
+      // sprs[1].y -= 180
+      sprs[1].setTexture(res.dengpao2)
+      sprs[2].runAction(cc.moveBy(3, -1000, 0))
+    }, 1)
 
     this.scheduleOnce(function() {
-      sprs[1].stopAllActions()
       this.next()
-    }, 6)
+    }, 23)
   }
   // update: function (dt) {
 

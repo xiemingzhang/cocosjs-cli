@@ -8,7 +8,7 @@ var Layer08 = MyLayer.extend({
 
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.bg02)
+    var bg = new cc.Sprite(res.bg3)
     bg.setAnchorPoint(0.5, 0.5)
     bg.setPosition({x: size.width / 2, y: size.height / 2})
     this.addChild(bg)
@@ -22,19 +22,11 @@ var Layer08 = MyLayer.extend({
     var self = this
     var sprs = this.sprs
 
-    sprs[0].enlarge(1.1, 0.5, 1)
-
-    this.scheduleOnce(function(){
-       sprs[2].frame([res.fenzhi_mb_gl, res.fenzhi_mb], 0.5, 1)
-    }, 4)
-
-    this.scheduleOnce(function(){
-       sprs[3].frame([res.fenzhi_mantou_gl, res.fenzhi_mantou], 0.5, 1)
-    }, 5)
+    sprs[0].runAction(cc.moveBy(0.8, 1920, 0))
 
     this.scheduleOnce(function() {
       this.next()
-    }, 6)
+    }, 12)
   }
   // update: function (dt) {
 

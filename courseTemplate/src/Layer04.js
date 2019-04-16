@@ -5,7 +5,7 @@ var Layer04 = MyLayer.extend({
 
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.bg02)
+    var bg = new cc.Sprite(res.bg4)
     bg.setAnchorPoint(0.5, 0.5)
     bg.setPosition({x: size.width / 2, y: size.height / 2})
     this.addChild(bg)
@@ -19,19 +19,44 @@ var Layer04 = MyLayer.extend({
     var self = this
     var sprs = this.sprs
 
-    sprs[0].runAction(cc.sequence(
-      cc.scaleTo(0.8, 1),
-      cc.callFunc(function(){
-        sprs[1].runAction(cc.fadeIn(0.8))
-      })
-    ))
+    sprs[0].progress(7, 'left')
+    sprs[4].frame([res.huomiao, res.huomiao2], 0.5, 0)
 
-    sprs[2].frame([res.miyawen2, res.miyawen1], 0.5, 0)
+    sprs[1].frame([res.miya4, res.miya3], 0.5, 0)
+
+    this.schedule(this.piao, 1.5)
 
     this.scheduleOnce(function() {
-      sprs[2].stopAllActions()
+      sprs[1].stopAllActions()
       this.next()
-    }, 7)
+    }, 8)
+  },
+  piao: function() {
+    var reqi = new MySprite(res.piao)
+    reqi.setPosition(cc.p(this.getRandomNum(355 + 600, 665 + 600), this.getRandomNum(530, 590)))
+    reqi.opacity = 0
+    this.addChild(reqi, 5)
+
+    reqi.runAction(cc.moveBy(1, 0, 50))
+
+    reqi.runAction(cc.sequence(
+      cc.fadeIn(0.8),
+      cc.callFunc(function() {reqi.runAction(cc.sequence(cc.fadeOut(0.2), cc.callFunc(function() {reqi.removeFromParent()})))})
+    ))
+
+    this.scheduleOnce(function() {
+      var reqi1 = new MySprite(res.piao)
+      reqi1.setPosition(cc.p(this.getRandomNum(355 + 600, 665 + 600), this.getRandomNum(530, 590)))
+      reqi1.opacity = 0
+      this.addChild(reqi1, 5)
+
+      reqi1.runAction(cc.moveBy(1, 0, 50))
+
+      reqi1.runAction(cc.sequence(
+        cc.fadeIn(0.8),
+        cc.callFunc(function() {reqi1.runAction(cc.sequence(cc.fadeOut(0.2), cc.callFunc(function() {reqi1.removeFromParent()})))})
+      ))
+    }, cc.random0To1() * 0.3)
   }
   // update: function (dt) {
 

@@ -27,7 +27,7 @@ var StartScene = cc.Scene.extend({
       [Layer03],
       [Layer04],
       [Layer05],
-      [Layer06, Layer061, Layer07, Layer08],
+      [Layer06, Layer07, Layer08],
       [Layer09],
       [Layer10],
       [Layer11],

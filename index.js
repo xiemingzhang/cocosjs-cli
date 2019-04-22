@@ -30,7 +30,8 @@ if (options._.length === 0 && (options.h || options.help)) {
         '',
         '  Commands:',
         '',
-        '    new <ProjectName> generates a new project that is single scene',
+        '    new <ProjectName> generates a new project for game',
+        '    newCourse <ProjectName> generates a new project for course',
         '    res <ProjectName> generates a new resource.js and audio.js over old',
         '',
         '  Options:',
@@ -50,8 +51,8 @@ if (options._.length === 0 && options.new) {
     if(optionsName.new){
       init(options.new)
     }else{
-      console.log('default project is cocosjsProj')
-      init('cocosjs-game')
+      console.log('default project is cocos2d-html-proj')
+      init('cocos2d-html-game')
     }
     // process.exit(0)
 }
@@ -61,8 +62,8 @@ if (options._.length === 0 && options.newCourse) {
     if(optionsName.newCourse){
       init(options.newCourse)
     }else{
-      console.log('default project is cocosjsProj')
-      init('cocosjs-course')
+      console.log('default project is cocos2d-html-proj')
+      init('cocos2d-html-course')
     }
     // process.exit(0)
 }
@@ -100,19 +101,20 @@ function createAfterConfirmation(name) {
 function createProject(name) {
     _name = name
     let root = path.resolve(name);
+
     // var projectName = path.basename(root);
     let templatesPath = path.join(__dirname, temp_path);
 
     console.log(
-        'This will create a new cocosjs project in',
+        'This will create a new cocos2d-html project in',
         root
     );
 
     if (!fs.existsSync(root)) {
         fs.mkdirSync(root);
-        fs.mkdirSync(root+'/'+path.basename(root));
-        // traverse(templatesPath, root)   
-        traverse(templatesPath, root+'/'+path.basename(root))  
+        // fs.mkdirSync(root+'/'+path.basename(root));
+        // // traverse(templatesPath, root)   
+        traverse(templatesPath, root)  
         console.log('build complete') 
     }
 }

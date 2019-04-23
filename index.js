@@ -233,9 +233,9 @@ function createResource(name){
     button_next: 'common/imgs/button_next.png',
     star_finish: 'common/imgs/star_finish.png'`
 
-  fs.writeFileSync(root + '/' + name + '/src/resource.js', _string1, "utf-8");
+  fs.writeFileSync(root + '/src/resource.js', _string1, "utf-8");
   //添加游戏图片
-  const paths1 = fs.readdirSync(root + '/' + name + '/res/Normal/source');
+  const paths1 = fs.readdirSync(root + '/res/Normal/source');
 
   let _myPathArr1 = []
   
@@ -244,9 +244,9 @@ function createResource(name){
         if(pic.test(_path)){
           _myPathArr1.push(_path)
         }else{
-          fs.stat(root + '/' + name + '/res/Normal/source' + '/' + _path, function(err, stats){
+          fs.stat(root + '/res/Normal/source' + '/' + _path, function(err, stats){
             if(stats.isDirectory()){
-              console.log(root + '/' + name + '/res/Normal/source' + '/' + _path);
+              console.log(root + '/res/Normal/source' + '/' + _path);
             }else{
               console.log(`${_path}:图片类型错误`);
             }
@@ -264,7 +264,7 @@ function createResource(name){
     _myPathArr1.forEach(function(item, index) {
       var pic1 = /\.(png)/i;
       if(index === 0){
-        fs.appendFileSync(root + '/' + name + '/src/resource.js', ',\r\r//source图片\r', "utf-8")
+        fs.appendFileSync(root + '/src/resource.js', ',\r\r//source图片\r', "utf-8")
       }
       if(index === _myPathArr1.length - 1){
         // var _str = `${item.replace('\.png','')}: 'source/${item}'\r}\r\r`
@@ -280,12 +280,12 @@ function createResource(name){
           var _str = `${item.replace(extname(item),'')}: 'source/${item}',\r`
         }
       }
-      fs.appendFileSync(root + '/' + name + '/src/resource.js', _str, "utf-8")
+      fs.appendFileSync(root + '/src/resource.js', _str, "utf-8")
     })
   }
 
   // 添加配音
-  // const paths2 = fs.readdirSync(root + '/' + name + '/res/Normal/audio/voice');
+  // const paths2 = fs.readdirSync(root + '/res/Normal/audio/voice');
 
   // let _myPathArr2 = []
   // paths2.forEach(_path => {
@@ -306,7 +306,7 @@ function createResource(name){
   // if(_myPathArr2.length !== 0){
   //   _myPathArr2.forEach(function(item, index) {
   //     if(index === 0){
-  //       fs.appendFileSync(root + '/' + name + '/src/resource.js', ',\r\r//source配音\r', "utf-8")
+  //       fs.appendFileSync(root + '/src/resource.js', ',\r\r//source配音\r', "utf-8")
   //     }
   //     if(index === _myPathArr2.length - 1){
   //       // var _str = `${item.replace('.mp3','_audio')}: 'audio/voice/${item}'\r}\r\r`
@@ -314,12 +314,12 @@ function createResource(name){
   //     }else{
   //       var _str = `${item.replace('.mp3','_audio')}: 'audio/voice/${item}',\r`
   //     }
-  //     fs.appendFileSync(root + '/' + name + '/src/resource.js', _str, "utf-8")
+  //     fs.appendFileSync(root + '/src/resource.js', _str, "utf-8")
   //   })
   // }
 
   // 添加音
-  const paths3 = fs.readdirSync(root + '/' + name + '/res/Normal/audio');
+  const paths3 = fs.readdirSync(root + '/res/Normal/audio');
 
   let _myPathArr3 = []
   paths3.forEach(_path => {
@@ -338,13 +338,13 @@ function createResource(name){
   // })
 
   if(_myPathArr3.length === 0){
-    fs.appendFileSync(root + '/' + name + '/src/resource.js', '\r}\r\r', "utf-8")
+    fs.appendFileSync(root + '/src/resource.js', '\r}\r\r', "utf-8")
   }else{
     _myPathArr3.forEach(function(item, index) {
       var pic1 = /\.mp3/i;
       // var pic2 = /\.wav/i;
       if(index === 0){
-        fs.appendFileSync(root + '/' + name + '/src/resource.js', ',\r\r//source声音\r', "utf-8")
+        fs.appendFileSync(root + '/src/resource.js', ',\r\r//source声音\r', "utf-8")
       }
       if(index === _myPathArr3.length - 1){
         if(pic1.test(item)){
@@ -359,7 +359,7 @@ function createResource(name){
           var _str = `${item.replace(extname(item),'_sound')}: 'audio/${item}',\r`
         }
       }
-      fs.appendFileSync(root + '/' + name + '/src/resource.js', _str, "utf-8")
+      fs.appendFileSync(root + '/src/resource.js', _str, "utf-8")
     })
   }
 
@@ -369,7 +369,7 @@ function createResource(name){
     g_resources.push(res[i])
   }`
 
-  fs.appendFileSync(root + '/' + name + '/src/resource.js', _string2, "utf-8")
+  fs.appendFileSync(root + '/src/resource.js', _string2, "utf-8")
   // fs.writeFileSync(root + '/' + 'r.js', _string1, "utf-8");
 }
 
@@ -412,10 +412,10 @@ function createAudio(name){
       cc.audioEngine.setMusicVolume(0.2)
     }`
 
-  fs.writeFileSync(root + '/' + name + '/src/audio.js', _string1, "utf-8");
+  fs.writeFileSync(root + '/src/audio.js', _string1, "utf-8");
 
   // 添加配音方法
-  // const paths2 = fs.readdirSync(root + '/' + name + '/res/Normal/audio/voice');
+  // const paths2 = fs.readdirSync(root + '/res/Normal/audio/voice');
 
   // let _myPathArr2 = []
   // paths2.forEach(_path => {
@@ -434,7 +434,7 @@ function createAudio(name){
   // if(_myPathArr2.length !== 0){
   //   _myPathArr2.forEach(function(item, index) {
   //     if(index === 0){
-  //       fs.appendFileSync(root + '/' + name + '/src/audio.js', ',\r//配音\r', "utf-8")
+  //       fs.appendFileSync(root + '/src/audio.js', ',\r//配音\r', "utf-8")
   //     }    
   //     if(index === _myPathArr2.length - 1){
   //       var _str = `${item.replace('.mp3','_audio')}: function() {
@@ -446,12 +446,12 @@ function createAudio(name){
   // },\r`
   //     }
 
-  //     fs.appendFileSync(root + '/' + name + '/src/audio.js', _str, "utf-8")
+  //     fs.appendFileSync(root + '/src/audio.js', _str, "utf-8")
   //   })
   // }
 
   // 添加声音方法
-  const paths3 = fs.readdirSync(root + '/' + name + '/res/Normal/audio');
+  const paths3 = fs.readdirSync(root + '/res/Normal/audio');
 
   let _myPathArr3 = []
   paths3.forEach(_path => {
@@ -468,12 +468,12 @@ function createAudio(name){
   // })
 
   if(_myPathArr3.length === 0){
-    fs.appendFileSync(root + '/' + name + '/src/audio.js', '\r}', "utf-8")
+    fs.appendFileSync(root + '/src/audio.js', '\r}', "utf-8")
   }else{
     var pic1 = /\.mp3/i;
     _myPathArr3.forEach(function(item, index) {
       if(index === 0){
-        fs.appendFileSync(root + '/' + name + '/src/audio.js', ',\r//声音\r', "utf-8")
+        fs.appendFileSync(root + '/src/audio.js', ',\r//声音\r', "utf-8")
       }
       if(index === _myPathArr3.length - 1){
 
@@ -501,7 +501,7 @@ function createAudio(name){
         }
         
       }
-      fs.appendFileSync(root + '/' + name + '/src/audio.js', _str, "utf-8")
+      fs.appendFileSync(root + '/src/audio.js', _str, "utf-8")
     })
   }
 }

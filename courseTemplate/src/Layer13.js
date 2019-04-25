@@ -8,28 +8,32 @@ var Layer13 = MyLayer.extend({
 
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.space)
+    var bg = new cc.Sprite(res.bg3)
     bg.setAnchorPoint(0.5, 0.5)
     bg.setPosition({x: size.width / 2, y: size.height / 2})
     this.addChild(bg)
 
     this.createBtn(textArr[12])
-    this.sprs = this.sprites(gameData.layer13, true)
+    this.sprs = this.creatSprites(gameData.layer13)
   },
   onStart: function(num) {
-    sound.s13_sound()
+    // sound.s13_sound()
     var self = this
     var sprs = this.sprs
 
+    sprs[0].frame([res.miya2, res.miya1], 0.5, 0)
+
+    sprs[2].runAction(cc.scaleTo(0.8, 1))
+
     this.scheduleOnce(function(){
-      // sprs[1].y -= 180
-      sprs[1].setTexture(res.dengpao2)
-      sprs[2].runAction(cc.moveBy(3, -1000, 0))
-    }, 1)
+      sprs[1].runAction(cc.scaleTo(0.8, 1))
+      // sprs[3].runAction(cc.fadeIn(0.8))
+    }, 0.6)
 
     this.scheduleOnce(function() {
+      sprs[0].stopAllActions()
       this.next()
-    }, 23)
+    }, 7)
   }
   // update: function (dt) {
 

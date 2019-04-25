@@ -8,27 +8,55 @@ var Layer14 = MyLayer.extend({
 
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.bg3)
+    var bg = new cc.Sprite(res.bg2)
     bg.setAnchorPoint(0.5, 0.5)
     bg.setPosition({x: size.width / 2, y: size.height / 2})
     this.addChild(bg)
 
-    // this.createBtn(textArr[13])
-    this.sprs = this.sprites(gameData.layer14, true)
+    this.createBtn(textArr[13])
+    this.sprs = this.creatSprites(gameData.layer14)
   },
   onStart: function(num) {
-    sound.s14_sound()
+    // sound.s14_sound()
     var self = this
     var sprs = this.sprs
 
-    sprs[0].frame([res.miya4, res.miya3], 0.5, 0)
-
-    sprs[2].runAction(cc.fadeIn(0.8))
+    this.scheduleOnce(function() {
+      sprs[2].runAction(cc.fadeIn(0.8))
+    }, 1)
 
     this.scheduleOnce(function() {
-      sprs[0].stopAllActions()
+      sprs[1].runAction(cc.fadeIn(0.8))
+    }, 2)
+
+    this.scheduleOnce(function() {
+      sprs[0].runAction(cc.fadeIn(0.8))
+    }, 3)
+
+    this.scheduleOnce(function() {
+      var pos1 = cc.p(sprs[0].x, sprs[0].y)
+      var pos2 = cc.p(sprs[1].x, sprs[1].y)
+      var pos3 = cc.p(sprs[2].x, sprs[2].y)
+      sprs[2].runAction(cc.moveTo(0.8, pos1))
+      sprs[0].runAction(cc.moveTo(0.8, pos2))
+      sprs[1].runAction(cc.moveTo(0.8, pos3))
+    }, 4)
+
+    this.scheduleOnce(function() {
+      sprs[5].runAction(cc.fadeIn(0.8))
+    }, 5)
+
+    this.scheduleOnce(function() {
+      sprs[4].runAction(cc.fadeIn(0.8))
+    }, 6)
+
+    this.scheduleOnce(function() {
+      sprs[3].runAction(cc.fadeIn(0.8))
+    }, 7)
+
+    this.scheduleOnce(function() {
       this.next()
-    }, 12)
+    }, 9)
   }
   // update: function (dt) {
 

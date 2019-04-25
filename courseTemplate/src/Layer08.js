@@ -15,18 +15,26 @@ var Layer08 = MyLayer.extend({
 
     this.createBtn(textArr[7])
 
-    this.sprs = this.sprites(gameData.layer08, true)
+    this.sprs = this.creatSprites(gameData.layer08)
   },
   onStart: function(num) {
-    sound.s8_sound()
+    // sound.s8_sound()
     var self = this
     var sprs = this.sprs
 
-    sprs[0].runAction(cc.moveBy(0.8, 1920, 0))
+    sprs[0].frame([res.miya2, res.miya1], 0.5, 0)
+
+    sprs[2].runAction(cc.scaleTo(0.8, 1))
+
+    this.scheduleOnce(function(){
+      sprs[1].runAction(cc.scaleTo(0.8, 1))
+      // sprs[3].runAction(cc.fadeIn(0.8))
+    }, 0.6)
 
     this.scheduleOnce(function() {
+      sprs[0].stopAllActions()
       this.next()
-    }, 12)
+    }, 7)
   }
   // update: function (dt) {
 

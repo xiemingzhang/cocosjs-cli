@@ -717,10 +717,26 @@
 //  return shuffle_absolute(arr);
 // }
 
+  function getRandomNum(minNum, maxNum, decimalNum) {
+    var max = 0, min = 0
+    minNum <= maxNum ? (min = minNum, max = maxNum) : (min = maxNum, max = minNum)
+    switch (arguments.length) {
+      case 1:
+        return Math.floor(Math.random() * (max + 1))
+      case 2:
+        return Math.floor(Math.random() * (max - min + 1) + min)
+      case 3:
+        return (Math.random() * (max - min) + min).toFixed(decimalNum)
+      default:
+        return Math.random()
+    }
+  }
+  
   root.util = {
     getPointArr: getPointArr,
     getIncreaseArr: getIncreaseArr,
     flattenArr: flattenArr,
+    getRandomNum: getRandomNum
   }
 
 })(window)

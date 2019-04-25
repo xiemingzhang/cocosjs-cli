@@ -14,24 +14,22 @@ var Layer10 = MyLayer.extend({
     this.addChild(bg)
 
     // this.createBtn(textArr[9])
-    this.sprs = this.sprites(gameData.layer10, true)
+    this.sprs = this.creatSprites(gameData.layer10)
   },
   onStart: function(num) {
-    sound.s10_sound()
+    // sound.s10_sound()
     var self = this
     var sprs = this.sprs
 
-    sprs[1].runAction(cc.rotateBy(5, 6))
+    sprs[0].flash(0.5, 1)
+    sprs[2].runAction(cc.fadeIn(0.8))
 
-    sprs[0].runAction(cc.sequence(
-      cc.moveBy(0.35, 0, -300),
-      cc.jumpBy(0.3, cc.p(0, 0), 35, 2)
-    ))
-
-    sprs[2].frame([res.boy2, res.boy1], 0.5, 0)
+    this.scheduleOnce(function(){
+      sprs[1].flash(0.5, 1)
+      sprs[3].runAction(cc.fadeIn(0.8))
+    }, 1.5)
 
     this.scheduleOnce(function() {
-      sprs[2].stopAllActions()
       this.next()
     }, 5)
   }

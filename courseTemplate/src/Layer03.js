@@ -5,94 +5,71 @@ var Layer03 = MyLayer.extend({
 
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.bg3)
+    var bg = new cc.Sprite(res.bg1)
     bg.setAnchorPoint(0.5, 0.5)
     bg.setPosition({x: size.width / 2, y: size.height / 2})
     this.addChild(bg)
 
     this.createBtn(textArr[2])
 
-    this.sprs = this.sprites(gameData.layer03, true)
+    this.sprs = this.creatSprites(gameData.layer03)
   },
   onStart: function(num) {
-    sound.s3_sound()
+    // sound.s3_sound()
     var self = this
     var sprs = this.sprs
 
-    sprs[3].frame([res.huomiao, res.huomiao2], 0.5, 0)
+    sprs[1].flash(0.35, 2)
+    sprs[0].frame([res.miya2, res.miya1], 0.5, 0)
 
     this.scheduleOnce(function(){
-      sprs[3].stopAllActions()
-      sprs[3].removeFromParent()
-      this.unschedule(this.reqi)
-      sprs[6].opacity = 255
-      sprs[6].frame([res.huomiao, res.huomiao2], 0.5, 0)
-    }, 6)
+      sprs[1].runAction(cc.fadeOut(0.8))
+      sprs[2].runAction(cc.fadeIn(0.8))
+      sprs[3].runAction(cc.fadeIn(0.8))
+    }, 1.5)
 
     this.scheduleOnce(function(){
-      this.schedule(this.piao, 1.5)
-    }, 9)
+      sprs[0].stopAllActions()
+      sprs[0].setTexture(res.miya3)
+      sprs[0].x += 18
+      sprs[0].setScale(0.99)
+      sprs[0].frame([res.miya3, res.miya4], 0.5, 0)
+      sprs[6].y += 27
+      sprs[6].setTexture(res.yifu2)
+      sprs[4].runAction(cc.fadeIn(0.8))
+      sprs[5].runAction(cc.fadeIn(0.8))
+    }, 2.3)
 
-    this.schedule(this.reqi, 1.5)
+    this.scheduleOnce(function(){
+      sprs[0].stopAllActions()
+      sprs[0].setTexture(res.miya1)
+      sprs[0].x -= 18
+      sprs[0].setScale(0.85)
+      sprs[0].frame([res.miya1, res.miya2], 0.5, 0)
+
+      sprs[2].runAction(cc.fadeOut(0.8))
+      sprs[3].runAction(cc.fadeOut(0.8))
+
+      sprs[4].runAction(cc.fadeOut(0.8))
+      sprs[5].runAction(cc.fadeOut(0.8))
+      sprs[6].runAction(cc.fadeOut(0.8))
+
+      sprs[7].runAction(cc.fadeIn(0.8))
+      sprs[8].runAction(cc.fadeIn(0.8))
+      sprs[9].runAction(cc.fadeIn(0.8))
+      sprs[10].runAction(cc.fadeIn(0.8))
+      sprs[12].opacity = 255
+
+      sprs[12].runAction(cc.sequence(
+         cc.fadeTo(0.5, 100),
+         cc.fadeTo(0.5, 255)
+      ).repeatForever())
+    }, 5)
 
     this.scheduleOnce(function() {
-      this.unscheduleAllCallbacks()
+      sprs[0].stopAllActions()
       this.next()
-    }, 12)
-  },
-  reqi: function() {
-    var reqi = new MySprite(res.reqi)
-    reqi.setPosition(cc.p(this.getRandomNum(355, 665), this.getRandomNum(420, 480)))
-    reqi.opacity = 0
-    this.addChild(reqi, 5)
-
-    reqi.runAction(cc.moveBy(1, 0, 50))
-
-    reqi.runAction(cc.sequence(
-      cc.fadeIn(0.8),
-      cc.callFunc(function() {reqi.runAction(cc.sequence(cc.fadeOut(0.2), cc.callFunc(function() {reqi.removeFromParent()})))})
-    ))
-
-    this.scheduleOnce(function() {
-      var reqi1 = new MySprite(res.reqi)
-      reqi1.setPosition(cc.p(this.getRandomNum(355, 665), this.getRandomNum(420, 480)))
-      reqi1.opacity = 0
-      this.addChild(reqi1, 5)
-
-      reqi1.runAction(cc.moveBy(1, 0, 50))
-
-      reqi1.runAction(cc.sequence(
-        cc.fadeIn(0.8),
-        cc.callFunc(function() {reqi1.runAction(cc.sequence(cc.fadeOut(0.2), cc.callFunc(function() {reqi1.removeFromParent()})))})
-      ))
-    }, cc.random0To1() * 0.3)
-  },
-  piao: function() {
-    var reqi = new MySprite(res.piao)
-    reqi.setPosition(cc.p(this.getRandomNum(355 + 800, 665 + 800), this.getRandomNum(430, 490)))
-    reqi.opacity = 0
-    this.addChild(reqi, 5)
-
-    reqi.runAction(cc.moveBy(1, 0, 50))
-
-    reqi.runAction(cc.sequence(
-      cc.fadeIn(0.8),
-      cc.callFunc(function() {reqi.runAction(cc.sequence(cc.fadeOut(0.2), cc.callFunc(function() {reqi.removeFromParent()})))})
-    ))
-
-    this.scheduleOnce(function() {
-      var reqi1 = new MySprite(res.piao)
-      reqi1.setPosition(cc.p(this.getRandomNum(355 + 800, 665 + 800), this.getRandomNum(430, 490)))
-      reqi1.opacity = 0
-      this.addChild(reqi1, 5)
-
-      reqi1.runAction(cc.moveBy(1, 0, 50))
-
-      reqi1.runAction(cc.sequence(
-        cc.fadeIn(0.8),
-        cc.callFunc(function() {reqi1.runAction(cc.sequence(cc.fadeOut(0.2), cc.callFunc(function() {reqi1.removeFromParent()})))})
-      ))
-    }, cc.random0To1() * 0.3)
+    }, 8)
   }
   // update: function (dt) {
 

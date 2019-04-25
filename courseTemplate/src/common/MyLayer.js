@@ -6,6 +6,7 @@ var MyLayer = cc.LayerColor.extend({
   onEnter: function() {
     this._super()
     var self = this
+    this.sprites = []
     // cc.log("onEnter");
     // this.listenerArr = []
     this._listener = cc.EventListener.create({
@@ -52,30 +53,52 @@ var MyLayer = cc.LayerColor.extend({
     // cc.log("onExit");
     // cc.eventManager.removeListeners(cc.EventListener.KEYBOARD)
   },
-  sprites: function(sp, bool) {
-    var sprite = []
-    var len = sp.length
+  creatSprites: function(data) {
+    var sprites = []
+    var len = data.length
     for (var i = 0; i < len; i++) {
-      sprite[i] = new MySprite(sp[i].sprUrl)
-      sprite[i].setAnchorPoint(sp[i].chorPoint[0], sp[i].chorPoint[1])
-      sprite[i].setOpacity(sp[i].opacity)
-      sprite[i].setScale(sp[i].scale[0] * fix, sp[i].scale[1] * fix)
-      sprite[i].setRotation(sp[i].rotation)
-      var sprBox = sprite[i]
-      if(sp[i].byScale){
-         sprBox = sprite[i].getBoundingBox()
+      sprites[i] = new MySprite(data[i].sprUrl)
+      sprites[i].setAnchorPoint(data[i].chorPoint[0], data[i].chorPoint[1])
+      sprites[i].setOpacity(data[i].opacity)
+      sprites[i].setScale(data[i].scale[0] * fix, data[i].scale[1] * fix)
+      sprites[i].setRotation(data[i].rotation)
+      var sprBox = sprites[i]
+      if(data[i].byScale) {
+        sprBox = sprites[i].getBoundingBox()
       }
-      sprite[i].setPosition(sp[i].pos[0] * fix + sprBox.width * fix * sp[i].chorPoint[0] + (sp[i].offset ? sprBox.width * fix * sp[i].offset[0] : 0), sp[i].pos[1] * fix + sprBox.height * fix * sp[i].chorPoint[1] + (sp[i].offset ? sprBox.height * fix * sp[i].offset[1] : 0) + (sp[i].dY ? sp[i].dY : 0))
-      sprite[i].data = sp[i]
-      sprite[i].id = sp[i].id
-      sprite[i].zindex = sp[i].zindex
-      sprite[i].box = sprite[i].getBoundingBox()
-      if(bool) {
-        this.addChild(sprite[i], sprite[i].zindex, sprite[i].id)
+      sprites[i].setPosition(data[i].pos[0] * fix + sprBox.width * fix * data[i].chorPoint[0] + (data[i].offset ? sprBox.width * fix * data[i].offset[0] : 0), data[i].pos[1] * fix + sprBox.height * fix * data[i].chorPoint[1] + (data[i].offset ? sprBox.height * fix * data[i].offset[1] : 0) + (data[i].dY ? data[i].dY : 0))
+      sprites[i].data = data[i]
+      sprites[i].id = data[i].id
+      sprites[i].zindex = data[i].zindex
+      // sprites[i].box = sprites[i].getBoundingBox()
+      if(!data[i].deAdd) {
+        this.addChild(sprites[i], sprites[i].zindex, sprites[i].id)
+      }
+      if(data[i].childs && data[i].childs.length > 0){
+        var sprites_child = []
+        var l = data[i].childs.length
+        var data_child = data[i].childs
+        for (var j = 0; j < l; j++) {
+          sprites_child[j] = new MySprite(data_child[j].sprUrl)
+          sprites_child[j].setAnchorPoint(data_child[j].chorPoint[0], data_child[j].chorPoint[1])
+          sprites_child[j].setOpacity(data_child[j].opacity)
+          sprites_child[j].setScale(data_child[j].scale[0] * fix, data_child[j].scale[1] * fix)
+          sprites_child[j].setRotation(data_child[j].rotation)
+          sprites_child[j].setPosition(data_child[j].pos[0] * fix, data_child[j].pos[1] * fix)
+          sprites_child[j].data = data_child[j]
+          sprites_child[j].id = data_child[j].id
+          sprites_child[j].zindex = data_child[j].zindex
+          sprites[i].addChild(sprites_child[j], sprites_child[j].zindex, sprites_child[j].id)
+        }
+        sprites[i].childs = sprites_child
       }
     }
-    return sprite
+    this.sprites = sprites
+    return sprites
   },
+  // getSprites: function(){
+  //   return this.sprites
+  // },
   // addSoundButton: function(spr){
   //   // var horn = this.createSprite(res.sound, 1 / 3 * fix, [0, 0], {x: 15, y: 15})
   //   // this.addChild(horn, 5)
@@ -285,16 +308,28 @@ var MyLayer = cc.LayerColor.extend({
     }
     this.getParent().preLayer(this, t, n)
   },
-  getRandomNum: function(min, max) {
-    var x, d
-    if(max > min) {
-      x = min
-      d = max
-    }else{
-      x = max
-      d = min
+  getRandomNum: function(minNum, maxNum, decimalNum) {
+    // var x, d
+    // if(max > min) {
+    //   x = min
+    //   d = max
+    // }else{
+    //   x = max
+    //   d = min
+    // }
+    // return ~~(Math.random() * (d - x + 1)) + x
+    var max = 0, min = 0
+    minNum <= maxNum ? (min = minNum, max = maxNum) : (min = maxNum, max = minNum)
+    switch (arguments.length) {
+      case 1:
+        return Math.floor(Math.random() * (max + 1))
+      case 2:
+        return Math.floor(Math.random() * (max - min + 1) + min)
+      case 3:
+        return (Math.random() * (max - min) + min).toFixed(decimalNum)
+      default:
+        return Math.random()
     }
-    return ~~(Math.random() * (d - x + 1)) + x
   },
   shuffleArr: function(arr) {
     var len = arr.length

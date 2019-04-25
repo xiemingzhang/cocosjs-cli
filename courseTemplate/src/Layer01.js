@@ -8,7 +8,7 @@ var Layer01 = MyLayer.extend({
 
     this.scheduleOnce(this.onStart, 1)
 
-    var bg = new cc.Sprite(res.热的传递)
+    var bg = new cc.Sprite(res.学习薄厚)
     bg.setAnchorPoint(0.5, 0.5)
     bg.setPosition({x: size.width / 2, y: size.height / 2})
     this.addChild(bg)

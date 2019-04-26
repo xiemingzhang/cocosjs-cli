@@ -589,7 +589,7 @@
     var totalLen = getTotalLength(svgPath)
     for(var pathLen = 0;pathLen < totalLen;pathLen += i) {
       var preMove = getPointAtLength(svgPath, pathLen)
-      pointArr.push({x: preMove.x * fix + varianceX, y: (414 * fix - preMove.y * fix) + varianceY})
+      pointArr.push({x: preMove.x * fix + varianceX, y: (1080 * fix - preMove.y * fix) + varianceY})
     }
     return pointArr
   }
